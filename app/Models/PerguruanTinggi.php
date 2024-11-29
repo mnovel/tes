@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class PerguruanTinggi extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name', 'jurusan_id', 'status'];
+
+    public function jurusan()
+    {
+        return $this->belongsTo(Jurusan::class, 'jurusan_id');
+    }
 }

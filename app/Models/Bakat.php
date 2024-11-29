@@ -21,4 +21,14 @@ class Bakat extends Model
         'recommendation',
         'icon'
     ];
+
+    public function jurusan()
+    {
+        return $this->hasMany(Jurusan::class, 'bakat_id');
+    }
+
+    public function profesi()
+    {
+        return $this->hasMany(Profesi::class, 'bakat_id');
+    }
 }

@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('jurusans', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->uuid('bakat_id');
             $table->timestamps();
+
+            $table->foreign('bakat_id')
+                ->references('id')
+                ->on('bakats')
+                ->onUpdate('cascade')->onDelete('restrict');
         });
     }
 
