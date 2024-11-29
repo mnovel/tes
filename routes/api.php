@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BakatController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\ProfesiController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\SettingController;
@@ -85,4 +86,12 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'jurusan'], function () {
     Route::get('{jurusan}', [JurusanController::class, 'show']);
     Route::put('{jurusan}', [JurusanController::class, 'update']);
     Route::delete('{jurusan}', [JurusanController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'auth:api', 'prefix' => 'profesi'], function () {
+    Route::get('', [ProfesiController::class, 'index']);
+    Route::post('', [ProfesiController::class, 'store']);
+    Route::get('{profesi}', [ProfesiController::class, 'show']);
+    Route::put('{profesi}', [ProfesiController::class, 'update']);
+    Route::delete('{profesi}', [ProfesiController::class, 'destroy']);
 });

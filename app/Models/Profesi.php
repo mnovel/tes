@@ -11,8 +11,12 @@ class Profesi extends Model
 
     protected $fillable = ['name', 'bakat_id'];
 
+    protected $casts = [
+        'bakat_id' => 'array',
+    ];
+
     public function bakat()
     {
-        return $this->belongsTo(Bakat::class, 'bakat_id');
+        return Bakat::whereIn('id', $this->bakat_id)->pluck('name');
     }
 }
