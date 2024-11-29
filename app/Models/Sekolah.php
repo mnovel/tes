@@ -16,6 +16,9 @@ class Sekolah extends Model
         'regency_id'
     ];
 
+    protected $hidden = ['created_at', 'updated_at'];
+
+
     public function province()
     {
         return $this->belongsTo(Province::class, 'province_id');

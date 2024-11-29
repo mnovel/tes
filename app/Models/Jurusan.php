@@ -11,9 +11,15 @@ class Jurusan extends Model
 
     protected $fillable = ['name', 'bakat_id'];
 
+    protected $casts = [
+        'bakat_id' => 'array',
+    ];
+
+    protected $hidden = ['created_at', 'updated_at'];
+
     public function bakat()
     {
-        return $this->belongsTo(Bakat::class, 'bakat_id');
+        return Bakat::whereIn('id', $this->bakat_id)->pluck('name');
     }
 
     public function perguruanTinggi()

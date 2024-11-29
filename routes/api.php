@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BakatController;
+use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,10 +42,12 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'user'], function () {
     Route::delete('{user}', [UserController::class, 'destroy']);
 });
 
+
 Route::group(['middleware' => 'api', 'prefix' => 'setting'], function () {
     Route::get('/', [SettingController::class, 'index']);
     Route::post('/', [SettingController::class, 'update']);
 });
+
 
 Route::group(['prefix' => 'region'], function () {
     Route::get('provinces', [RegionController::class, 'provinces']);
@@ -74,4 +76,13 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'bakat'], function () {
     Route::get('{bakat}', [BakatController::class, 'show']);
     Route::post('{bakat}', [BakatController::class, 'update']);
     Route::delete('{bakat}', [BakatController::class, 'destroy']);
+});
+
+
+Route::group(['middleware' => 'auth:api', 'prefix' => 'jurusan'], function () {
+    Route::get('', [JurusanController::class, 'index']);
+    Route::post('', [JurusanController::class, 'store']);
+    Route::get('{jurusan}', [JurusanController::class, 'show']);
+    Route::put('{jurusan}', [JurusanController::class, 'update']);
+    Route::delete('{jurusan}', [JurusanController::class, 'destroy']);
 });

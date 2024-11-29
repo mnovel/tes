@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kelas;
 use App\Http\Requests\UpdateKelasRequest;
+use Illuminate\Http\Request;
 
 class KelasController extends Controller
 {
@@ -20,9 +21,21 @@ class KelasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $kelas = Kelas::select(['id', 'name', 'level', 'status'])->get();
+
+        $validated = $request->validate([
+            'level' => 'nullable|in:SD,SMP,SMA'
+        ]);
+
+        $query = Kelas::select(['id', 'name', 'level', 'status']);
+
+
+        if (!empty($validated['level'])) {
+            $query->where('level',  $validated['level']);
+        }
+
+        $kelas = $query->get();
 
         return response()->json([
             'status' => 'success',

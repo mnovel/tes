@@ -11,7 +11,7 @@ class StoreJurusanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreJurusanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:60|unique:jurusans,name',
+            'bakat' => 'required|array',
+            'bakat.*' => 'required|exists:bakats,id',
         ];
     }
 }

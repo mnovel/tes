@@ -24,11 +24,10 @@ class SettingController extends Controller
     public function index()
     {
         $setting = Setting::select(['title', 'description', 'author', 'keywords', 'icon'])->first();
-        $response = [
+        return response()->json([
             'status' => 'success',
             'data' => $setting,
-        ];
-        return response()->json($response);
+        ]);
     }
 
 
@@ -38,21 +37,16 @@ class SettingController extends Controller
     public function update(UpdateSettingRequest $request)
     {
         $validated = $request->validated();
-
         $setting = Setting::first();
 
         if ($request->hasFile('icon')) {
             $fileExtension = $request->file('icon')->getClientOriginalExtension();
-
             $iconFileName = 'icon.' . $fileExtension;
-
             $iconPath = $request->file('icon')->storeAs('images', $iconFileName, 'public');
-
             $validated['icon'] = $iconPath;
         }
 
         $setting->update($validated);
-
         return response()->json([
             'status' => 'success',
             'message' => 'The setting has been updated successfully.',

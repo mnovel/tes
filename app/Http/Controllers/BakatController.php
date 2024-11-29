@@ -75,7 +75,6 @@ class BakatController extends Controller
         }
 
         $bakat->update($validated);
-
         return response()->json([
             'status' => 'success',
             'message' => __('Great news! The talent details have been updated successfully.'),
@@ -93,7 +92,6 @@ class BakatController extends Controller
         }
 
         $bakat->delete();
-
         return response()->json([
             'status' => 'success',
             'message' => __('The talent has been removed successfully.'),

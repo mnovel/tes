@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $query = User::select(['id', 'name', 'email'])->orderBy('name');
+        $query = User::orderBy('name');
 
         $validated = $request->validate([
             'name' => 'nullable|string|max:255',
@@ -31,7 +31,7 @@ class UserController extends Controller
 
         $users = $query->paginate(15);
 
-        $response = [
+        return response()->json([
             'status' => 'success',
             'data' => $users->items(),
             'meta' => [
@@ -40,9 +40,7 @@ class UserController extends Controller
                 'per_page' => $users->perPage(),
                 'total' => $users->total(),
             ]
-        ];
-
-        return response()->json($response);
+        ]);
     }
 
     /**
@@ -51,13 +49,11 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $validated = $request->validated();
-
         $user = User::create($validated);
-
         return response()->json([
             'status' => 'success',
             'message' => 'Hooray! A new user has been added to our system successfully.',
-            'data' => $validated
+            'data' => $user
         ], 201);
     }
 
@@ -79,14 +75,11 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $validated = $request->validated();
-
-        // Encrypt the password if it's provided
         if (isset($validated['password'])) {
             $validated['password'] = bcrypt($validated['password']);
         }
 
         $user->update($validated);
-
         return response()->json([
             'status' => 'success',
             'message' => 'Great news! The user details have been successfully updated.',
@@ -100,7 +93,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-
         return response()->json([
             'status' => 'success',
             'message' => 'User removed successfully. We hope to see them again in the future!'

@@ -14,6 +14,8 @@ class Bakat extends Model
 
     public $incrementing = false;
 
+    protected $hidden = ['created_at', 'updated_at'];
+
     protected $fillable = [
         'name',
         'short_description',
