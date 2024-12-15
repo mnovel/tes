@@ -15,18 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('level');
-            $table->char('province_id');
-            $table->char('regency_id');
             $table->timestamps();
-
-            $table->foreign('province_id')
-                ->references('id')
-                ->on('provinces')
-                ->onUpdate('cascade')->onDelete('restrict');
-            $table->foreign('regency_id')
-                ->references('id')
-                ->on('regencies')
-                ->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

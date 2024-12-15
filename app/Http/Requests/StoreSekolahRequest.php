@@ -25,20 +25,7 @@ class StoreSekolahRequest extends FormRequest
 
         return [
             'name' => 'required|string|max:60|unique:sekolahs,name',
-            'level' => 'required|in:SD,SMP,SMA',
-            'province' => 'required|exists:provinces,id',
-            'regency' => [
-                'required',
-                'exists:regencies,id',
-                function ($attribute, $value, $fail) use ($province_id) {
-                    $isRelated = \App\Models\Regency::where('id', $value)
-                        ->where('province_id', $province_id)
-                        ->exists();
-                    if (!$isRelated) {
-                        $fail("The selected {$attribute} does not belong to the specified province.");
-                    }
-                },
-            ],
+            'level' => 'required|in:SMP,SMA',
         ];
     }
 }

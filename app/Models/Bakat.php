@@ -26,11 +26,11 @@ class Bakat extends Model
 
     public function jurusan()
     {
-        return $this->hasMany(Jurusan::class, 'bakat_id');
+        return Jurusan::whereJsonContains('bakat_id', $this->id);
     }
 
     public function profesi()
     {
-        return $this->hasMany(Profesi::class, 'bakat_id');
+        return Profesi::whereJsonContains('bakat_id', $this->id);
     }
 }

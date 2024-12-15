@@ -15,36 +15,6 @@ class KelasSeeder extends Seeder
     {
         $kelas = [
             [
-                'name' => 'Kelas 1',
-                'level' => 'SD',
-                'status' => 'active'
-            ],
-            [
-                'name' => 'Kelas 2',
-                'level' => 'SD',
-                'status' => 'active'
-            ],
-            [
-                'name' => 'Kelas 3',
-                'level' => 'SD',
-                'status' => 'active'
-            ],
-            [
-                'name' => 'Kelas 4',
-                'level' => 'SD',
-                'status' => 'active'
-            ],
-            [
-                'name' => 'Kelas 5',
-                'level' => 'SD',
-                'status' => 'active'
-            ],
-            [
-                'name' => 'Kelas 6',
-                'level' => 'SD',
-                'status' => 'active'
-            ],
-            [
                 'name' => 'Kelas 7',
                 'level' => 'SMP',
                 'status' => 'active'

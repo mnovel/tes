@@ -20,32 +20,13 @@ class SekolahController extends Controller
             'name' => 'nullable|string|max:255',
         ]);
 
-        $query = Sekolah::with(['province:id,name', 'regency:id,name'])
-            ->orderBy('name');
-
-        if (!empty($validated['province'])) {
-            $query->where('province_id', $validated['province']);
-        }
-
-        if (!empty($validated['regency'])) {
-            $query->where('regency_id', $validated['regency']);
-        }
+        $query = Sekolah::orderBy('name');
 
         if (!empty($validated['name'])) {
             $query->where('name', 'LIKE', '%' . $validated['name'] . '%');
         }
 
         $paginatedSchools = $query->paginate(15);
-
-        $formattedSchools = $paginatedSchools->getCollection()->map(fn($school) => [
-            'id' => $school->id,
-            'name' => $school->name,
-            'level' => $school->level,
-            'province' => $school->province->name,
-            'regency' => $school->regency->name,
-        ]);
-
-        $paginatedSchools->setCollection($formattedSchools);
 
         return response()->json([
             'status' => 'success',
@@ -70,8 +51,6 @@ class SekolahController extends Controller
         $sekolah = Sekolah::create([
             'name' => $validated['name'],
             'level' => $validated['level'],
-            'province_id' => $validated['province'],
-            'regency_id' => $validated['regency'],
         ]);
 
         return response()->json([
@@ -93,8 +72,6 @@ class SekolahController extends Controller
                 'id' => $sekolah->id,
                 'name' => $sekolah->name,
                 'level' => $sekolah->level,
-                'province' => $sekolah->province->name,
-                'regency' => $sekolah->regency->name,
             ]
         ], 200);
     }
@@ -109,8 +86,6 @@ class SekolahController extends Controller
         $sekolah->update([
             'name' => $validated['name'],
             'level' => $validated['level'],
-            'province_id' => $validated['province'],
-            'regency_id' => $validated['regency'],
         ]);
 
         return response()->json([
