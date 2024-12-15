@@ -16,8 +16,6 @@ class BakatController extends Controller
     {
         $bakat = Bakat::all();
 
-        dd($bakat->jurusan());
-
         return response()->json([
             'status' => 'success',
             'message' => __('Here is the list of all available talents!'),
