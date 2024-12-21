@@ -24,6 +24,6 @@ class Jurusan extends Model
 
     public function perguruanTinggi()
     {
-        return $this->hasMany(PerguruanTinggi::class, 'jurusan_id');
+        return PerguruanTinggi::whereJsonContains('jurusan_id', $this->id);
     }
 }

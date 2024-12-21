@@ -14,14 +14,10 @@ return new class extends Migration
         Schema::create('perguruan_tinggis', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('jurusan_id');
-            $table->string('status');
+            $table->integer('rank');
+            $table->json('jurusan_id');
+            $table->string('status')->default('active');
             $table->timestamps();
-
-            $table->foreign('jurusan_id')
-                ->references('id')
-                ->on('jurusans')
-                ->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

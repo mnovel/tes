@@ -11,7 +11,7 @@ class UpdatePerguruanTinggiRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdatePerguruanTinggiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:120|unique:perguruan_tinggis,name,' . $this->perguruanTinggi->id,
+            'rank' => 'required|integer|min:1',
+            'jurusan' => 'required',
+            'jurusan.*' => 'required|exists:jurusans,id'
         ];
     }
 }

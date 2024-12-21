@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BakatController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\PerguruanTinggiController;
 use App\Http\Controllers\ProfesiController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\SekolahController;
@@ -77,6 +78,14 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'bakat'], function () {
     Route::get('{bakat}', [BakatController::class, 'show']);
     Route::post('{bakat}', [BakatController::class, 'update']);
     Route::delete('{bakat}', [BakatController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'auth:api', 'prefix' => 'perguruan-tinggi'], function () {
+    Route::get('', [PerguruanTinggiController::class, 'index']);
+    Route::post('', [PerguruanTinggiController::class, 'store']);
+    Route::get('{perguruanTinggi}', [PerguruanTinggiController::class, 'show']);
+    Route::put('{perguruanTinggi}', [PerguruanTinggiController::class, 'update']);
+    Route::delete('{perguruanTinggi}', [PerguruanTinggiController::class, 'destroy']);
 });
 
 

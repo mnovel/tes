@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PerguruanTinggi;
 use App\Http\Requests\StorePerguruanTinggiRequest;
 use App\Http\Requests\UpdatePerguruanTinggiRequest;
+use App\Models\Jurusan;
 
 class PerguruanTinggiController extends Controller
 {
@@ -13,15 +14,18 @@ class PerguruanTinggiController extends Controller
      */
     public function index()
     {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $perguruanTinggi = PerguruanTinggi::get()->map(fn($perguruanTinggi) => [
+            'id' => $perguruanTinggi->id,
+            'name' => $perguruanTinggi->name,
+            'rank' => $perguruanTinggi->rank,
+            'jurusan' => Jurusan::whereIn('id', $perguruanTinggi->jurusan_id)->pluck('name')->toArray()
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $perguruanTinggi
+        ]);
     }
 
     /**
@@ -29,7 +33,17 @@ class PerguruanTinggiController extends Controller
      */
     public function store(StorePerguruanTinggiRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $perguruanTinggi = PerguruanTinggi::create([
+            'name' =>  $validated['name'],
+            'rank' =>  $validated['rank'],
+            'jurusan_id' =>  $validated['jurusan'],
+        ]);
+        return response()->json([
+            'status' => 'successs',
+            'message' => '',
+            'data' => $perguruanTinggi
+        ]);
     }
 
     /**
@@ -37,15 +51,17 @@ class PerguruanTinggiController extends Controller
      */
     public function show(PerguruanTinggi $perguruanTinggi)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(PerguruanTinggi $perguruanTinggi)
-    {
-        //
+        return response()->json([
+            'status' => 'success',
+            'message' => '',
+            'data' => [
+                'id' => $perguruanTinggi->id,
+                'name' => $perguruanTinggi->name,
+                'rank' => $perguruanTinggi->rank,
+                'bakat' =>  $perguruanTinggi->jurusan(),
+                'status' => $perguruanTinggi->status,
+            ]
+        ]);
     }
 
     /**
@@ -53,7 +69,17 @@ class PerguruanTinggiController extends Controller
      */
     public function update(UpdatePerguruanTinggiRequest $request, PerguruanTinggi $perguruanTinggi)
     {
-        //
+        $validated = $request->validated();
+        $perguruanTinggi->update([
+            'name' =>  $validated['name'],
+            'rank' =>  $validated['rank'],
+            'jurusan_id' =>  $validated['jurusan'],
+        ]);
+        return response()->json([
+            'status' => 'successs',
+            'message' => '',
+            'data' => $perguruanTinggi
+        ]);
     }
 
     /**
@@ -61,6 +87,10 @@ class PerguruanTinggiController extends Controller
      */
     public function destroy(PerguruanTinggi $perguruanTinggi)
     {
-        //
+        $perguruanTinggi->delete();
+        return response()->json([
+            'status' => 'success',
+            'message' => '',
+        ]);
     }
 }
