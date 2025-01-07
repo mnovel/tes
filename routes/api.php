@@ -37,6 +37,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     Route::get('me', [AuthController::class, 'me']);
 });
 
+
 Route::group(['middleware' => 'auth:api', 'prefix' => 'pertanyaan'], function () {
     Route::get('', [PertanyaanController::class, 'index']);
     Route::post('', [PertanyaanController::class, 'store']);

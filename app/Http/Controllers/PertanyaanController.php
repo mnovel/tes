@@ -78,6 +78,10 @@ class PertanyaanController extends Controller
      */
     public function destroy(Pertanyaan $pertanyaan)
     {
-        //
+        $pertanyaan->delete();
+        return response()->json([
+            'status' => 'success',
+            'message' => __('delete_data', ['data' => 'Pertanyaan']),
+        ]);
     }
 }
