@@ -28,8 +28,7 @@ class KelasController extends Controller
             'level' => 'nullable|in:SD,SMP,SMA'
         ]);
 
-        $query = Kelas::select(['id', 'name', 'level', 'status']);
-
+        $query = Kelas::query();
 
         if (!empty($validated['level'])) {
             $query->where('level',  $validated['level']);
@@ -39,7 +38,7 @@ class KelasController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Here is the list of all available classes!',
+            'message' => __('display_data', ['data' => 'kelas']),
             'data' => $kelas,
         ], 200);
     }
@@ -54,7 +53,7 @@ class KelasController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Fantastic! The class status has been successfully updated.',
+            'message' => __('update_data', ['data' => 'kelas']),
         ], 200);
     }
 }

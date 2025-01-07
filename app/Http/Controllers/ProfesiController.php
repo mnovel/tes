@@ -19,20 +19,28 @@ class ProfesiController extends Controller
             'bakat' => 'nullable|exists:bakats,id'
         ]);
 
-        $query = Profesi::query();
+        $query = Profesi::with('bakat');
 
         if (!empty($validated['bakat'])) {
-            $query->whereJsonContains('bakat_id', $validated['bakat']);
+            $query->whereHas('bakat', function ($query) use ($validated) {
+                $query->where('bakats.id', $validated['bakat']);
+            });
         }
 
         $profesi = $query->get()->map(fn($profesi) => [
             'id' => $profesi->id,
             'name' => $profesi->name,
-            'bakat' => Bakat::whereIn('id', $profesi->bakat_id)->pluck('name')->toArray()
+            'bakat' => $profesi->bakat->map(function ($bakat) {
+                return [
+                    'id' => $bakat->id,
+                    'name' => $bakat->name,
+                ];
+            })
         ]);
 
         return response()->json([
             'status' => 'success',
+            'message' => __('display_data', ['data' => 'Profesi']),
             'data' => $profesi
         ]);
     }
@@ -45,11 +53,11 @@ class ProfesiController extends Controller
         $validated = $request->validated();
         $profesi = Profesi::create([
             'name' => $validated['name'],
-            'bakat_id' => $validated['bakat']
         ]);
+        $profesi->bakat()->attach($validated['bakat']);
         return response()->json([
             'status' => 'successs',
-            'message' => '',
+            'message' => __('create_data', ['data' => 'Profesi']),
             'data' => $profesi
         ]);
     }
@@ -61,11 +69,16 @@ class ProfesiController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'message' => '',
+            'message' => __('detail_data', ['data' => 'Profesi']),
             'data' => [
                 'id' => $profesi->id,
                 'name' => $profesi->name,
-                'bakat' =>  $profesi->bakat()
+                'bakat' => $profesi->bakat->map(function ($bakat) {
+                    return [
+                        'id' => $bakat->id,
+                        'name' => $bakat->name,
+                    ];
+                })
             ]
         ]);
     }
@@ -76,10 +89,12 @@ class ProfesiController extends Controller
     public function update(UpdateProfesiRequest $request, Profesi $profesi)
     {
         $validated = $request->validated();
-        $profesi->update($validated);
+        $profesi->name = $validated['name'];
+        $profesi->save();
+        $profesi->bakat()->sync($validated['bakat']);
         return response()->json([
             'status' => 'success',
-            'message' => '',
+            'message' => __('update_data', ['data' => 'Profesi']),
             'data' => $profesi
         ]);
     }
@@ -92,7 +107,7 @@ class ProfesiController extends Controller
         $profesi->delete();
         return response()->json([
             'status' => 'success',
-            'message' => '',
+            'message' => __('delete_data', ['data' => 'Profesi']),
         ]);
     }
 }

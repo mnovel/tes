@@ -14,7 +14,6 @@ class Bakat extends Model
 
     public $incrementing = false;
 
-    protected $hidden = ['created_at', 'updated_at'];
 
     protected $fillable = [
         'name',
@@ -24,13 +23,15 @@ class Bakat extends Model
         'icon'
     ];
 
+    protected $hidden = ['created_at', 'updated_at'];
+
     public function jurusan()
     {
-        return Jurusan::whereJsonContains('bakat_id', $this->id);
+        return $this->belongsToMany(Jurusan::class, 'bakat_jurusan');
     }
 
     public function profesi()
     {
-        return Profesi::whereJsonContains('bakat_id', $this->id);
+        return $this->belongsToMany(Profesi::class, 'bakat_profesi');
     }
 }

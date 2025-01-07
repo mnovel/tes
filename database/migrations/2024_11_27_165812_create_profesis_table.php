@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('profesis', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->json('bakat_id');
             $table->timestamps();
         });
     }

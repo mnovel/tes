@@ -9,21 +9,17 @@ class Jurusan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'bakat_id'];
-
-    protected $casts = [
-        'bakat_id' => 'array',
-    ];
+    protected $fillable = ['name'];
 
     protected $hidden = ['created_at', 'updated_at'];
 
     public function bakat()
     {
-        return Bakat::whereIn('id', $this->bakat_id)->pluck('name');
+        return $this->belongsToMany(Bakat::class, 'bakat_jurusan');
     }
 
     public function perguruanTinggi()
     {
-        return PerguruanTinggi::whereJsonContains('jurusan_id', $this->id);
+        return $this->belongsToMany(PerguruanTinggi::class, 'jurusan_perguruan_tinggi');
     }
 }

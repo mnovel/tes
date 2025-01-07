@@ -20,20 +20,30 @@ class JurusanController extends Controller
             'bakat' => 'nullable|exists:bakats,id'
         ]);
 
-        $query = Jurusan::query();
+        $query = Jurusan::with('bakat');
 
         if (!empty($validated['bakat'])) {
-            $query->whereJsonContains('bakat_id', $validated['bakat']);
+            $query->whereHas('bakat', function ($query) use ($validated) {
+                $query->where('bakats.id', $validated['bakat']);
+            });
         }
 
-        $jurusan = $query->get()->map(fn($jurusan) => [
-            'id' => $jurusan->id,
-            'name' => $jurusan->name,
-            'bakat' => Bakat::whereIn('id', $jurusan->bakat_id)->pluck('name')->toArray()
-        ]);
+        $jurusan = $query->get()->map(function ($jurusan) {
+            return [
+                'id' => $jurusan->id,
+                'name' => $jurusan->name,
+                'bakat' => $jurusan->bakat->map(function ($bakat) {
+                    return [
+                        'id' => $bakat->id,
+                        'name' => $bakat->name,
+                    ];
+                })
+            ];
+        });
 
         return response()->json([
             'status' => 'success',
+            'message' => __('display_data', ['data' => 'Jurusan']),
             'data' => $jurusan
         ]);
     }
@@ -46,11 +56,11 @@ class JurusanController extends Controller
         $validated = $request->validated();
         $jurusan = Jurusan::create([
             'name' => $validated['name'],
-            'bakat_id' => $validated['bakat']
         ]);
+        $jurusan->bakat()->attach($validated['bakat']);
         return response()->json([
             'status' => 'successs',
-            'message' => '',
+            'message' => __('create_data', ['data' => 'Jurusan']),
             'data' => $jurusan
         ]);
     }
@@ -62,11 +72,16 @@ class JurusanController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'message' => '',
+            'message' => __('detail_data', ['data' => 'Jurusan']),
             'data' => [
                 'id' => $jurusan->id,
                 'name' => $jurusan->name,
-                'bakat' =>  $jurusan->bakat()
+                'bakat' => $jurusan->bakat->map(function ($bakat) {
+                    return [
+                        'id' => $bakat->id,
+                        'name' => $bakat->name,
+                    ];
+                })
             ]
         ]);
     }
@@ -77,10 +92,12 @@ class JurusanController extends Controller
     public function update(UpdateJurusanRequest $request, Jurusan $jurusan)
     {
         $validated = $request->validated();
-        $jurusan->update($validated);
+        $jurusan->name = $validated['name'];
+        $jurusan->save();
+        $jurusan->bakat()->sync($validated['bakat']);
         return response()->json([
             'status' => 'success',
-            'message' => '',
+            'message' => __('update_data', ['data' => 'Jurusan']),
             'data' => $jurusan
         ]);
     }
@@ -93,7 +110,7 @@ class JurusanController extends Controller
         $jurusan->delete();
         return response()->json([
             'status' => 'success',
-            'message' => '',
+            'message' => __('delete_data', ['data' => 'Jurusan']),
         ]);
     }
 }

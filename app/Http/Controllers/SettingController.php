@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use App\Http\Requests\UpdateSettingRequest;
-use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
@@ -26,6 +25,7 @@ class SettingController extends Controller
         $setting = Setting::select(['title', 'description', 'author', 'keywords', 'icon'])->first();
         return response()->json([
             'status' => 'success',
+            'message' => __('display_data', ['data' => 'setting']),
             'data' => $setting,
         ]);
     }
@@ -49,7 +49,7 @@ class SettingController extends Controller
         $setting->update($validated);
         return response()->json([
             'status' => 'success',
-            'message' => 'The setting has been updated successfully.',
+            'message' =>  __('update_data', ['data' => 'setting']),
             'data' => $validated
         ], 200);
     }

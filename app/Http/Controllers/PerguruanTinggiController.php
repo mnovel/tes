@@ -15,15 +15,23 @@ class PerguruanTinggiController extends Controller
     public function index()
     {
 
-        $perguruanTinggi = PerguruanTinggi::get()->map(fn($perguruanTinggi) => [
-            'id' => $perguruanTinggi->id,
-            'name' => $perguruanTinggi->name,
-            'rank' => $perguruanTinggi->rank,
-            'jurusan' => Jurusan::whereIn('id', $perguruanTinggi->jurusan_id)->pluck('name')->toArray()
-        ]);
+        $perguruanTinggi = PerguruanTinggi::with('jurusan')->get()->map(function ($perguruanTinggi) {
+            return [
+                'id' => $perguruanTinggi->id,
+                'name' => $perguruanTinggi->name,
+                'rank' => $perguruanTinggi->rank,
+                'jurusan' => $perguruanTinggi->jurusan->map(function ($jurusan) {
+                    return [
+                        'id' => $jurusan->id,
+                        'name' => $jurusan->name
+                    ];
+                })
+            ];
+        });
 
         return response()->json([
             'status' => 'success',
+            'message' => __('display_data', ['data' => 'Perguruan Tinggi']),
             'data' => $perguruanTinggi
         ]);
     }
@@ -37,11 +45,11 @@ class PerguruanTinggiController extends Controller
         $perguruanTinggi = PerguruanTinggi::create([
             'name' =>  $validated['name'],
             'rank' =>  $validated['rank'],
-            'jurusan_id' =>  $validated['jurusan'],
         ]);
+        $perguruanTinggi->jurusan()->attach($validated['jurusan']);
         return response()->json([
             'status' => 'successs',
-            'message' => '',
+            'message' => __('create_data', ['data' => 'Perguruan Tinggi']),
             'data' => $perguruanTinggi
         ]);
     }
@@ -53,13 +61,17 @@ class PerguruanTinggiController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'message' => '',
+            'message' => __('detail_data', ['data' => 'Perguruan Tinggi']),
             'data' => [
                 'id' => $perguruanTinggi->id,
                 'name' => $perguruanTinggi->name,
                 'rank' => $perguruanTinggi->rank,
-                'bakat' =>  $perguruanTinggi->jurusan(),
-                'status' => $perguruanTinggi->status,
+                'jurusan' => $perguruanTinggi->jurusan->map(function ($jurusan) {
+                    return [
+                        'id' => $jurusan->id,
+                        'name' => $jurusan->name
+                    ];
+                })
             ]
         ]);
     }
@@ -73,11 +85,11 @@ class PerguruanTinggiController extends Controller
         $perguruanTinggi->update([
             'name' =>  $validated['name'],
             'rank' =>  $validated['rank'],
-            'jurusan_id' =>  $validated['jurusan'],
         ]);
+        $perguruanTinggi->jurusan()->sync($validated['jurusan']);
         return response()->json([
             'status' => 'successs',
-            'message' => '',
+            'message' => __('update_data', ['data' => 'Perguruan Tinggi']),
             'data' => $perguruanTinggi
         ]);
     }
@@ -90,7 +102,7 @@ class PerguruanTinggiController extends Controller
         $perguruanTinggi->delete();
         return response()->json([
             'status' => 'success',
-            'message' => '',
+            'message' =>  __('delete_data', ['data' => 'Perguruan Tinggi']),
         ]);
     }
 }

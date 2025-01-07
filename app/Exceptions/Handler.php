@@ -36,7 +36,7 @@ class Handler extends ExceptionHandler
         $this->renderable(function (ValidationException $e, $request) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
+                'message' => 'Data yang Anda masukkan tidak valid.',
                 'errors' => $e->errors()
             ], 422);
         });
@@ -47,27 +47,18 @@ class Handler extends ExceptionHandler
 
             if (preg_match('/([A-Za-z]+)Controller@/', $routeAction, $matches)) {
                 $modelName = Str::singular($matches[1]);
-
-                $model = $modelName;
+                $model = strtolower($matches[1]);
                 return response()->json([
                     'status' => 'error',
-                    'message' => "Sorry, we couldn't find the $model you were looking for."
+                    'message' => "Maaf, kami tidak dapat menemukan data {$model} yang Anda cari."
                 ], 404);
             }
 
             return response()->json([
                 'status' => 'error',
-                'message' => 'Sorry, the requested resource could not be found.'
+                'message' => 'Maaf, kami tidak dapat menemukan data yang Anda cari.'
             ], 404);
         });
-
-        // Optionally, handle other exceptions globally (e.g., generic error responses)
-        // $this->renderable(function (Throwable $e, $request) {
-        //     return response()->json([
-        //         'status' => 'error',
-        //         'message' => 'Something went wrong. Please try again later.'
-        //     ], 500);
-        // });
     }
 
     protected function unauthenticated($request, AuthenticationException $exception)

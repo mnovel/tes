@@ -9,14 +9,12 @@ class PerguruanTinggi extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'rank', 'jurusan_id', 'status'];
+    protected $fillable = ['name', 'rank', 'status'];
 
-    protected $casts = [
-        'jurusan_id' => 'array',
-    ];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function jurusan()
     {
-        return Jurusan::whereIn('id', $this->jurusan_id)->pluck('name');
+        return $this->belongsToMany(Jurusan::class, 'jurusan_perguruan_tinggi');
     }
 }

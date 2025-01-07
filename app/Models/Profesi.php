@@ -9,14 +9,12 @@ class Profesi extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'bakat_id'];
+    protected $fillable = ['name'];
 
-    protected $casts = [
-        'bakat_id' => 'array',
-    ];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function bakat()
     {
-        return Bakat::whereIn('id', $this->bakat_id)->pluck('name');
+        return $this->belongsToMany(Bakat::class, 'bakat_profesi');
     }
 }

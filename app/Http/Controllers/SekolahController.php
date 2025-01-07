@@ -5,40 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Sekolah;
 use App\Http\Requests\StoreSekolahRequest;
 use App\Http\Requests\UpdateSekolahRequest;
-use Illuminate\Http\Request;
 
 class SekolahController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $validated = $request->validate([
-            'province' => 'nullable|exists:provinces,id',
-            'regency' => 'nullable|exists:regencies,id',
-            'name' => 'nullable|string|max:255',
-        ]);
-
-        $query = Sekolah::orderBy('name');
-
-        if (!empty($validated['name'])) {
-            $query->where('name', 'LIKE', '%' . $validated['name'] . '%');
-        }
-
-        $paginatedSchools = $query->paginate(15);
-
+        $sekolah = Sekolah::orderBy('name')->get();
         return response()->json([
             'status' => 'success',
-            'message' => 'Here are the schools that match your search!',
-            'data' => $paginatedSchools->items(),
-            'meta' => [
-                'current_page' => $paginatedSchools->currentPage(),
-                'last_page' => $paginatedSchools->lastPage(),
-                'per_page' => $paginatedSchools->perPage(),
-                'total' => $paginatedSchools->total(),
-            ],
-        ]);
+            'message' => __('display_data', ['data' => 'sekolah']),
+            'data' => $sekolah,
+        ], 200);
     }
 
     /**
@@ -55,7 +35,7 @@ class SekolahController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Hooray! The school has been successfully added to the system.',
+            'message' => __('create_data', ['data' => 'sekolah']),
             'data' => $sekolah
         ], 201);
     }
@@ -67,7 +47,7 @@ class SekolahController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'message' => 'Here is the detailed information about the school you requested!',
+            'message' => __('detail_data', ['data' => 'sekolah']),
             'data' => [
                 'id' => $sekolah->id,
                 'name' => $sekolah->name,
@@ -90,7 +70,7 @@ class SekolahController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Great! The school information has been updated successfully.',
+            'message' => __('update_data', ['data' => 'sekolah']),
             'data' => $sekolah
         ], 200);
     }
@@ -104,7 +84,7 @@ class SekolahController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'The school has been successfully removed.',
+            'message' => __('delete_data', ['data' => 'sekolah']),
         ], 200);
     }
 }

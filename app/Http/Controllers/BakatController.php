@@ -18,7 +18,7 @@ class BakatController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => __('Here is the list of all available talents!'),
+            'message' => __('display_data', ['data' => 'bakat']),
             'data' => $bakat,
         ], 200);
     }
@@ -40,7 +40,7 @@ class BakatController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => __('Hooray! A new talent has been successfully added to the list.'),
+            'message' => __('create_data', ['data' => 'bakat']),
             'data' => $bakat,
         ], 201);
     }
@@ -52,7 +52,7 @@ class BakatController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'message' => __('Here is the talent you were looking for!'),
+            'message' => __('detail_data', ['data' => 'bakat']),
             'data' => $bakat,
         ], 200);
     }
@@ -77,7 +77,7 @@ class BakatController extends Controller
         $bakat->update($validated);
         return response()->json([
             'status' => 'success',
-            'message' => __('Great news! The talent details have been updated successfully.'),
+            'message' => __('update_data', ['data' => 'bakat']),
             'data' => $bakat,
         ], 200);
     }
@@ -94,7 +94,7 @@ class BakatController extends Controller
         $bakat->delete();
         return response()->json([
             'status' => 'success',
-            'message' => __('The talent has been removed successfully.'),
+            'message' => __('delete_data', ['data' => 'bakat']),
         ], 200);
     }
 }

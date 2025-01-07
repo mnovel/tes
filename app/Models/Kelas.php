@@ -12,4 +12,6 @@ class Kelas extends Model
     protected $fillable = [
         'status',
     ];
+
+    protected $hidden = ['created_at', 'updated_at'];
 }
