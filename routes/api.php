@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfesiController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\SurveiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VersiPertanyaanController;
 use App\Models\Panduan;
@@ -133,4 +134,12 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'pertanyaan'], function ()
 Route::group(['middleware' => 'api', 'prefix' => 'panduan'], function () {
     Route::get('/', [PanduanController::class, 'index']);
     Route::put('/', [PanduanController::class, 'update']);
+});
+
+Route::group(['middleware' => 'auth:api', 'prefix' => 'survei'], function () {
+    Route::get('', [SurveiController::class, 'index']);
+    Route::post('', [SurveiController::class, 'store']);
+    Route::get('{survei}', [SurveiController::class, 'show']);
+    Route::put('{survei}', [SurveiController::class, 'update']);
+    Route::delete('{survei}', [SurveiController::class, 'destroy']);
 });
