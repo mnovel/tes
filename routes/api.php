@@ -136,7 +136,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'panduan'], function () {
     Route::put('/', [PanduanController::class, 'update']);
 });
 
-Route::group(['middleware' => 'auth:api', 'prefix' => 'survei'], function () {
+Route::group(['middleware' => 'api', 'prefix' => 'survei'], function () {
     Route::get('', [SurveiController::class, 'index']);
     Route::post('', [SurveiController::class, 'store']);
     Route::get('{survei}', [SurveiController::class, 'show']);

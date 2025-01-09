@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Survei extends Model
 {
-    protected $fillable = ['question'];
+    protected $fillable = ['question', 'type', 'status'];
 
     protected $hidden = ['created_at', 'updated_at'];
 }

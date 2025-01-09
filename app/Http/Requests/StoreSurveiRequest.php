@@ -23,6 +23,7 @@ class StoreSurveiRequest extends FormRequest
     {
         return [
             'question' => 'required|string|unique:surveis,question',
+            'type' => 'required|in:Scale,Text',
             'status' => 'required|in:Active,Inactive'
         ];
     }

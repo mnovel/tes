@@ -23,6 +23,7 @@ class UpdateSurveiRequest extends FormRequest
     {
         return [
             'question' => 'required|string|unique:surveis,question,' . $this->survei->id,
+            'type' => 'required|in:Scale,Text',
             'status' => 'required|in:Active,Inactive'
         ];
     }

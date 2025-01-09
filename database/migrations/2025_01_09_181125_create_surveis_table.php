@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('surveis', function (Blueprint $table) {
             $table->id();
             $table->string('question');
+            $table->enum('type', ['Scale', 'Text']);
             $table->enum('status', ['Active', 'Inactive']);
             $table->timestamps();
         });
