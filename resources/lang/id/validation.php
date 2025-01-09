@@ -156,6 +156,5 @@ return [
         'regency' => 'Kabupaten/Kota',
         'title' => 'Judul',
         'description' => 'Deskripsi',
-        'keywords' => 'Pencipta'
     ],
 ];

@@ -23,7 +23,7 @@ class PanduanController extends Controller
      */
     public function index()
     {
-        $panduan = Panduan::select('deskripsi')->first();
+        $panduan = Panduan::select('description')->first();
         return response()->json([
             'status' => 'success',
             'message' => __('display_data', ['data' => 'panduan']),

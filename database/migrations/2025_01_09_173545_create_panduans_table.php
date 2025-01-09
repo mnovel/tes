@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('panduans', function (Blueprint $table) {
             $table->id();
-            $table->text('deskripsi');
+            $table->text('description');
             $table->timestamps();
         });
     }
