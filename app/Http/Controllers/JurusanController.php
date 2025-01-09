@@ -107,10 +107,24 @@ class JurusanController extends Controller
      */
     public function destroy(Jurusan $jurusan)
     {
-        $jurusan->delete();
-        return response()->json([
-            'status' => 'success',
-            'message' => __('delete_data', ['data' => 'Jurusan']),
-        ]);
+        try {
+            $jurusan->delete();
+            return response()->json([
+                'status' => 'success',
+                'message' => __('delete_data', ['data' => 'Jurusan']),
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() == 23000) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => __('error_delete_relation', ['data' => 'jurusan']),
+                ], 400);
+            }
+
+            return response()->json([
+                'status' => 'error',
+                'message' => __('error_delete', ['data' => 'jurusan']),
+            ], 500);
+        }
     }
 }

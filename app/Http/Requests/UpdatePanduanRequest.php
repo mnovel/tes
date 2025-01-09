@@ -22,7 +22,7 @@ class UpdatePanduanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'description' => ['required', 'string'],
+            'description' => 'required|string',
         ];
     }
 }

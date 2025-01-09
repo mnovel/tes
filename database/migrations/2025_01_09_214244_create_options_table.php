@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pertanyaans', function (Blueprint $table) {
+        Schema::create('options', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('versi_id')->constrained('versi_pertanyaans')->onDelete('restrict');
-            $table->enum('type', ['Single', 'Multiple']);
-            $table->text('question');
+            $table->uuid('pertanyaan_id');
+            $table->string('answer');
+            $table->string('bakat_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('pertanyaan_id')->references('id')->on('pertanyaans')->onDelete('cascade');
+            $table->foreign('bakat_id')->references('id')->on('bakats')->onDelete('restrict');
         });
     }
 
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pertanyaans');
+        Schema::dropIfExists('options');
     }
 };

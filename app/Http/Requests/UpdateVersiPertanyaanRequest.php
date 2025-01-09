@@ -22,8 +22,8 @@ class UpdateVersiPertanyaanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'unique:versi_pertanyaans,name,' . $this->versiPertanyaan->id],
-            'status' => ['required', 'in:Active,Inactive'],
+            'name' => 'required|string|unique:versi_pertanyaans,name,' . $this->versiPertanyaan->id,
+            'status' => 'required|in:Active,Inactive',
         ];
     }
 }

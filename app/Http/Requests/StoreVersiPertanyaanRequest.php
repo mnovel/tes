@@ -22,8 +22,8 @@ class StoreVersiPertanyaanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'unique:versi_pertanyaans,name'],
-            'status' => ['required', 'in:Active,Inactive'],
+            'name' => 'required|string|unique:versi_pertanyaans,name',
+            'status' => 'required|in:Active,Inactive',
         ];
     }
 }

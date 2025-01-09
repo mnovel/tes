@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Pertanyaan;
 use App\Http\Requests\StorePertanyaanRequest;
 use App\Http\Requests\UpdatePertanyaanRequest;
+use App\Models\Option;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PertanyaanController extends Controller
 {
@@ -15,18 +17,36 @@ class PertanyaanController extends Controller
     public function index(Request $request)
     {
         $validated = $request->validate([
-            'type' => 'nullable|in:SINGLE,MULTIPLE',
+            'type' => 'nullable|in:Single,Multiple',
         ]);
 
-        $query = Pertanyaan::query();
+        $query = Pertanyaan::orderBy('type');
+
         if (isset($validated['type'])) {
             $query->where('type', $validated['type']);
         }
-        $pertanyaans = $query->get();
+
+        $pertanyaan = $query->get()->map(function ($pertanyaan) {
+            return [
+                'id' => $pertanyaan->id,
+                'versi' => $pertanyaan->versi->name,
+                'type' => $pertanyaan->type,
+                'question' => $pertanyaan->question,
+                'options' => $pertanyaan->option->map(function ($option) {
+                    return [
+                        'id' => $option->id,
+                        'answer' => $option->answer,
+                        'bakat_id' => $option->bakat->id ?? null,
+                        'bakat' => $option->bakat->name ?? null,
+                    ];
+                }),
+            ];
+        });
+
         return response()->json([
             'status' => 'success',
-            'message' => '',
-            'data' => $pertanyaans
+            'message' => __('display_data', ['data' => 'pertanyaan']),
+            'data' => $pertanyaan
         ]);
     }
 
@@ -36,17 +56,38 @@ class PertanyaanController extends Controller
     public function store(StorePertanyaanRequest $request)
     {
         $validated = $request->validated();
-        if (isset($validated['options']) && is_array($validated['options'])) {
-            foreach ($validated['options'] as &$option) {
-                $option['id'] = (string) \Illuminate\Support\Str::uuid();
+        try {
+            DB::beginTransaction();
+
+            $pertanyaan = Pertanyaan::create([
+                'versi_id' => $validated['versi'],
+                'type' => $validated['type'],
+                'question' => $validated['question'],
+            ]);
+
+            foreach ($validated['options'] as $option) {
+                Option::create([
+                    'pertanyaan_id' => $pertanyaan->id,
+                    'answer' => $option['answer'],
+                    'bakat_id' => $option['bakat'] ?? null,
+                ]);
             }
+
+            DB::commit();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => __('create_data', ['data' => 'pertanyaan']),
+                'data' => $pertanyaan->load('option')
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => 'error',
+                'message' => __('error_create', ['data' => 'pertanyaan']),
+                'error' => $e->getMessage()
+            ], 500);
         }
-        $pertanyaan = Pertanyaan::create($validated);
-        return response()->json([
-            'status' => 'success',
-            'message' => '',
-            'data' => $pertanyaan
-        ]);
     }
 
     /**
@@ -54,15 +95,24 @@ class PertanyaanController extends Controller
      */
     public function show(Pertanyaan $pertanyaan)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Pertanyaan $pertanyaan)
-    {
-        //
+        return response()->json([
+            'status' => 'success',
+            'message' => __('detail_data', ['data' => 'pertanyaan']),
+            'data' => [
+                'id' => $pertanyaan->id,
+                'versi' => $pertanyaan->versi->name,
+                'type' => $pertanyaan->type,
+                'question' => $pertanyaan->question,
+                'options' => $pertanyaan->options->map(function ($option) {
+                    return [
+                        'id' => $option->id,
+                        'answer' => $option->answer,
+                        'bakat_id' => $option->bakat->id ?? null,
+                        'bakat' => $option->bakat->name ?? null,
+                    ];
+                }),
+            ]
+        ]);
     }
 
     /**
@@ -70,7 +120,41 @@ class PertanyaanController extends Controller
      */
     public function update(UpdatePertanyaanRequest $request, Pertanyaan $pertanyaan)
     {
-        //
+        $validated = $request->validated();
+        try {
+            DB::beginTransaction();
+
+            $pertanyaan->update([
+                'versi_id' => $validated['versi'],
+                'type' => $validated['type'],
+                'question' => $validated['question'],
+            ]);
+
+            $pertanyaan->option()->delete();
+
+            foreach ($validated['options'] as $option) {
+                Option::create([
+                    'pertanyaan_id' => $pertanyaan->id,
+                    'answer' => $option['answer'],
+                    'bakat_id' => $option['bakat'] ?? null,
+                ]);
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => __('update_data', ['data' => 'pertanyaan']),
+                'data' => $pertanyaan->load('option')
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => 'error',
+                'message' => __('error_update', ['data' => 'pertanyaan']),
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**

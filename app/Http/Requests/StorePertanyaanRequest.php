@@ -24,56 +24,48 @@ class StorePertanyaanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => 'required|in:SINGLE,MULTIPLE',
-            'question' => 'required|string',
-            'options' => ['required', 'array', function ($attribute, $value, $fail) {
-                $type = $this->input('type');
-                if ($type === 'SINGLE') {
-                    $answers = array_column($value, 'answer');
-                    $uniqueAnswers = array_unique($answers);
-
-                    if (array_diff(['Setuju', 'Tidak Setuju'], $uniqueAnswers)) {
-                        $fail("$attribute harus memiliki jawaban 'Setuju' dan 'Tidak Setuju'.");
+            'versi' => 'required|exists:versi_pertanyaans,id',
+            'type' => 'required|in:Single,Multiple',
+            'question' => 'required|string|unique:pertanyaans,question',
+            'options' => 'required|array|min:2',
+            'options.*.answer' => [
+                'required',
+                'string',
+                'distinct',
+                function ($attribute, $value, $fail) {
+                    if ($this->input('type') === 'Single' && !in_array(Str::lower($value), ['setuju', 'tidak setuju'])) {
+                        $fail("$attribute hanya boleh berisi 'Setuju' atau 'Tidak Setuju' untuk pertanyaan Single.");
                     }
                 }
-            }],
-            'options.*' => 'required|array',
-            'options.*.answer' => ['required', function ($attribute, $value, $fail) {
-                $type = $this->input('type');
-                if ($type === 'SINGLE') {
-                    if (!in_array($value, ['Setuju', 'Tidak Setuju'])) {
-                        $fail("$attribute harus 'Setuju' atau 'Tidak Setuju'.");
-                    }
-                }
-            }],
-            'options.*.bakat' => ['nullable', function ($attribute, $value, $fail) {
-                $type = $this->input('type');
-                $answer = $this->input(str_replace('.bakat', '.answer', $attribute));
-
-                if ($type === 'SINGLE') {
-                    if ($answer === 'Setuju') {
-                        if (empty($value) || !DB::table('bakats')->where('id', $value)->exists()) {
-                            $fail("$attribute tidak valid. Bakat harus ada dan ditemukan di tabel bakats.");
-                        }
-                    } elseif ($answer === 'Tidak Setuju') {
-                        if ($value !== null) {
-                            $fail("$attribute harus null ketika jawaban adalah 'Tidak Setuju'.");
-                        }
-                    }
-                } elseif ($type === 'MULTIPLE') {
+            ],
+            'options.*.bakat' => [
+                'distinct',
+                function ($attribute, $value, $fail) {
+                    $type = $this->input('type');
                     $options = $this->input('options');
-                    $bakatIds = array_column($options, 'bakat');
-                    $uniqueBakatIds = array_unique($bakatIds);
 
-                    if (count($bakatIds) !== count($uniqueBakatIds)) {
-                        $fail("$attribute harus memiliki bakat yang unik.");
+                    preg_match('/options\.(\d+)\.bakat/', $attribute, $matches);
+                    $index = $matches[1] ?? null;
+                    $answer = $options[$index]['answer'] ?? null;
+
+                    if ($type === 'Multiple' && is_null($value)) {
+                        $fail("$attribute wajib diisi bila tipe adalah Multiple.");
                     }
 
-                    if (empty($value) || !DB::table('bakats')->where('id', $value)->exists()) {
-                        $fail("$attribute tidak valid. Bakat harus ada dan ditemukan di tabel bakats.");
+                    if ($type === 'Single' && strtolower($answer) === 'tidak setuju' && !is_null($value)) {
+                        $fail("$attribute harus null jika tipe Single dan jawaban adalah 'Tidak Setuju'.");
+                    }
+
+                    if ($type === 'Single' && strtolower($answer) === 'setuju' && is_null($value)) {
+                        $fail("$attribute harus diisi jika tipe Single dan jawaban adalah 'Setuju'.");
+                    }
+
+                    if (!is_null($value) && !DB::table('bakats')->where('id', $value)->exists()) {
+                        $fail("$attribute yang dipilih tidak valid.");
                     }
                 }
-            }],
+            ]
+
         ];
     }
 }

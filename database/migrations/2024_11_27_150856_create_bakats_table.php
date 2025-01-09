@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('bakats', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('short_description')->nullable();
+            $table->string('short_description');
             $table->text('full_description');
             $table->text('recommendation');
             $table->string('icon')->nullable();

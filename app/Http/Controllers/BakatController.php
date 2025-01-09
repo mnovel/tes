@@ -87,14 +87,29 @@ class BakatController extends Controller
      */
     public function destroy(Bakat $bakat)
     {
-        if ($bakat->icon && Storage::exists($bakat->icon)) {
-            Storage::delete($bakat->icon);
-        }
+        try {
+            $bakat->delete();
 
-        $bakat->delete();
-        return response()->json([
-            'status' => 'success',
-            'message' => __('delete_data', ['data' => 'bakat']),
-        ], 200);
+            if ($bakat->icon && Storage::exists($bakat->icon)) {
+                Storage::delete($bakat->icon);
+            }
+
+            return response()->json([
+                'status' => 'success',
+                'message' => __('delete_data', ['data' => 'bakat']),
+            ], 200);
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() == 23000) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => __('error_delete_relation', ['data' => 'bakat']),
+                ], 400);
+            }
+
+            return response()->json([
+                'status' => 'error',
+                'message' => __('error_delete', ['data' => 'bakat']),
+            ], 500);
+        }
     }
 }

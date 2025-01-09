@@ -10,4 +10,9 @@ class VersiPertanyaan extends Model
     protected $fillable = ['name', 'status'];
 
     protected $hidden = ['created_at', 'updated_at'];
+
+    public function pertanyaan()
+    {
+        return $this->hasMany(Pertanyaan::class);
+    }
 }

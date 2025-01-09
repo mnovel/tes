@@ -14,9 +14,17 @@ class Pertanyaan extends Model
 
     public $incrementing = false;
 
-    protected $fillable = ['type', 'question', 'options'];
+    protected $fillable = ['versi_id', 'type', 'question'];
 
-    protected $casts = [
-        'options' => 'array',
-    ];
+    protected $hidden = ['created_at', 'updated_at'];
+
+    public function versi()
+    {
+        return $this->belongsTo(VersiPertanyaan::class);
+    }
+
+    public function option()
+    {
+        return $this->hasMany(Option::class);
+    }
 }
