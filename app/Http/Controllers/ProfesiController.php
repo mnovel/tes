@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Profesi;
 use App\Http\Requests\StoreProfesiRequest;
 use App\Http\Requests\UpdateProfesiRequest;
-use App\Models\Bakat;
 use Illuminate\Http\Request;
 
 class ProfesiController extends Controller
@@ -58,7 +57,16 @@ class ProfesiController extends Controller
         return response()->json([
             'status' => 'successs',
             'message' => __('create_data', ['data' => 'profesi']),
-            'data' => $profesi
+            'data' => [
+                'id' => $profesi->id,
+                'name' => $profesi->name,
+                'bakat' => $profesi->bakat->map(function ($bakat) {
+                    return [
+                        'id' => $bakat->id,
+                        'name' => $bakat->name,
+                    ];
+                })
+            ]
         ]);
     }
 
@@ -95,7 +103,16 @@ class ProfesiController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => __('update_data', ['data' => 'profesi']),
-            'data' => $profesi
+            'data' => [
+                'id' => $profesi->id,
+                'name' => $profesi->name,
+                'bakat' => $profesi->bakat->map(function ($bakat) {
+                    return [
+                        'id' => $bakat->id,
+                        'name' => $bakat->name,
+                    ];
+                })
+            ]
         ]);
     }
 

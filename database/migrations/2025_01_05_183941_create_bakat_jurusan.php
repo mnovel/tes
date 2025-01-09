@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('bakat_jurusan', function (Blueprint $table) {
             $table->id();
-            $table->uuid('bakat_id');
+            $table->foreignUuid('bakat_id')->constrained()->onDelete('restrict');
             $table->foreignId('jurusan_id')->constrained()->onDelete('cascade');
-            $table->foreign('bakat_id')->references('id')->on('bakats')->onDelete('restrict');
+            // $table->foreign('bakat_id')->references('id')->on('bakats')->onDelete('restrict');
             $table->timestamps();
         });
     }

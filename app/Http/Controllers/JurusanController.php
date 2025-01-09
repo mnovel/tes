@@ -61,7 +61,16 @@ class JurusanController extends Controller
         return response()->json([
             'status' => 'successs',
             'message' => __('create_data', ['data' => 'Jurusan']),
-            'data' => $jurusan
+            'data' => [
+                'id' => $jurusan->id,
+                'name' => $jurusan->name,
+                'bakat' => $jurusan->bakat->map(function ($bakat) {
+                    return [
+                        'id' => $bakat->id,
+                        'name' => $bakat->name,
+                    ];
+                }),
+            ]
         ]);
     }
 
@@ -98,7 +107,16 @@ class JurusanController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => __('update_data', ['data' => 'Jurusan']),
-            'data' => $jurusan
+            'data' => [
+                'id' => $jurusan->id,
+                'name' => $jurusan->name,
+                'bakat' => $jurusan->bakat->map(function ($bakat) {
+                    return [
+                        'id' => $bakat->id,
+                        'name' => $bakat->name,
+                    ];
+                }),
+            ]
         ]);
     }
 
