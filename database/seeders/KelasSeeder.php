@@ -17,32 +17,32 @@ class KelasSeeder extends Seeder
             [
                 'name' => 'Kelas 7',
                 'level' => 'SMP',
-                'status' => 'active'
+                'status' => 'Active'
             ],
             [
                 'name' => 'Kelas 8',
                 'level' => 'SMP',
-                'status' => 'active'
+                'status' => 'Active'
             ],
             [
                 'name' => 'Kelas 9',
                 'level' => 'SMP',
-                'status' => 'active'
+                'status' => 'Active'
             ],
             [
                 'name' => 'Kelas 10',
                 'level' => 'SMA',
-                'status' => 'active'
+                'status' => 'Active'
             ],
             [
                 'name' => 'Kelas 11',
                 'level' => 'SMA',
-                'status' => 'active'
+                'status' => 'Active'
             ],
             [
                 'name' => 'Kelas 12',
                 'level' => 'SMA',
-                'status' => 'active'
+                'status' => 'Active'
             ],
         ];
 

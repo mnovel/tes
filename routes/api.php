@@ -11,6 +11,7 @@ use App\Http\Controllers\RegionController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VersiPertanyaanController;
 use App\Models\Pertanyaan;
 use Illuminate\Support\Facades\Route;
 
@@ -38,20 +39,15 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
 });
 
 
-Route::group(['middleware' => 'auth:api', 'prefix' => 'pertanyaan'], function () {
-    Route::get('', [PertanyaanController::class, 'index']);
-    Route::post('', [PertanyaanController::class, 'store']);
-    Route::get('{pertanyaan}', [PertanyaanController::class, 'show']);
-    Route::put('{pertanyaan}', [PertanyaanController::class, 'update']);
-    Route::delete('{pertanyaan}', [PertanyaanController::class, 'destroy']);
-});
-
+/**
+ *
+ * Route for Master Data
+ */
 
 Route::group(['middleware' => 'api', 'prefix' => 'setting'], function () {
     Route::get('/', [SettingController::class, 'index']);
     Route::post('/', [SettingController::class, 'update']);
 });
-
 
 Route::group(['middleware' => 'auth:api', 'prefix' => 'sekolah'], function () {
     Route::get('', [SekolahController::class, 'index']);
@@ -61,12 +57,10 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'sekolah'], function () {
     Route::delete('{sekolah}', [SekolahController::class, 'destroy']);
 });
 
-
 Route::group(['middleware' => 'api', 'prefix' => 'kelas'], function () {
     Route::get('/', [KelasController::class, 'index']);
     Route::put('/{kelas}', [KelasController::class, 'update']);
 });
-
 
 Route::group(['middleware' => 'auth:api', 'prefix' => 'bakat'], function () {
     Route::get('', [BakatController::class, 'index']);
@@ -84,7 +78,6 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'perguruan-tinggi'], funct
     Route::delete('{perguruanTinggi}', [PerguruanTinggiController::class, 'destroy']);
 });
 
-
 Route::group(['middleware' => 'auth:api', 'prefix' => 'jurusan'], function () {
     Route::get('', [JurusanController::class, 'index']);
     Route::post('', [JurusanController::class, 'store']);
@@ -101,12 +94,10 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'profesi'], function () {
     Route::delete('{profesi}', [ProfesiController::class, 'destroy']);
 });
 
-
 Route::group(['prefix' => 'region'], function () {
     Route::get('provinces', [RegionController::class, 'provinces']);
     Route::get('regencies', [RegionController::class, 'regencies']);
 });
-
 
 Route::group(['middleware' => 'auth:api', 'prefix' => 'user'], function () {
     Route::get('', [UserController::class, 'index']);
@@ -114,4 +105,25 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'user'], function () {
     Route::get('{user}', [UserController::class, 'show']);
     Route::put('{user}', [UserController::class, 'update']);
     Route::delete('{user}', [UserController::class, 'destroy']);
+});
+
+
+/**
+ * Route for Setting Quiz
+ */
+
+Route::group(['middleware' => 'auth:api', 'prefix' => 'versi-pertanyaan'], function () {
+    Route::get('', [VersiPertanyaanController::class, 'index']);
+    Route::post('', [VersiPertanyaanController::class, 'store']);
+    Route::get('{versiPertanyaan}', [VersiPertanyaanController::class, 'show']);
+    Route::put('{versiPertanyaan}', [VersiPertanyaanController::class, 'update']);
+    Route::delete('{versiPertanyaan}', [VersiPertanyaanController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'auth:api', 'prefix' => 'pertanyaan'], function () {
+    Route::get('', [PertanyaanController::class, 'index']);
+    Route::post('', [PertanyaanController::class, 'store']);
+    Route::get('{pertanyaan}', [PertanyaanController::class, 'show']);
+    Route::put('{pertanyaan}', [PertanyaanController::class, 'update']);
+    Route::delete('{pertanyaan}', [PertanyaanController::class, 'destroy']);
 });

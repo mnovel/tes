@@ -25,7 +25,8 @@ class PerguruanTinggiController extends Controller
                         'id' => $jurusan->id,
                         'name' => $jurusan->name
                     ];
-                })
+                }),
+                'status' => $perguruanTinggi->status
             ];
         });
 
@@ -45,6 +46,7 @@ class PerguruanTinggiController extends Controller
         $perguruanTinggi = PerguruanTinggi::create([
             'name' =>  $validated['name'],
             'rank' =>  $validated['rank'],
+            'status' => $validated['status']
         ]);
         $perguruanTinggi->jurusan()->attach($validated['jurusan']);
         return response()->json([
@@ -71,7 +73,8 @@ class PerguruanTinggiController extends Controller
                         'id' => $jurusan->id,
                         'name' => $jurusan->name
                     ];
-                })
+                }),
+                'status' => $perguruanTinggi->status
             ]
         ]);
     }
@@ -85,6 +88,7 @@ class PerguruanTinggiController extends Controller
         $perguruanTinggi->update([
             'name' =>  $validated['name'],
             'rank' =>  $validated['rank'],
+            'status' => $validated['status']
         ]);
         $perguruanTinggi->jurusan()->sync($validated['jurusan']);
         return response()->json([

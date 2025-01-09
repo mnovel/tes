@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('rank');
-            $table->string('status')->default('active');
+            $table->enum('status', ['Active', 'Inactive']);
             $table->timestamps();
         });
     }

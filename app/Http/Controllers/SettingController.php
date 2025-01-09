@@ -50,7 +50,6 @@ class SettingController extends Controller
         return response()->json([
             'status' => 'success',
             'message' =>  __('update_data', ['data' => 'setting']),
-            'data' => $validated
         ], 200);
     }
 }

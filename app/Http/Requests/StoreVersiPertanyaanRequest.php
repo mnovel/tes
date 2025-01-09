@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateKelasRequest extends FormRequest
+class StoreVersiPertanyaanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,8 @@ class UpdateKelasRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => 'required|in:Active,Inactive',
+            'name' => ['required', 'string', 'unique:versi_pertanyaans,name'],
+            'status' => ['required', 'in:Active,Inactive'],
         ];
     }
 }

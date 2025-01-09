@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jurusan_perguruan_tinggi', function (Blueprint $table) {
+        Schema::create('versi_pertanyaans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('perguruan_tinggi_id')->constrained()->onDelete('cascade');
-            $table->foreignId('jurusan_id')->constrained()->onDelete('cascade');
+            $table->string('name');
+            $table->enum('status', ['Active', 'Inactive']);
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jurusan_perguruan_tinggi');
+        Schema::dropIfExists('versi_pertanyaans');
     }
 };
