@@ -52,7 +52,18 @@ class PerguruanTinggiController extends Controller
         return response()->json([
             'status' => 'successs',
             'message' => __('create_data', ['data' => 'perguruan tinggi']),
-            'data' => $perguruanTinggi
+            'data' => [
+                'id' => $perguruanTinggi->id,
+                'name' => $perguruanTinggi->name,
+                'rank' => $perguruanTinggi->rank,
+                'jurusan' => $perguruanTinggi->jurusan->map(function ($jurusan) {
+                    return [
+                        'id' => $jurusan->id,
+                        'name' => $jurusan->name
+                    ];
+                }),
+                'status' => $perguruanTinggi->status
+            ]
         ]);
     }
 
@@ -94,7 +105,18 @@ class PerguruanTinggiController extends Controller
         return response()->json([
             'status' => 'successs',
             'message' => __('update_data', ['data' => 'perguruan tinggi']),
-            'data' => $perguruanTinggi
+            'data' =>  [
+                'id' => $perguruanTinggi->id,
+                'name' => $perguruanTinggi->name,
+                'rank' => $perguruanTinggi->rank,
+                'jurusan' => $perguruanTinggi->jurusan->map(function ($jurusan) {
+                    return [
+                        'id' => $jurusan->id,
+                        'name' => $jurusan->name
+                    ];
+                }),
+                'status' => $perguruanTinggi->status
+            ]
         ]);
     }
 
