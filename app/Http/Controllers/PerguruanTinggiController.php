@@ -32,7 +32,7 @@ class PerguruanTinggiController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => __('display_data', ['data' => 'Perguruan Tinggi']),
+            'message' => __('display_data', ['data' => 'perguruan tinggi']),
             'data' => $perguruanTinggi
         ]);
     }
@@ -51,7 +51,7 @@ class PerguruanTinggiController extends Controller
         $perguruanTinggi->jurusan()->attach($validated['jurusan']);
         return response()->json([
             'status' => 'successs',
-            'message' => __('create_data', ['data' => 'Perguruan Tinggi']),
+            'message' => __('create_data', ['data' => 'perguruan tinggi']),
             'data' => $perguruanTinggi
         ]);
     }
@@ -63,7 +63,7 @@ class PerguruanTinggiController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'message' => __('detail_data', ['data' => 'Perguruan Tinggi']),
+            'message' => __('detail_data', ['data' => 'perguruan tinggi']),
             'data' => [
                 'id' => $perguruanTinggi->id,
                 'name' => $perguruanTinggi->name,
@@ -93,7 +93,7 @@ class PerguruanTinggiController extends Controller
         $perguruanTinggi->jurusan()->sync($validated['jurusan']);
         return response()->json([
             'status' => 'successs',
-            'message' => __('update_data', ['data' => 'Perguruan Tinggi']),
+            'message' => __('update_data', ['data' => 'perguruan tinggi']),
             'data' => $perguruanTinggi
         ]);
     }
@@ -106,7 +106,7 @@ class PerguruanTinggiController extends Controller
         $perguruanTinggi->delete();
         return response()->json([
             'status' => 'success',
-            'message' =>  __('delete_data', ['data' => 'Perguruan Tinggi']),
+            'message' =>  __('delete_data', ['data' => 'perguruan tinggi']),
         ]);
     }
 }

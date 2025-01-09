@@ -40,7 +40,7 @@ class ProfesiController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => __('display_data', ['data' => 'Profesi']),
+            'message' => __('display_data', ['data' => 'profesi']),
             'data' => $profesi
         ]);
     }
@@ -57,7 +57,7 @@ class ProfesiController extends Controller
         $profesi->bakat()->attach($validated['bakat']);
         return response()->json([
             'status' => 'successs',
-            'message' => __('create_data', ['data' => 'Profesi']),
+            'message' => __('create_data', ['data' => 'profesi']),
             'data' => $profesi
         ]);
     }
@@ -69,7 +69,7 @@ class ProfesiController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'message' => __('detail_data', ['data' => 'Profesi']),
+            'message' => __('detail_data', ['data' => 'profesi']),
             'data' => [
                 'id' => $profesi->id,
                 'name' => $profesi->name,
@@ -94,7 +94,7 @@ class ProfesiController extends Controller
         $profesi->bakat()->sync($validated['bakat']);
         return response()->json([
             'status' => 'success',
-            'message' => __('update_data', ['data' => 'Profesi']),
+            'message' => __('update_data', ['data' => 'profesi']),
             'data' => $profesi
         ]);
     }
@@ -107,7 +107,7 @@ class ProfesiController extends Controller
         $profesi->delete();
         return response()->json([
             'status' => 'success',
-            'message' => __('delete_data', ['data' => 'Profesi']),
+            'message' => __('delete_data', ['data' => 'profesi']),
         ]);
     }
 }

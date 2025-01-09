@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BakatController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\PerguruanTinggiController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\ProfesiController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VersiPertanyaanController;
+use App\Models\Panduan;
 use App\Models\Pertanyaan;
 use Illuminate\Support\Facades\Route;
 
@@ -126,4 +128,9 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'pertanyaan'], function ()
     Route::get('{pertanyaan}', [PertanyaanController::class, 'show']);
     Route::put('{pertanyaan}', [PertanyaanController::class, 'update']);
     Route::delete('{pertanyaan}', [PertanyaanController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'panduan'], function () {
+    Route::get('/', [PanduanController::class, 'index']);
+    Route::put('/', [PanduanController::class, 'update']);
 });
