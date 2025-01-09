@@ -14,7 +14,7 @@ class PanduanSeeder extends Seeder
     public function run(): void
     {
         $panduan = [
-            'deskripsi' => 'Panduan ini berisi tentang cara menggunakan aplikasi ini',
+            'description' => 'Panduan ini berisi tentang cara menggunakan aplikasi ini',
         ];
         Panduan::create($panduan);
     }
