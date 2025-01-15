@@ -26,7 +26,10 @@ class DatabaseSeeder extends Seeder
         // $this->call(IndoRegionDistrictSeeder::class);
         // $this->call(IndoRegionVillageSeeder::class);
         $this->call(KelasSeeder::class);
+        $this->call(SekolahSeeder::class);
         $this->call(BakatSeeder::class);
+        $this->call(JurusanSeeder::class);
+        $this->call(PerguruanTinggiSeeder::class);
         $this->call(PanduanSeeder::class);
     }
 }

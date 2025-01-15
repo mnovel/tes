@@ -7,9 +7,11 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\PerguruanTinggiController;
 use App\Http\Controllers\PertanyaanController;
+use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\ProfesiController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\SekolahController;
+use App\Http\Controllers\SesiController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SurveiController;
 use App\Http\Controllers\UserController;
@@ -142,4 +144,25 @@ Route::group(['middleware' => 'api', 'prefix' => 'survei'], function () {
     Route::get('{survei}', [SurveiController::class, 'show']);
     Route::put('{survei}', [SurveiController::class, 'update']);
     Route::delete('{survei}', [SurveiController::class, 'destroy']);
+});
+
+/**
+ * Route for Resul Quiz
+ *
+ */
+
+Route::group(['middleware' => 'api', 'prefix' => 'peserta'], function () {
+    Route::get('', [PesertaController::class, 'index']);
+    Route::post('', [PesertaController::class, 'store']);
+    Route::get('{peserta}', [PesertaController::class, 'show']);
+    Route::put('{peserta}', [PesertaController::class, 'update']);
+    Route::delete('{peserta}', [PesertaController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'sesi'], function () {
+    Route::get('', [SesiController::class, 'index']);
+    Route::post('', [SesiController::class, 'store']);
+    Route::get('{sesi}', [SesiController::class, 'show']);
+    Route::put('{sesi}', [SesiController::class, 'update']);
+    Route::delete('{sesi}', [SesiController::class, 'destroy']);
 });
