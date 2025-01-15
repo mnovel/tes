@@ -9,6 +9,16 @@ use App\Http\Requests\UpdateSesiRequest;
 class SesiController extends Controller
 {
     /**
+     * Create a new AuthController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['show', 'store', 'update']]);
+    }
+
+    /**
      * Display a listing of the resource.
      */
     public function index()

@@ -15,7 +15,7 @@ class PesertaController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['show']]);
+        $this->middleware('auth:api', ['except' => ['show', 'store']]);
     }
 
     /**
