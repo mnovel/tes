@@ -39,4 +39,9 @@ class Bakat extends Model
     {
         return $this->hasMany(Option::class);
     }
+
+    public function sesi()
+    {
+        return $this->belongsToMany(Sesi::class, 'sesi_bakat');
+    }
 }

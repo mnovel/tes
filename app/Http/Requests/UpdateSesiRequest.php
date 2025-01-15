@@ -22,7 +22,8 @@ class UpdateSesiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'bakat' => 'nullable|exists:bakats,id',
+            'bakat' => 'required|array',
+            'bakat.*' => 'exists:bakats,id',
             'status' => 'required|in:Active,Completed'
         ];
     }

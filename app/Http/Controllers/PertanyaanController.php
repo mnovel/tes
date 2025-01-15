@@ -29,12 +29,17 @@ class PertanyaanController extends Controller
     {
         $validated = $request->validate([
             'type' => 'nullable|in:Single,Multiple',
+            'versi' => 'nullable|exists:versi_pertanyaans,id',
         ]);
 
         $query = Pertanyaan::orderBy('type');
 
         if (isset($validated['type'])) {
             $query->where('type', $validated['type']);
+        }
+
+        if (isset($validated['versi'])) {
+            $query->where('versi_id', $validated['versi']);
         }
 
         $pertanyaan = $query->get()->map(function ($pertanyaan) {

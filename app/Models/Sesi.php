@@ -9,8 +9,7 @@ class Sesi extends Model
 {
     use HasUuids;
 
-    protected $fillable = ['peserta_id', 'bakat_id', 'status'];
-
+    protected $fillable = ['peserta_id', 'versi_id', 'status'];
 
     public function peserta()
     {
@@ -19,6 +18,6 @@ class Sesi extends Model
 
     public function bakat()
     {
-        return $this->belongsTo(Bakat::class);
+        return $this->belongsToMany(Bakat::class, 'sesi_bakat');
     }
 }

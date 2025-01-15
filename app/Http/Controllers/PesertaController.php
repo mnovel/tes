@@ -40,7 +40,13 @@ class PesertaController extends Controller
                     'sesi' => $peserta->sesi->map(function ($sesi) {
                         return [
                             'id' => $sesi->id,
-                            'status' => $sesi->status
+                            'status' => $sesi->status,
+                            'bakat' => $sesi->bakat->map(function ($bakat) {
+                                return [
+                                    'id' => $bakat->id,
+                                    'name' => $bakat->name,
+                                ];
+                            })
                         ];
                     })
                 ];
@@ -54,9 +60,10 @@ class PesertaController extends Controller
     public function store(StorePesertaRequest $request)
     {
         $validated = $request->validated();
-        $peserta = Peserta::create([
-            'name' => $validated['name'],
+        $peserta = Peserta::firstOrCreate([
             'email' => $validated['email'],
+        ], [
+            'name' => $validated['name'],
             'sekolah_id' => $validated['sekolah'],
             'kelas_id' => $validated['kelas'],
             'perguruan_tinggi_id' => $validated['perguruan_tinggi'],
@@ -88,7 +95,13 @@ class PesertaController extends Controller
                 'sesi' => $peserta->sesi->map(function ($sesi) {
                     return [
                         'id' => $sesi->id,
-                        'status' => $sesi->status
+                        'status' => $sesi->status,
+                        'bakat' => $sesi->bakat->map(function ($bakat) {
+                            return [
+                                'id' => $bakat->id,
+                                'name' => $bakat->name,
+                            ];
+                        })
                     ];
                 })
             ]

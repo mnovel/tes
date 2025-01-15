@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('versi_pertanyaans', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->enum('status', ['Active', 'Inactive']);
             $table->timestamps();

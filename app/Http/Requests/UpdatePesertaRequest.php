@@ -23,7 +23,7 @@ class UpdatePesertaRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:pesertas,email,' . $this->peserta->id,
+            'email' => 'required|email',
             'sekolah' => 'required|exists:sekolahs,id',
             'kelas' => 'required|exists:kelas,id',
             'perguruan_tinggi' => 'nullable|exists:perguruan_tinggis,id',

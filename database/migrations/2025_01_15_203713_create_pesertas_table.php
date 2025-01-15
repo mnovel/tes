@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pesertas', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->foreignId('sekolah_id')->nullable()->constrained('sekolahs')->onDelete('set null');
             $table->foreignId('kelas_id')->nullable()->constrained('kelas')->onDelete('set null');
             $table->foreignId('perguruan_tinggi_id')->nullable()->constrained('perguruan_tinggis')->onDelete('set null');

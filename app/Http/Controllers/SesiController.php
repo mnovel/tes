@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sesi;
 use App\Http\Requests\StoreSesiRequest;
 use App\Http\Requests\UpdateSesiRequest;
+use App\Models\VersiPertanyaan;
 
 class SesiController extends Controller
 {
@@ -38,8 +39,10 @@ class SesiController extends Controller
     public function store(StoreSesiRequest $request)
     {
         $validated = $request->validated();
+        $activeVersi = VersiPertanyaan::where('status', 'Active')->first()->id;
         $sesi = Sesi::create([
             'peserta_id' => $validated['peserta'],
+            'versi_id' => $activeVersi,
             'status' => $validated['status']
         ]);
         return response()->json([
@@ -68,9 +71,10 @@ class SesiController extends Controller
     {
         $validated = $request->validated();
         $sesi->update([
-            'bakat_id' => $validated['bakat'],
+
             'status' => $validated['status']
         ]);
+        $sesi->bakat()->attach($validated['bakat']);
         return response()->json([
             'status' => 'success',
             'message' => __('update_data', ['data' => 'sesi']),
