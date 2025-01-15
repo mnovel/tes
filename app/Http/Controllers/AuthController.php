@@ -14,7 +14,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'refresh']]);
     }
 
     /**
@@ -26,7 +26,7 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (!$token = auth()->attempt($credentials)) {
+        if (!$token = auth()->setTTL(1440)->attempt($credentials)) {
             return response()->json([
                 'status' => 'error',
                 'message' => __('Oops! Your email or password is incorrect. Please try again.'),
@@ -83,7 +83,7 @@ class AuthController extends Controller
     public function refresh()
     {
         try {
-            $token = auth()->refresh();
+            $token = auth()->setTTL(1440)->refresh();
 
             return response()->json([
                 'status' => 'success',
