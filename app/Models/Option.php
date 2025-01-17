@@ -31,4 +31,9 @@ class Option extends Model
     {
         return $this->belongsTo(Bakat::class);
     }
+
+    public function jawaban()
+    {
+        return $this->hasMany(Jawaban::class);
+    }
 }

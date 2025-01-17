@@ -158,6 +158,10 @@ return [
         'author' => 'Penulis',
         'keyword' => 'Kata Kunci',
         'icon' => 'Gambar',
-        'question' => 'pertanyaan',
+        'question' => 'Pertanyaan',
+        'session' => 'Sesi',
+        'answer.question' => 'Pertanyaan',
+        'answer.option.*' => 'Opsi',
+        'option.*' => 'Opsi',
     ],
 ];

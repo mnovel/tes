@@ -19,4 +19,9 @@ class VersiPertanyaan extends Model
     {
         return $this->hasMany(Pertanyaan::class);
     }
+
+    public function sesi()
+    {
+        return $this->hasMany(Sesi::class);
+    }
 }

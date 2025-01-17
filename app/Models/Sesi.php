@@ -16,8 +16,18 @@ class Sesi extends Model
         return $this->belongsTo(Peserta::class);
     }
 
+    public function versi()
+    {
+        return $this->belongsTo(VersiPertanyaan::class);
+    }
+
     public function bakat()
     {
         return $this->belongsToMany(Bakat::class, 'sesi_bakat');
+    }
+
+    public function jawaban()
+    {
+        return $this->hasMany(Jawaban::class);
     }
 }

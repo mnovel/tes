@@ -29,7 +29,25 @@ class SesiController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => __('display_data', ['data' => 'sesi']),
-            'data' => $sesi
+            'data' => $sesi->map(function ($sesi) {
+                return [
+                    'id' => $sesi->id,
+                    'peserta' => [
+                        'id' => $sesi->peserta->id,
+                        'name' => $sesi->peserta->name,
+                        'kelas' => $sesi->peserta->kelas->name,
+                        'jenjang' => $sesi->peserta->sekolah->level,
+                        'sekolah' => $sesi->peserta->sekolah->name,
+                    ],
+                    'versi' => [
+                        'id' => $sesi->versi->id,
+                        'name' => $sesi->versi->name,
+                    ],
+                    'status' => $sesi->status,
+                    'created_at' => $sesi->created_at,
+                    'updated_at' => $sesi->updated_at,
+                ];
+            })
         ]);
     }
 
@@ -60,7 +78,29 @@ class SesiController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => __('show_data', ['data' => 'sesi']),
-            'data' => $sesi
+            'data' => [
+                'id' => $sesi->id,
+                'peserta' => [
+                    'id' => $sesi->peserta->id,
+                    'name' => $sesi->peserta->name,
+                    'kelas' => $sesi->peserta->kelas->name,
+                    'jenjang' => $sesi->peserta->sekolah->level,
+                    'sekolah' => $sesi->peserta->sekolah->name,
+                ],
+                'versi' => [
+                    'id' => $sesi->versi->id,
+                    'name' => $sesi->versi->name,
+                ],
+                'status' => $sesi->status,
+                'bakat' => $sesi->bakat->map(function ($bakat) {
+                    return [
+                        'id' => $bakat->id,
+                        'nama' => $bakat->nama,
+                    ];
+                }),
+                'created_at' => $sesi->created_at,
+                'updated_at' => $sesi->updated_at,
+            ]
         ]);
     }
 

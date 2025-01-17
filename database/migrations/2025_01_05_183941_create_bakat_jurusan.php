@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignUuid('bakat_id')->constrained()->onDelete('restrict');
             $table->foreignId('jurusan_id')->constrained()->onDelete('cascade');
-            // $table->foreign('bakat_id')->references('id')->on('bakats')->onDelete('restrict');
             $table->timestamps();
         });
     }

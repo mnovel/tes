@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BakatController;
+use App\Http\Controllers\JawabanController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\PanduanController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\PerguruanTinggiController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\ProfesiController;
+use App\Http\Controllers\RecordAnswerController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\SesiController;
@@ -16,8 +18,6 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SurveiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VersiPertanyaanController;
-use App\Models\Panduan;
-use App\Models\Pertanyaan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -165,4 +165,10 @@ Route::group(['middleware' => 'api', 'prefix' => 'sesi'], function () {
     Route::get('{sesi}', [SesiController::class, 'show']);
     Route::put('{sesi}', [SesiController::class, 'update']);
     Route::delete('{sesi}', [SesiController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'jawaban'], function () {
+    Route::post('', [JawabanController::class, 'store']);
+    Route::get('{sesi}', [JawabanController::class, 'show']);
+    Route::put('{sesi}/{pertanyaan}', [JawabanController::class, 'update']);
 });
