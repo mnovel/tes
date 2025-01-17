@@ -10,6 +10,9 @@
     "error_delete": "Terjadi kesalahan saat menghapus data :data.",
     "error_delete_relation": ":Data tidak dapat dihapus karena masih terhubung dengan data lain.",
 
+    "no_data": "Maaf, kami tidak dapat menemukan data :data yang Anda cari.",
+    "no_data2": "Maaf, kami tidak dapat menemukan data yang Anda cari.",
+
     "Oops! Your email or password is incorrect. Please try again.": "Ups! Email atau kata sandi Anda salah. Silakan coba lagi.",
     "Welcome back! You are now logged in.": "Selamat datang kembali! Anda sekarang sudah login.",
     "Here is your profile information.": "Berikut adalah informasi profil Anda.",

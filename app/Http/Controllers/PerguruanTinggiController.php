@@ -14,7 +14,6 @@ class PerguruanTinggiController extends Controller
      */
     public function index()
     {
-
         $perguruanTinggi = PerguruanTinggi::with('jurusan')->get()->map(function ($perguruanTinggi) {
             return [
                 'id' => $perguruanTinggi->id,
@@ -29,7 +28,6 @@ class PerguruanTinggiController extends Controller
                 'status' => $perguruanTinggi->status
             ];
         });
-
         return response()->json([
             'status' => 'success',
             'message' => __('display_data', ['data' => 'perguruan tinggi']),

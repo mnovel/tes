@@ -24,12 +24,33 @@ class UpdateJawabanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'option' => [
+            'session' => 'required|exists:sesis,id',
+            'answer' => 'required|array',
+            'answer.question' => [
+                'required',
+                Rule::exists('jawabans', 'pertanyaan_id')->where(function ($query) {
+                    return $query->where('sesi_id', request()->input('session'));
+                }),
+                function ($attribute, $value, $fail) {
+                    $sesi = DB::table('sesis')
+                        ->where('id', request()->input('session'))
+                        ->first();
+
+                    $pertanyaan = DB::table('pertanyaans')
+                        ->where('id', $value)
+                        ->first();
+
+                    if ($sesi->versi_id !== $pertanyaan->versi_id) {
+                        $fail("Pertanyaan tidak sesuai dengan sesi yang sedang berlangsung.");
+                    }
+                }
+            ],
+            'answer.option' => [
                 'required',
                 'array',
                 function ($attribute, $value, $fail) {
                     $questionType = DB::table('pertanyaans')
-                        ->where('id', $this->pertanyaan->id)
+                        ->where('id', request()->input('answer.question'))
                         ->value('type');
 
                     if ($questionType === 'Multiple' && count($value) !== 3) {
@@ -40,16 +61,12 @@ class UpdateJawabanRequest extends FormRequest
                         $fail("Opsi yang dipilih harus 1.");
                     }
                 },
-                function ($attribute, $value, $fail) {
-                    if (count($value) !== count(array_unique($value))) {
-                        $fail("Opsi yang dipilih tidak boleh duplikat.");
-                    }
-                }
             ],
-            'option.*' => [
+            'answer.option.*' => [
                 'required',
+                'distinct',
                 Rule::exists('options', 'id')->where(function ($query) {
-                    return $query->where('pertanyaan_id', $this->pertanyaan->id);
+                    return $query->where('pertanyaan_id', request()->input('answer.question'));
                 }),
             ]
         ];

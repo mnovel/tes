@@ -111,10 +111,8 @@ class SesiController extends Controller
     {
         $validated = $request->validated();
         $sesi->update([
-
             'status' => $validated['status']
         ]);
-        $sesi->bakat()->attach($validated['bakat']);
         return response()->json([
             'status' => 'success',
             'message' => __('update_data', ['data' => 'sesi']),

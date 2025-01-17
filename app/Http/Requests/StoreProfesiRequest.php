@@ -24,7 +24,7 @@ class StoreProfesiRequest extends FormRequest
         return [
             'name' => 'required|string|max:60|unique:jurusans,name',
             'bakat' => 'required|array',
-            'bakat.*' => 'required|exists:bakats,id',
+            'bakat.*' => 'required|exists:bakats,id|distinct',
         ];
     }
 }

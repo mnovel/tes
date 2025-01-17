@@ -24,7 +24,7 @@ class UpdateProfesiRequest extends FormRequest
         return [
             'name' => 'required|string|max:60|unique:jurusans,name,' . $this->profesi->id,
             'bakat' => 'required|array',
-            'bakat.*' => 'required|exists:bakats,id',
+            'bakat.*' => 'required|exists:bakats,id|distinct',
         ];
     }
 }

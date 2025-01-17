@@ -31,7 +31,20 @@ class StoreJawabanRequest extends FormRequest
                 'exists:pertanyaans,id',
                 Rule::unique('jawabans', 'pertanyaan_id')->where(function ($query) {
                     return $query->where('sesi_id', request()->input('session'));
-                })
+                }),
+                function ($attribute, $value, $fail) {
+                    $sesi = DB::table('sesis')
+                        ->where('id', request()->input('session'))
+                        ->first();
+
+                    $pertanyaan = DB::table('pertanyaans')
+                        ->where('id', $value)
+                        ->first();
+
+                    if ($sesi->versi_id !== $pertanyaan->versi_id) {
+                        $fail("Pertanyaan tidak sesuai dengan sesi yang sedang berlangsung.");
+                    }
+                }
             ],
             'answer.option' => [
                 'required',
@@ -49,14 +62,10 @@ class StoreJawabanRequest extends FormRequest
                         $fail("Opsi yang dipilih harus 1.");
                     }
                 },
-                function ($attribute, $value, $fail) {
-                    if (count($value) !== count(array_unique($value))) {
-                        $fail("Opsi yang dipilih tidak boleh duplikat.");
-                    }
-                }
             ],
             'answer.option.*' => [
                 'required',
+                'distinct',
                 Rule::exists('options', 'id')->where(function ($query) {
                     return $query->where('pertanyaan_id', request()->input('answer.question'));
                 }),

@@ -167,8 +167,8 @@ Route::group(['middleware' => 'api', 'prefix' => 'sesi'], function () {
     Route::delete('{sesi}', [SesiController::class, 'destroy']);
 });
 
-Route::group(['middleware' => 'api', 'prefix' => 'jawaban'], function () {
+Route::group(['prefix' => 'jawaban'], function () {
     Route::post('', [JawabanController::class, 'store']);
     Route::get('{sesi}', [JawabanController::class, 'show']);
-    Route::put('{sesi}/{pertanyaan}', [JawabanController::class, 'update']);
+    Route::put('', [JawabanController::class, 'update']);
 });

@@ -50,13 +50,13 @@ class Handler extends ExceptionHandler
                 $model = strtolower($matches[1]);
                 return response()->json([
                     'status' => 'error',
-                    'message' => "Maaf, kami tidak dapat menemukan data {$model} yang Anda cari."
+                    'message' => __('no_data', ['data' => $model])
                 ], 404);
             }
 
             return response()->json([
                 'status' => 'error',
-                'message' => 'Maaf, kami tidak dapat menemukan data yang Anda cari.'
+                'message' => __('no_data2', ['data' => ''])
             ], 404);
         });
     }
