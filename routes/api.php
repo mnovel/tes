@@ -127,6 +127,7 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'versi-pertanyaan'], funct
 
 Route::group(['middleware' => 'api', 'prefix' => 'pertanyaan'], function () {
     Route::get('', [PertanyaanController::class, 'index']);
+    Route::get('quiz', [PertanyaanController::class, 'indexQuiz']);
     Route::post('', [PertanyaanController::class, 'store']);
     Route::get('{pertanyaan}', [PertanyaanController::class, 'show']);
     Route::put('{pertanyaan}', [PertanyaanController::class, 'update']);

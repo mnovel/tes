@@ -19,7 +19,7 @@ class PertanyaanController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+        $this->middleware('auth:api', ['except' => ['indexQuiz', 'show']]);
     }
 
     /**
@@ -54,6 +54,48 @@ class PertanyaanController extends Controller
                         'answer' => $option->answer,
                         'bakat_id' => $option->bakat->id ?? null,
                         'bakat' => $option->bakat->name ?? null,
+                    ];
+                }),
+            ];
+        });
+
+        return response()->json([
+            'status' => 'success',
+            'message' => __('display_data', ['data' => 'pertanyaan']),
+            'data' => $pertanyaan
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function indexQuiz(Request $request)
+    {
+        $validated = $request->validate([
+            'type' => 'nullable|in:Single,Multiple',
+            'versi' => 'nullable|exists:versi_pertanyaans,id',
+        ]);
+
+        $query = Pertanyaan::orderBy('type');
+
+        if (isset($validated['type'])) {
+            $query->where('type', $validated['type']);
+        }
+
+        if (isset($validated['versi'])) {
+            $query->where('versi_id', $validated['versi']);
+        }
+
+        $pertanyaan = $query->get()->map(function ($pertanyaan) {
+            return [
+                'id' => $pertanyaan->id,
+                'versi' => $pertanyaan->versi->name,
+                'type' => $pertanyaan->type,
+                'question' => $pertanyaan->question,
+                'options' => $pertanyaan->option->map(function ($option) {
+                    return [
+                        'id' => $option->id,
+                        'answer' => $option->answer,
                     ];
                 }),
             ];
