@@ -7,6 +7,7 @@ use App\Http\Requests\StorePertanyaanRequest;
 use App\Http\Requests\UpdatePertanyaanRequest;
 use App\Models\Option;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PertanyaanController extends Controller
@@ -19,7 +20,7 @@ class PertanyaanController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['indexQuiz', 'show']]);
+        $this->middleware('auth:api', ['except' => ['index', 'show']]);
     }
 
     /**
@@ -49,54 +50,18 @@ class PertanyaanController extends Controller
                 'type' => $pertanyaan->type,
                 'question' => $pertanyaan->question,
                 'options' => $pertanyaan->option->map(function ($option) {
-                    return [
+                    $data = [
                         'id' => $option->id,
                         'answer' => $option->answer,
-                        'bakat_id' => $option->bakat->id ?? null,
-                        'bakat' => $option->bakat->name ?? null,
+
                     ];
-                }),
-            ];
-        });
 
-        return response()->json([
-            'status' => 'success',
-            'message' => __('display_data', ['data' => 'pertanyaan']),
-            'data' => $pertanyaan
-        ]);
-    }
+                    if (Auth::check()) {
+                        $data['bakat_id'] = $option->bakat->id ?? null;
+                        $data['bakat'] = $option->bakat->name ?? null;
+                    }
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function indexQuiz(Request $request)
-    {
-        $validated = $request->validate([
-            'type' => 'nullable|in:Single,Multiple',
-            'versi' => 'nullable|exists:versi_pertanyaans,id',
-        ]);
-
-        $query = Pertanyaan::orderBy('type');
-
-        if (isset($validated['type'])) {
-            $query->where('type', $validated['type']);
-        }
-
-        if (isset($validated['versi'])) {
-            $query->where('versi_id', $validated['versi']);
-        }
-
-        $pertanyaan = $query->get()->map(function ($pertanyaan) {
-            return [
-                'id' => $pertanyaan->id,
-                'versi' => $pertanyaan->versi->name,
-                'type' => $pertanyaan->type,
-                'question' => $pertanyaan->question,
-                'options' => $pertanyaan->option->map(function ($option) {
-                    return [
-                        'id' => $option->id,
-                        'answer' => $option->answer,
-                    ];
+                    return $data;
                 }),
             ];
         });
@@ -161,13 +126,18 @@ class PertanyaanController extends Controller
                 'versi' => $pertanyaan->versi->name,
                 'type' => $pertanyaan->type,
                 'question' => $pertanyaan->question,
-                'options' => $pertanyaan->options->map(function ($option) {
-                    return [
+                'options' => $pertanyaan->option->map(function ($option) {
+                    $data = [
                         'id' => $option->id,
                         'answer' => $option->answer,
-                        'bakat_id' => $option->bakat->id ?? null,
-                        'bakat' => $option->bakat->name ?? null,
                     ];
+
+                    if (Auth::check()) {
+                        $data['bakat_id'] = $option->bakat->id ?? null;
+                        $data['bakat'] = $option->bakat->name ?? null;
+                    }
+
+                    return $data;
                 }),
             ]
         ]);

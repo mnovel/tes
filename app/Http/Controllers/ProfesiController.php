@@ -5,37 +5,42 @@ namespace App\Http\Controllers;
 use App\Models\Profesi;
 use App\Http\Requests\StoreProfesiRequest;
 use App\Http\Requests\UpdateProfesiRequest;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfesiController extends Controller
 {
     /**
+     * Create a new ProfesiController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+    }
+
+    /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $validated = $request->validate([
-            'bakat' => 'nullable|exists:bakats,id'
-        ]);
+        $profesi = Profesi::with('bakat')->get()->map(function ($profesi) {
+            $data =  [
+                'id' => $profesi->id,
+                'name' => $profesi->name,
+            ];
 
-        $query = Profesi::with('bakat');
+            if (Auth::check()) {
+                $data['bakat'] = $profesi->bakat->map(function ($bakat) {
+                    return [
+                        'id' => $bakat->id,
+                        'name' => $bakat->name,
+                    ];
+                });
+            }
 
-        if (!empty($validated['bakat'])) {
-            $query->whereHas('bakat', function ($query) use ($validated) {
-                $query->where('bakats.id', $validated['bakat']);
-            });
-        }
-
-        $profesi = $query->get()->map(fn($profesi) => [
-            'id' => $profesi->id,
-            'name' => $profesi->name,
-            'bakat' => $profesi->bakat->map(function ($bakat) {
-                return [
-                    'id' => $bakat->id,
-                    'name' => $bakat->name,
-                ];
-            })
-        ]);
+            return $data;
+        });
 
         return response()->json([
             'status' => 'success',
@@ -75,19 +80,25 @@ class ProfesiController extends Controller
      */
     public function show(Profesi $profesi)
     {
+
+        $data = [
+            'id' => $profesi->id,
+            'name' => $profesi->name,
+        ];
+
+        if (Auth::check()) {
+            $data['bakat'] = $profesi->bakat->map(function ($bakat) {
+                return [
+                    'id' => $bakat->id,
+                    'name' => $bakat->name,
+                ];
+            });
+        }
+
         return response()->json([
             'status' => 'success',
             'message' => __('detail_data', ['data' => 'profesi']),
-            'data' => [
-                'id' => $profesi->id,
-                'name' => $profesi->name,
-                'bakat' => $profesi->bakat->map(function ($bakat) {
-                    return [
-                        'id' => $bakat->id,
-                        'name' => $bakat->name,
-                    ];
-                })
-            ]
+            'data' => $data
         ]);
     }
 

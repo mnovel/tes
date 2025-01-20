@@ -15,7 +15,7 @@ class KelasController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['index']]);
+        $this->middleware('auth:api', ['except' => ['index', 'show']]);
     }
 
     /**
@@ -25,13 +25,18 @@ class KelasController extends Controller
     {
 
         $validated = $request->validate([
-            'level' => 'nullable|in:SD,SMP,SMA'
+            'level' => 'nullable|in:SD,SMP,SMA',
+            'status' => 'nullable|in:Active,Inactive'
         ]);
 
         $query = Kelas::query();
 
         if (!empty($validated['level'])) {
             $query->where('level',  $validated['level']);
+        }
+
+        if (!empty($validated['status'])) {
+            $query->where('status',  $validated['status']);
         }
 
         $kelas = $query->get();

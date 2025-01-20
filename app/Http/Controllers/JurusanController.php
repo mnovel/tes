@@ -7,38 +7,42 @@ use App\Models\Jurusan;
 use App\Http\Requests\StoreJurusanRequest;
 use App\Http\Requests\UpdateJurusanRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JurusanController extends Controller
 {
+    /**
+     * Create a new JurusanController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-
-        $validated = $request->validate([
-            'bakat' => 'nullable|exists:bakats,id'
-        ]);
-
-        $query = Jurusan::with('bakat');
-
-        if (!empty($validated['bakat'])) {
-            $query->whereHas('bakat', function ($query) use ($validated) {
-                $query->where('bakats.id', $validated['bakat']);
-            });
-        }
-
-        $jurusan = $query->get()->map(function ($jurusan) {
-            return [
+        $jurusan = Jurusan::with('bakat')->get()->map(function ($jurusan) {
+            $data = [
                 'id' => $jurusan->id,
                 'name' => $jurusan->name,
-                'bakat' => $jurusan->bakat->map(function ($bakat) {
+
+            ];
+
+            if (Auth::check()) {
+                $data['bakat'] = $jurusan->bakat->map(function ($bakat) {
                     return [
                         'id' => $bakat->id,
                         'name' => $bakat->name,
                     ];
-                })
-            ];
+                });
+            }
+
+            return $data;
         });
 
         return response()->json([
@@ -79,19 +83,25 @@ class JurusanController extends Controller
      */
     public function show(Jurusan $jurusan)
     {
+        $data = [
+            'id' => $jurusan->id,
+            'name' => $jurusan->name,
+
+        ];
+
+        if (Auth::check()) {
+            $data['bakat'] = $jurusan->bakat->map(function ($bakat) {
+                return [
+                    'id' => $bakat->id,
+                    'name' => $bakat->name,
+                ];
+            });
+        }
+
         return response()->json([
             'status' => 'success',
             'message' => __('detail_data', ['data' => 'Jurusan']),
-            'data' => [
-                'id' => $jurusan->id,
-                'name' => $jurusan->name,
-                'bakat' => $jurusan->bakat->map(function ($bakat) {
-                    return [
-                        'id' => $bakat->id,
-                        'name' => $bakat->name,
-                    ];
-                })
-            ]
+            'data' => $data
         ]);
     }
 

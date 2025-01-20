@@ -31,18 +31,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
-
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     Route::post('login', [AuthController::class, 'login']);
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('refresh', [AuthController::class, 'refresh']);
     Route::get('me', [AuthController::class, 'me']);
 });
-
 
 /**
  *
@@ -54,7 +48,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'setting'], function () {
     Route::post('/', [SettingController::class, 'update']);
 });
 
-Route::group(['middleware' => 'auth:api', 'prefix' => 'sekolah'], function () {
+Route::group(['middleware' => 'api', 'prefix' => 'sekolah'], function () {
     Route::get('', [SekolahController::class, 'index']);
     Route::post('', [SekolahController::class, 'store']);
     Route::get('{sekolah}', [SekolahController::class, 'show']);
@@ -75,7 +69,7 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'bakat'], function () {
     Route::delete('{bakat}', [BakatController::class, 'destroy']);
 });
 
-Route::group(['middleware' => 'auth:api', 'prefix' => 'perguruan-tinggi'], function () {
+Route::group(['middleware' => 'api', 'prefix' => 'perguruan-tinggi'], function () {
     Route::get('', [PerguruanTinggiController::class, 'index']);
     Route::post('', [PerguruanTinggiController::class, 'store']);
     Route::get('{perguruanTinggi}', [PerguruanTinggiController::class, 'show']);
@@ -83,7 +77,7 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'perguruan-tinggi'], funct
     Route::delete('{perguruanTinggi}', [PerguruanTinggiController::class, 'destroy']);
 });
 
-Route::group(['middleware' => 'auth:api', 'prefix' => 'jurusan'], function () {
+Route::group(['middleware' => 'api', 'prefix' => 'jurusan'], function () {
     Route::get('', [JurusanController::class, 'index']);
     Route::post('', [JurusanController::class, 'store']);
     Route::get('{jurusan}', [JurusanController::class, 'show']);
@@ -91,7 +85,7 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'jurusan'], function () {
     Route::delete('{jurusan}', [JurusanController::class, 'destroy']);
 });
 
-Route::group(['middleware' => 'auth:api', 'prefix' => 'profesi'], function () {
+Route::group(['middleware' => 'api', 'prefix' => 'profesi'], function () {
     Route::get('', [ProfesiController::class, 'index']);
     Route::post('', [ProfesiController::class, 'store']);
     Route::get('{profesi}', [ProfesiController::class, 'show']);
@@ -127,7 +121,6 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'versi-pertanyaan'], funct
 
 Route::group(['middleware' => 'api', 'prefix' => 'pertanyaan'], function () {
     Route::get('', [PertanyaanController::class, 'index']);
-    Route::get('quiz', [PertanyaanController::class, 'indexQuiz']);
     Route::post('', [PertanyaanController::class, 'store']);
     Route::get('{pertanyaan}', [PertanyaanController::class, 'show']);
     Route::put('{pertanyaan}', [PertanyaanController::class, 'update']);
@@ -148,7 +141,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'survei'], function () {
 });
 
 /**
- * Route for Resul Quiz
+ * Route for Result Quiz
  *
  */
 
