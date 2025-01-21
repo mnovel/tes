@@ -35,13 +35,13 @@ class StoreJawabanRequest extends FormRequest
                 function ($attribute, $value, $fail) {
                     $sesi = DB::table('sesis')
                         ->where('id', request()->input('session'))
-                        ->first();
+                        ->first()->versi_id ?? null;
 
                     $pertanyaan = DB::table('pertanyaans')
                         ->where('id', $value)
-                        ->first();
+                        ->first()->versi_id ?? null;
 
-                    if ($sesi->versi_id ?? null !== $pertanyaan->versi_id) {
+                    if ($sesi !== $pertanyaan) {
                         $fail("Pertanyaan tidak sesuai dengan sesi yang sedang berlangsung.");
                     }
                 }
