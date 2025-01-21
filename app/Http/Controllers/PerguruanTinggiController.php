@@ -38,23 +38,18 @@ class PerguruanTinggiController extends Controller
         }
 
         $perguruanTinggi = $query->get()->map(function ($perguruanTinggi) {
-            $data = [
+            return [
                 'id' => $perguruanTinggi->id,
                 'name' => $perguruanTinggi->name,
                 'rank' => $perguruanTinggi->rank,
-                'status' => $perguruanTinggi->status
-            ];
-
-            if (Auth::check()) {
-                $data['jurusan'] = $perguruanTinggi->jurusan->map(function ($jurusan) {
+                'status' => $perguruanTinggi->status,
+                'jurusan' =>  $perguruanTinggi->jurusan->map(function ($jurusan) {
                     return [
                         'id' => $jurusan->id,
                         'name' => $jurusan->name
                     ];
-                });
-            }
-
-            return $data;
+                })
+            ];
         });
 
         return response()->json([
@@ -103,17 +98,15 @@ class PerguruanTinggiController extends Controller
             'id' => $perguruanTinggi->id,
             'name' => $perguruanTinggi->name,
             'rank' => $perguruanTinggi->rank,
-
-            'status' => $perguruanTinggi->status
-        ];
-        if (Auth::check()) {
-            $data['jurusan'] = $perguruanTinggi->jurusan->map(function ($jurusan) {
+            'status' => $perguruanTinggi->status,
+            'jurusan' => $perguruanTinggi->jurusan->map(function ($jurusan) {
                 return [
                     'id' => $jurusan->id,
                     'name' => $jurusan->name
                 ];
-            });
-        }
+            })
+        ];
+
         return response()->json([
             'status' => 'success',
             'message' => __('detail_data', ['data' => 'perguruan tinggi']),
