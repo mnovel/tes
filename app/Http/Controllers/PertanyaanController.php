@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Pertanyaan;
 use App\Http\Requests\StorePertanyaanRequest;
 use App\Http\Requests\UpdatePertanyaanRequest;
+use App\Models\Jawaban;
 use App\Models\Option;
+use App\Models\Sesi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +22,60 @@ class PertanyaanController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+        $this->middleware('auth:api', ['except' => ['indexQuiz']]);
+    }
+
+    /**
+     * Display index quiz
+     */
+
+    public function indexQuiz(Request $request, Sesi $sesi)
+    {
+        $validated = $request->validate([
+            'type' => 'required|in:Single,Multiple',
+        ]);
+
+        $versi = $sesi->versi_id;
+
+        $pertanyaanQuery = Pertanyaan::with(['versi', 'option'])->orderBy('type')->where('versi_id', $versi);
+
+        if (!empty($validated['type'])) {
+            $pertanyaanQuery->where('type', $validated['type']);
+        }
+
+        $pertanyaan = $pertanyaanQuery->paginate(1);
+
+        $formattedPertanyaan = $pertanyaan->getCollection()->map(function ($pertanyaan) use ($sesi) {
+            return [
+                'id' => $pertanyaan->id,
+                'versi' => $pertanyaan->versi->id,
+                'type' => $pertanyaan->type,
+                'question' => $pertanyaan->question,
+                'options' => $pertanyaan->option->map(function ($option) {
+                    return [
+                        'id' => $option->id,
+                        'answer' => $option->answer,
+                    ];
+                }),
+                'answers' => Jawaban::with('option')->where('pertanyaan_id', $pertanyaan->id)->where('sesi_id', $sesi->id)->get()->map(function ($answer) {
+                    return [
+                        'option_id' => $answer->option_id,
+                        'answer' => $answer->option->answer
+                    ];
+                })
+            ];
+        });
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $formattedPertanyaan,
+            'pagination' => [
+                'current_page' => $pertanyaan->currentPage(),
+                'last_page' => $pertanyaan->lastPage(),
+                'per_page' => $pertanyaan->perPage(),
+                'total' => $pertanyaan->total(),
+            ],
+        ]);
     }
 
     /**
@@ -50,18 +105,12 @@ class PertanyaanController extends Controller
                 'type' => $pertanyaan->type,
                 'question' => $pertanyaan->question,
                 'options' => $pertanyaan->option->map(function ($option) {
-                    $data = [
+                    return [
                         'id' => $option->id,
                         'answer' => $option->answer,
-
+                        'bakat_id' => $option->bakat->id ?? null,
+                        'bakat' => $option->bakat->name ?? null
                     ];
-
-                    if (Auth::check()) {
-                        $data['bakat_id'] = $option->bakat->id ?? null;
-                        $data['bakat'] = $option->bakat->name ?? null;
-                    }
-
-                    return $data;
                 }),
             ];
         });
@@ -127,17 +176,12 @@ class PertanyaanController extends Controller
                 'type' => $pertanyaan->type,
                 'question' => $pertanyaan->question,
                 'options' => $pertanyaan->option->map(function ($option) {
-                    $data = [
+                    return [
                         'id' => $option->id,
                         'answer' => $option->answer,
+                        'bakat_id' => $option->bakat->id ?? null,
+                        'bakat' => $option->bakat->name ?? null
                     ];
-
-                    if (Auth::check()) {
-                        $data['bakat_id'] = $option->bakat->id ?? null;
-                        $data['bakat'] = $option->bakat->name ?? null;
-                    }
-
-                    return $data;
                 }),
             ]
         ]);

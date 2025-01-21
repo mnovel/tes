@@ -45,63 +45,6 @@ class JawabanController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Sesi $sesi, Request $request)
-    {
-        $validated = $request->validate([
-            'question' => [
-                'nullable',
-                Rule::exists('jawabans', 'pertanyaan_id')->where(function ($query) use ($sesi) {
-                    return $query->where('sesi_id', $sesi->id);
-                }),
-            ]
-        ]);
-
-        if (isset($validated['question'])) {
-            $jawaban = $sesi->jawaban->where('pertanyaan_id', $validated['question']);
-            if ($jawaban->isEmpty()) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => __('no_data', ['data' => 'jawaban']),
-                ], 404);
-            }
-            return response()->json([
-                'status' => 'success',
-                'message' => __('display_data', ['data' => 'jawaban']),
-                'data' => [
-                    'answers' => $jawaban->groupBy('pertanyaan_id')->map(function ($jawaban, $key) {
-                        return [
-                            'question_id' => $key,
-                            'option_ids' => $jawaban->map(function ($jawaban) {
-                                return $jawaban->option_id;
-                            }),
-                        ];
-                    })->values(),
-                ]
-            ]);
-        }
-
-        return response()->json([
-            'status' => 'success',
-            'message' => __('display_data', ['data' => 'jawaban']),
-            'data' => [
-                'answers' => $sesi->jawaban->groupBy('pertanyaan_id')->map(function ($jawaban, $key) {
-                    return [
-                        'question_id' => $key,
-                        'option_ids' => $jawaban->map(function ($jawaban) {
-                            return $jawaban->option_id;
-                        }),
-                    ];
-                })->values(),
-                'last_answer' => [
-                    'question_id' => $sesi->jawaban->last()->pertanyaan_id,
-                ],
-            ]
-        ]);
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateJawabanRequest $request)

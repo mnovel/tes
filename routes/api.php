@@ -111,6 +111,9 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'user'], function () {
  * Route for Setting Quiz
  */
 
+Route::get('soal/{sesi}', [PertanyaanController::class, 'indexQuiz']);
+
+
 Route::group(['middleware' => 'auth:api', 'prefix' => 'versi-pertanyaan'], function () {
     Route::get('', [VersiPertanyaanController::class, 'index']);
     Route::post('', [VersiPertanyaanController::class, 'store']);
