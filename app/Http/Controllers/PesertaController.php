@@ -65,10 +65,10 @@ class PesertaController extends Controller
             'email' => $validated['email'],
         ], [
             'name' => $validated['name'],
-            'sekolah_id' => $validated['sc'],
-            'kelas_id' => $validated['kelas'],
-            'perguruan_tinggi_id' => $validated['perguruan_tinggi'] ?? null,
-            'jurusan_id' => $validated['jurusan'] ?? null,
+            'sekolah_id' => $validated['school'],
+            'kelas_id' => $validated['class'],
+            'perguruan_tinggi_id' => $validated['university'] ?? null,
+            'jurusan_id' => $validated['major'] ?? null,
         ]);
 
         if (!$peserta->sesi()->where('status', 'Active')->exists()) {
@@ -134,10 +134,10 @@ class PesertaController extends Controller
         $peserta->update([
             'name' => $validated['name'],
             'email' => $validated['email'],
-            'sekolah_id' => $validated['sc'],
-            'kelas_id' => $validated['kelas'],
-            'perguruan_tinggi_id' => $validated['perguruan_tinggi'] ?? null,
-            'jurusan_id' => $validated['jurusan'] ?? null,
+            'sekolah_id' => $validated['school'],
+            'kelas_id' => $validated['class'],
+            'perguruan_tinggi_id' => $validated['university'] ?? null,
+            'jurusan_id' => $validated['major'] ?? null,
         ]);
         return response()->json([
             'status' => 'success',
