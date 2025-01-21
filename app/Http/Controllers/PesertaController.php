@@ -86,8 +86,8 @@ class PesertaController extends Controller
                 'email' => $peserta->email,
                 'sekolah' => $peserta->sekolah->name,
                 'kelas' => $peserta->kelas->name,
-                'perguruan_tinggi_impian' => $peserta->perguruanTinggi->name,
-                'jurusan_impian' => $peserta->jurusan->name,
+                'perguruan_tinggi_impian' => $peserta->perguruanTinggi->name ?? null,
+                'jurusan_impian' => $peserta->jurusan->name ?? null,
                 'sesi' => $peserta->sesi->map(function ($sesi) {
                     return [
                         'id' => $sesi->id,
@@ -112,8 +112,8 @@ class PesertaController extends Controller
                 'email' => $peserta->email,
                 'sekolah' => $peserta->sekolah->name,
                 'kelas' => $peserta->kelas->name,
-                'perguruan_tinggi_impian' => $peserta->perguruanTinggi->name,
-                'jurusan_impian' => $peserta->jurusan->name,
+                'perguruan_tinggi_impian' => $peserta->perguruanTinggi->name ?? null,
+                'jurusan_impian' => $peserta->jurusan->name ?? null,
                 'sesi' => $peserta->sesi->map(function ($sesi) {
                     return [
                         'id' => $sesi->id,
@@ -154,8 +154,8 @@ class PesertaController extends Controller
                 'email' => $peserta->email,
                 'sekolah' => $peserta->sekolah->name,
                 'kelas' => $peserta->kelas->name,
-                'perguruan_tinggi_impian' => $peserta->perguruanTinggi->name,
-                'jurusan_impian' => $peserta->jurusan->name,
+                'perguruan_tinggi_impian' => $peserta->perguruanTinggi->name ?? null,
+                'jurusan_impian' => $peserta->jurusan->name ?? null,
             ]
         ]);
     }
