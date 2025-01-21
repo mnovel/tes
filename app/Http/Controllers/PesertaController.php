@@ -36,8 +36,8 @@ class PesertaController extends Controller
                     'email' => $peserta->email,
                     'school' => $peserta->sekolah->name,
                     'class' => $peserta->kelas->name,
-                    'dream_university' => $peserta->perguruanTinggi->name,
-                    'dream_major' => $peserta->jurusan->name,
+                    'dream_university' => $peserta->perguruanTinggi->name ?? null,
+                    'dream_major' => $peserta->jurusan->name ?? null,
                     'sessions' => $peserta->sesi->map(function ($sesi) {
                         return [
                             'id' => $sesi->id,
