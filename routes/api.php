@@ -155,9 +155,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'peserta'], function () {
 
 Route::group(['middleware' => 'api', 'prefix' => 'sesi'], function () {
     Route::get('', [SesiController::class, 'index']);
-    Route::post('', [SesiController::class, 'store']);
     Route::get('{sesi}', [SesiController::class, 'show']);
-    Route::put('{sesi}', [SesiController::class, 'update']);
     Route::delete('{sesi}', [SesiController::class, 'destroy']);
 });
 
@@ -165,4 +163,5 @@ Route::group(['prefix' => 'jawaban'], function () {
     Route::post('', [JawabanController::class, 'store']);
     Route::get('{sesi}', [JawabanController::class, 'show']);
     Route::put('', [JawabanController::class, 'update']);
+    Route::get('save/{sesi}', [JawabanController::class, 'save']);
 });

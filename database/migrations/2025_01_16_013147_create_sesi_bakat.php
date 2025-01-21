@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignUuid('sesi_id')->constrained()->onDelete('cascade');
             $table->foreignUuid('bakat_id')->constrained()->onDelete('cascade');
+            $table->integer('total');
             $table->timestamps();
         });
     }

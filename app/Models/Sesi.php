@@ -23,7 +23,7 @@ class Sesi extends Model
 
     public function bakat()
     {
-        return $this->belongsToMany(Bakat::class, 'sesi_bakat');
+        return $this->belongsToMany(Bakat::class, 'sesi_bakat')->withPivot('total');
     }
 
     public function jawaban()

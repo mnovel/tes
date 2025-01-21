@@ -41,7 +41,7 @@ class StoreJawabanRequest extends FormRequest
                         ->where('id', $value)
                         ->first();
 
-                    if ($sesi->versi_id !== $pertanyaan->versi_id) {
+                    if ($sesi->versi_id ?? null !== $pertanyaan->versi_id) {
                         $fail("Pertanyaan tidak sesuai dengan sesi yang sedang berlangsung.");
                     }
                 }

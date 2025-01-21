@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Peserta;
 use App\Http\Requests\StorePesertaRequest;
 use App\Http\Requests\UpdatePesertaRequest;
+use App\Models\VersiPertanyaan;
 
 class PesertaController extends Controller
 {
@@ -66,13 +67,34 @@ class PesertaController extends Controller
             'name' => $validated['name'],
             'sekolah_id' => $validated['sekolah'],
             'kelas_id' => $validated['kelas'],
-            'perguruan_tinggi_id' => $validated['perguruan_tinggi'],
-            'jurusan_id' => $validated['jurusan'],
+            'perguruan_tinggi_id' => $validated['perguruan_tinggi'] ?? null,
+            'jurusan_id' => $validated['jurusan'] ?? null,
         ]);
+
+        if (!$peserta->sesi()->where('status', 'Active')->exists()) {
+            $peserta->sesi()->create([
+                'versi_id' => VersiPertanyaan::where('status', 'Active')->first()->id,
+            ]);
+        }
+
         return response()->json([
             'status' => 'success',
             'message' => __('create_data', ['data' => 'Peserta']),
-            'data' => $peserta
+            'data' =>  [
+                'id' => $peserta->id,
+                'name' => $peserta->name,
+                'email' => $peserta->email,
+                'sekolah' => $peserta->sekolah->name,
+                'kelas' => $peserta->kelas->name,
+                'perguruan_tinggi_impian' => $peserta->perguruanTinggi->name,
+                'jurusan_impian' => $peserta->jurusan->name,
+                'sesi' => $peserta->sesi->map(function ($sesi) {
+                    return [
+                        'id' => $sesi->id,
+                        'status' => $sesi->status,
+                    ];
+                })
+            ]
         ]);
     }
 
@@ -120,8 +142,8 @@ class PesertaController extends Controller
             'email' => $validated['email'],
             'sekolah_id' => $validated['sekolah'],
             'kelas_id' => $validated['kelas'],
-            'perguruan_tinggi_id' => $validated['perguruan_tinggi'],
-            'jurusan_id' => $validated['jurusan'],
+            'perguruan_tinggi_id' => $validated['perguruan_tinggi'] ?? null,
+            'jurusan_id' => $validated['jurusan'] ?? null,
         ]);
         return response()->json([
             'status' => 'success',

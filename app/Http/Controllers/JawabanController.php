@@ -140,4 +140,62 @@ class JawabanController extends Controller
             'data' => $groupedData,
         ]);
     }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function save(Sesi $sesi)
+    {
+
+        $totalPertanyaan = Pertanyaan::where('versi_id', $sesi->versi_id)->count();
+        $totalJawaban = $sesi->jawaban->groupBy('pertanyaan_id')->count();
+
+        if ($totalJawaban == $totalPertanyaan && $sesi->status === 'Active') {
+            $calculateBakat = $this->calculateBakat($sesi);
+            $sesi->status = 'Completed';
+            foreach ($calculateBakat as $bakat) {
+                $sesi->bakat()->attach($bakat['bakat_id'], ['total' => $bakat['total']]);
+            }
+            $sesi->save();
+        } else if ($totalJawaban != $totalPertanyaan) {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('error_save_answer')
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('duplicate_save_answer')
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => __('save_answer'),
+            'data' => $sesi
+        ]);
+    }
+
+    public function calculateBakat(Sesi $sesi)
+    {
+        $sesi->load('jawaban.option.bakat');
+
+        $bakatTotals = $sesi->jawaban
+            ->map(function ($jawaban) {
+                return $jawaban->option->bakat->id ?? null;
+            })
+            ->filter()
+            ->countBy()
+            ->map(function ($total, $bakatId) {
+                return [
+                    'bakat_id' => $bakatId,
+                    'total' => $total,
+                ];
+            })
+            ->sortByDesc('total')
+            ->take(5)
+            ->values();
+
+        return $bakatTotals;
+    }
 }

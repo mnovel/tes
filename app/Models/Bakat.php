@@ -42,6 +42,6 @@ class Bakat extends Model
 
     public function sesi()
     {
-        return $this->belongsToMany(Sesi::class, 'sesi_bakat');
+        return $this->belongsToMany(Sesi::class, 'sesi_bakat')->withPivot('total');
     }
 }
