@@ -65,7 +65,7 @@ class PesertaController extends Controller
             'email' => $validated['email'],
         ], [
             'name' => $validated['name'],
-            'sekolah_id' => $validated['sekolah'],
+            'sekolah_id' => $validated['sc'],
             'kelas_id' => $validated['kelas'],
             'perguruan_tinggi_id' => $validated['perguruan_tinggi'] ?? null,
             'jurusan_id' => $validated['jurusan'] ?? null,
@@ -134,7 +134,7 @@ class PesertaController extends Controller
         $peserta->update([
             'name' => $validated['name'],
             'email' => $validated['email'],
-            'sekolah_id' => $validated['sekolah'],
+            'sekolah_id' => $validated['sc'],
             'kelas_id' => $validated['kelas'],
             'perguruan_tinggi_id' => $validated['perguruan_tinggi'] ?? null,
             'jurusan_id' => $validated['jurusan'] ?? null,
@@ -146,7 +146,7 @@ class PesertaController extends Controller
                 'id' => $peserta->id,
                 'name' => $peserta->name,
                 'email' => $peserta->email,
-                'sekolah' => $peserta->sekolah->name,
+                'sc' => $peserta->sekolah->name,
                 'kelas' => $peserta->kelas->name,
                 'perguruan_tinggi_impian' => $peserta->perguruanTinggi->name ?? null,
                 'jurusan_impian' => $peserta->jurusan->name ?? null,

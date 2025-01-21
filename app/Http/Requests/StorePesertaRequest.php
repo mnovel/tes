@@ -24,10 +24,10 @@ class StorePesertaRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|email',
-            'sekolah' => 'required|exists:sekolahs,id',
-            'kelas' => 'required|exists:kelas,id',
-            'perguruan_tinggi' => 'nullable|exists:perguruan_tinggis,id',
-            'jurusan' => 'nullable|exists:jurusans,id',
+            'school' => 'required|exists:sekolahs,id',
+            'class' => 'required|exists:kelas,id',
+            'university' => 'nullable|exists:perguruan_tinggis,id',
+            'major' => 'nullable|exists:jurusans,id',
         ];
     }
 }
