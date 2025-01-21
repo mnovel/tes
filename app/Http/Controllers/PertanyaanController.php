@@ -37,7 +37,7 @@ class PertanyaanController extends Controller
 
         $versi = $sesi->versi_id;
 
-        $pertanyaanQuery = Pertanyaan::with(['versi', 'option'])->orderBy('type')->where('versi_id', $versi);
+        $pertanyaanQuery = Pertanyaan::with(['versi', 'option'])->where('versi_id', $versi);
 
         if (!empty($validated['type'])) {
             $pertanyaanQuery->where('type', $validated['type']);
@@ -48,7 +48,7 @@ class PertanyaanController extends Controller
         $formattedPertanyaan = $pertanyaan->getCollection()->map(function ($pertanyaan) use ($sesi) {
             return [
                 'id' => $pertanyaan->id,
-                'versi' => $pertanyaan->versi->id,
+                'versi' => $pertanyaan->versi->name,
                 'type' => $pertanyaan->type,
                 'question' => $pertanyaan->question,
                 'options' => $pertanyaan->option->map(function ($option) {

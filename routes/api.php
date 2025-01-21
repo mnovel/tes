@@ -122,7 +122,7 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'versi-pertanyaan'], funct
     Route::delete('{versiPertanyaan}', [VersiPertanyaanController::class, 'destroy']);
 });
 
-Route::group(['middleware' => 'api', 'prefix' => 'pertanyaan'], function () {
+Route::group(['middleware' => 'auth:api', 'prefix' => 'pertanyaan'], function () {
     Route::get('', [PertanyaanController::class, 'index']);
     Route::post('', [PertanyaanController::class, 'store']);
     Route::get('{pertanyaan}', [PertanyaanController::class, 'show']);
