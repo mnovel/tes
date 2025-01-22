@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Sesi;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -24,7 +25,16 @@ class UpdateJawabanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'session' => 'required|exists:sesis,id',
+            'session' => [
+                'required',
+                'exists:sesis,id',
+                function ($attribute, $value, $fail) {
+                    $status = Sesi::find($value)->status;
+                    if ($status != 'Active') {
+                        $fail('Sesi anda telah berakhir');
+                    }
+                }
+            ],
             'answer' => 'required|array',
             'answer.question' => [
                 'required',
