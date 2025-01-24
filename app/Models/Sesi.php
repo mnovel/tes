@@ -30,4 +30,9 @@ class Sesi extends Model
     {
         return $this->hasMany(Jawaban::class);
     }
+
+    public function jawabanSurvei()
+    {
+        return $this->hasMany(JawabanSurvei::class);
+    }
 }

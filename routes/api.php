@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BakatController;
 use App\Http\Controllers\JawabanController;
+use App\Http\Controllers\JawabanSurveiController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\PanduanController;
@@ -10,7 +11,6 @@ use App\Http\Controllers\PerguruanTinggiController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\ProfesiController;
-use App\Http\Controllers\RecordAnswerController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\SesiController;
@@ -167,4 +167,11 @@ Route::group(['prefix' => 'jawaban'], function () {
     Route::get('{sesi}', [JawabanController::class, 'show']);
     Route::put('', [JawabanController::class, 'update']);
     Route::get('save/{sesi}', [JawabanController::class, 'save']);
+});
+
+
+Route::group(['middleware' => 'auth:api', 'prefix' => 'jawaban-survei'], function () {
+    Route::get('', [JawabanSurveiController::class, 'index']);
+    Route::get('{sesi}', [JawabanSurveiController::class, 'show']);
+    Route::post('{sesi}', [JawabanSurveiController::class, 'store']);
 });

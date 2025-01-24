@@ -7,8 +7,6 @@ use App\Http\Requests\StoreJawabanRequest;
 use App\Http\Requests\UpdateJawabanRequest;
 use App\Models\Pertanyaan;
 use App\Models\Sesi;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class JawabanController extends Controller
 {
