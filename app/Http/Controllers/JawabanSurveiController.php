@@ -76,16 +76,16 @@ class JawabanSurveiController extends Controller
     public function store(StoreJawabanSurveiRequest $request, Sesi $sesi)
     {
         $validated = $request->validated();
-        $jawabanSurveiList = [];
-        foreach ($validated['answers'] as $data) {
-            $jawabanSurveiList[] = JawabanSurvei::create([
+        $jawabanSurvei = [];
+        foreach ($validated as $data) {
+            $jawabanSurvei[] = JawabanSurvei::create([
                 'sesi_id' => $sesi->id,
-                'question_id' => $data['question_id'],
+                'question_id' => $data['question'],
                 'answer' => $data['answer']
             ]);
         }
 
-        $response = collect($jawabanSurveiList)->map(function ($jawabanSurvei) {
+        $response = collect($jawabanSurvei)->map(function ($jawabanSurvei) {
             return [
                 'sesi_id' => $jawabanSurvei->sesi_id,
                 'question_id' => $jawabanSurvei->question_id,
