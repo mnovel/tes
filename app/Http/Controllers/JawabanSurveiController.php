@@ -77,18 +77,26 @@ class JawabanSurveiController extends Controller
     {
         $validated = $request->validated();
         $jawabanSurveiList = [];
-        foreach ($validated as $data) {
+        foreach ($validated['answers'] as $data) {
             $jawabanSurveiList[] = JawabanSurvei::create([
                 'sesi_id' => $sesi->id,
-                'question_id' => $data['question'],
+                'question_id' => $data['question_id'],
                 'answer' => $data['answer']
             ]);
         }
 
+        $response = collect($jawabanSurveiList)->map(function ($jawabanSurvei) {
+            return [
+                'sesi_id' => $jawabanSurvei->sesi_id,
+                'question_id' => $jawabanSurvei->question_id,
+                'answer' => $jawabanSurvei->answer
+            ];
+        });
+
         return response()->json([
             'status' => 'success',
             'message' => __('create_data', ['data' => 'jawaban survei']),
-            'data' => $jawabanSurveiList
+            'data' => $response
         ]);
     }
 }
