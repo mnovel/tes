@@ -11,6 +11,17 @@ use App\Models\Survei;
 class JawabanSurveiController extends Controller
 {
     /**
+     * Create a new JawabanSurveiController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['show']]);
+    }
+
+
+    /**
      * Display a listing of the resource.
      */
     public function index()

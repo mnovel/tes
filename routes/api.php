@@ -170,7 +170,7 @@ Route::group(['prefix' => 'jawaban'], function () {
 });
 
 
-Route::group(['middleware' => 'auth:api', 'prefix' => 'jawaban-survei'], function () {
+Route::group(['middleware' => 'api', 'prefix' => 'jawaban-survei'], function () {
     Route::get('', [JawabanSurveiController::class, 'index']);
     Route::get('{sesi}', [JawabanSurveiController::class, 'show']);
     Route::post('{sesi}', [JawabanSurveiController::class, 'store']);
