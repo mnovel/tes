@@ -24,15 +24,19 @@ class StoreJawabanSurveiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'question' => [
+            'question' => 'required|array',
+            'question.*' => [
                 'required',
+                'distinct',
                 'exists:surveis,id',
                 Rule::unique('jawaban_surveis', 'question_id')->where(function ($query) {
                     return $query->where('sesi_id', $this->sesi->id);
                 })
             ],
-            'answer' => [
+            'answer' => 'required|array',
+            'answer.*' => [
                 'required',
+                'distinct',
                 function ($attribute, $value, $fail) {
                     $survei = Survei::find($this->input('question'));
                     if ($survei && $survei->type === 'Scale') {
