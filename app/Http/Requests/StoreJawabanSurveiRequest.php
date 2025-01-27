@@ -34,7 +34,6 @@ class StoreJawabanSurveiRequest extends FormRequest
             ],
             '*.answer' => [
                 'required',
-                'distinct',
                 function ($attribute, $value, $fail) {
                     $survei = Survei::find($this->input(str_replace('.answer', '.question', $attribute)));
                     if ($survei && $survei->type === 'Scale') {
