@@ -24,8 +24,7 @@ class StoreJawabanSurveiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'question' => 'required|array',
-            'question.*' => [
+            '*.question' => [
                 'required',
                 'distinct',
                 'exists:surveis,id',
@@ -33,12 +32,11 @@ class StoreJawabanSurveiRequest extends FormRequest
                     return $query->where('sesi_id', $this->sesi->id);
                 })
             ],
-            'answer' => 'required|array',
-            'answer.*' => [
+            '*.answer' => [
                 'required',
                 'distinct',
                 function ($attribute, $value, $fail) {
-                    $survei = Survei::find($this->input('question'));
+                    $survei = Survei::find($this->input(str_replace('.answer', '.question', $attribute)));
                     if ($survei && $survei->type === 'Scale') {
                         $validAnswers = ['Sangat Setuju', 'Setuju', 'Tidak Setuju', 'Sangat Tidak Setuju'];
                         if (!in_array($value, $validAnswers)) {
