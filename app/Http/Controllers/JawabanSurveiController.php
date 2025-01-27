@@ -17,7 +17,7 @@ class JawabanSurveiController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['show', 'create']]);
+        $this->middleware('auth:api', ['except' => ['show', 'store']]);
     }
 
 
