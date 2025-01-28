@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Jawaban;
 use App\Http\Requests\StoreJawabanRequest;
 use App\Http\Requests\UpdateJawabanRequest;
+use App\Models\Bakat;
 use App\Models\Pertanyaan;
 use App\Models\Sesi;
 
@@ -113,30 +114,21 @@ class JawabanController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => __('save_answer'),
-            'data' => $sesi
         ]);
     }
 
     public function calculateBakat(Sesi $sesi)
     {
-        $sesi->load('jawaban.option.bakat');
+        $bakat = Bakat::all()->map(function ($bakat) use ($sesi) {
+            $total = $sesi->jawaban->filter(function ($jawaban) use ($bakat) {
+                return $jawaban->option->bakat_id == $bakat->id;
+            })->count();
+            return [
+                'bakat_id' => $bakat->id,
+                'total' => $total,
+            ];
+        })->sortByDesc('total')->values();
 
-        $bakatTotals = $sesi->jawaban
-            ->map(function ($jawaban) {
-                return $jawaban->option->bakat->id ?? null;
-            })
-            ->filter()
-            ->countBy()
-            ->map(function ($total, $bakatId) {
-                return [
-                    'bakat_id' => $bakatId,
-                    'total' => $total,
-                ];
-            })
-            ->sortByDesc('total')
-            ->take(5)
-            ->values();
-
-        return $bakatTotals;
+        return $bakat;
     }
 }

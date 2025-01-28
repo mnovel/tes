@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BakatController;
+use App\Http\Controllers\HasilController;
 use App\Http\Controllers\JawabanController;
 use App\Http\Controllers\JawabanSurveiController;
 use App\Http\Controllers\JurusanController;
@@ -175,3 +176,6 @@ Route::group(['middleware' => 'api', 'prefix' => 'jawaban-survei'], function () 
     Route::get('{sesi}', [JawabanSurveiController::class, 'show']);
     Route::post('{sesi}', [JawabanSurveiController::class, 'store']);
 });
+
+
+Route::get('report/{sesi}', [HasilController::class, 'reportQuiz']);

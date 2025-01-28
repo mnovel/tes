@@ -40,13 +40,6 @@ class SesiController extends Controller
                         'id' => $sesi->versi->id,
                         'name' => $sesi->versi->name,
                     ],
-                    'talent' => $sesi->bakat->map(function ($bakat) {
-                        return [
-                            'id' => $bakat->id,
-                            'name' => $bakat->name,
-                            'score' => $bakat->pivot->total
-                        ];
-                    }),
                     'status' => $sesi->status,
                     'created_at' => $sesi->created_at,
                     'updated_at' => $sesi->updated_at,
@@ -77,13 +70,6 @@ class SesiController extends Controller
                     'name' => $sesi->versi->name,
                 ],
                 'status' => $sesi->status,
-                'talent' => $sesi->bakat->map(function ($bakat) {
-                    return [
-                        'id' => $bakat->id,
-                        'name' => $bakat->name,
-                        'score' => $bakat->pivot->total
-                    ];
-                }),
                 'created_at' => $sesi->created_at,
                 'updated_at' => $sesi->updated_at,
             ]
