@@ -111,10 +111,6 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'user'], function () {
 /**
  * Route for Setting Quiz
  */
-
-Route::get('soal/{sesi}', [PertanyaanController::class, 'indexQuiz']);
-
-
 Route::group(['middleware' => 'auth:api', 'prefix' => 'versi-pertanyaan'], function () {
     Route::get('', [VersiPertanyaanController::class, 'index']);
     Route::post('', [VersiPertanyaanController::class, 'store']);
@@ -148,6 +144,9 @@ Route::group(['middleware' => 'api', 'prefix' => 'survei'], function () {
  * Route for Result Quiz
  *
  */
+
+Route::get('soal/{sesi}', [PertanyaanController::class, 'indexQuiz'])->withoutMiddleware('throttle');
+
 
 Route::group(['middleware' => 'api', 'prefix' => 'peserta'], function () {
     Route::get('', [PesertaController::class, 'index']);
