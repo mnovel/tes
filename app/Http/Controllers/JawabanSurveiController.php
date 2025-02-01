@@ -76,6 +76,14 @@ class JawabanSurveiController extends Controller
     public function store(StoreJawabanSurveiRequest $request, Sesi $sesi)
     {
         $validated = $request->validated();
+
+        if ($sesi->status != 'Survei') {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('completed_sesi')
+            ]);
+        }
+
         $jawabanSurvei = [];
         foreach ($validated as $data) {
             $jawabanSurvei[] = JawabanSurvei::create([
