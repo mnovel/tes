@@ -94,7 +94,7 @@ class JawabanController extends Controller
 
         if ($totalJawaban == $totalPertanyaan && $sesi->status === 'Active') {
             $calculateBakat = $this->calculateBakat($sesi);
-            $sesi->status = 'Completed';
+            $sesi->status = 'Survei';
             foreach ($calculateBakat as $bakat) {
                 $sesi->bakat()->attach($bakat['bakat_id'], ['total' => $bakat['total']]);
             }
@@ -107,7 +107,7 @@ class JawabanController extends Controller
         } else {
             return response()->json([
                 'status' => 'error',
-                'message' => __('duplicate_save_answer')
+                'message' => __('completed_sesi')
             ]);
         }
 

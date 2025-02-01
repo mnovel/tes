@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('peserta_id')->constrained('pesertas')->onDelete('cascade');
             $table->foreignUuid('versi_id')->constrained('versi_pertanyaans')->onDelete('cascade');
-            $table->enum('status', ['Active', 'Completed'])->default('Active');
+            $table->enum('status', ['Active', 'Survei', 'Completed'])->default('Active');
             $table->timestamps();
         });
     }

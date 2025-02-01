@@ -85,6 +85,9 @@ class JawabanSurveiController extends Controller
             ]);
         }
 
+        $sesi->status = 'Completed';
+        $sesi->save();
+
         $response = collect($jawabanSurvei)->map(function ($jawabanSurvei) {
             return [
                 'sesi_id' => $jawabanSurvei->sesi_id,

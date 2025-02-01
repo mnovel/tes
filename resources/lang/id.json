@@ -7,7 +7,7 @@
 
     "save_answer": "Jawaban berhasil disimpan, sesi telah berakhir.",
     "error_save_answer": "Terdapat pertanyaan yang belum dijawab, silakan periksa kembali jawaban Anda.",
-    "duplicate_save_answer": "Sesi anda telah berakhir.",
+    "completed_sesi": "Sesi anda telah berakhir.",
 
     "error_create": "Terjadi kesalahan saat menambahkan data :data baru.",
     "error_udate": "Terjadi kesalahan saat memperbarui data :data.",
