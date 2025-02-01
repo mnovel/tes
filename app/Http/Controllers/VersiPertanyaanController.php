@@ -58,7 +58,7 @@ class VersiPertanyaanController extends Controller
     {
         $validated = $request->validated();
         if ($validated['status'] === 'Active') {
-            VersiPertanyaan::where('status', 'Active')->update(['status' => 'Inactive']);
+            VersiPertanyaan::where('status', 'Active')->where('id', '!=', $versiPertanyaan->id)->update(['status' => 'Inactive']);
         }
         $versiPertanyaan->update($validated);
         return response()->json([
