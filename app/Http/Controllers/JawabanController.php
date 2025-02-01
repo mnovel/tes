@@ -16,7 +16,6 @@ class JawabanController extends Controller
      */
     public function store(StoreJawabanRequest $request)
     {
-        app('router')->getMiddleware()->skip('throttle');
         $validated = $request->validated();
         $data = [];
         foreach ($validated['answer']['option'] as $option) {
@@ -49,7 +48,6 @@ class JawabanController extends Controller
      */
     public function update(UpdateJawabanRequest $request)
     {
-        app('router')->getMiddleware()->skip('throttle');
         $validated = $request->validated();
         $jawaban = Jawaban::where('sesi_id', $validated['session'])->where('pertanyaan_id', $validated['answer']['question'])->get();
         if ($jawaban->isEmpty()) {
