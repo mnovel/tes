@@ -9,15 +9,15 @@ class HasilController extends Controller
 {
     public function reportQuiz(Sesi $sesi)
     {
-        if ($sesi->status !== 'Survei') {
+        if ($sesi->status !== 'Completed') {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Sesi masih berlangsung atau belum selesai',
+                'data' => [
+                    'current_status' => $sesi->status
+                ],
             ], 400);
         }
-
-
-        // dd($sesi->bakat->sortByDesc('pivot.total')->take(3)->pluck('profesi')->flatten()->unique('id')->values());
 
         return response()->json([
             'status' => 'success',
