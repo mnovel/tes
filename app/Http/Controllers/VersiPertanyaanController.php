@@ -79,11 +79,25 @@ class VersiPertanyaanController extends Controller
                 'message' => 'Tidak bisa menghapus versi pertanyaan aktif',
             ]);
         } else {
-            $versiPertanyaan->delete();
-            return response()->json([
-                'status' => 'success',
-                'message' => __('delete_data', ['data' => 'versi pertanyaan']),
-            ]);
+            try {
+                $versiPertanyaan->delete();
+                return response()->json([
+                    'status' => 'success',
+                    'message' => __('delete_data', ['data' => 'versi pertanyaan']),
+                ]);
+            } catch (\Illuminate\Database\QueryException $e) {
+                if ($e->getCode() == 23000) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => __('error_delete_relation', ['data' => 'versi pertanyaan']),
+                    ], 400);
+                }
+
+                return response()->json([
+                    'status' => 'error',
+                    'message' => __('error_delete', ['data' => 'versi pertanyaan']),
+                ], 500);
+            }
         }
     }
 }

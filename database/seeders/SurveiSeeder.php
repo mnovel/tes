@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Survei;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -34,5 +35,9 @@ class SurveiSeeder extends Seeder
                 'status' => 'active'
             ]
         ];
+
+        foreach ($survei as $s) {
+            Survei::create($s);
+        }
     }
 }
