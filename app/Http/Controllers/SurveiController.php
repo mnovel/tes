@@ -76,10 +76,24 @@ class SurveiController extends Controller
      */
     public function destroy(Survei $survei)
     {
-        $survei->delete();
-        return response()->json([
-            'status' => 'success',
-            'message' => __('delete_data', ['data' => 'survei']),
-        ]);
+        try {
+            $survei->delete();
+            return response()->json([
+                'status' => 'success',
+                'message' => __('delete_data', ['data' => 'survei']),
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() == 23000) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => __('error_delete_relation', ['data' => 'survei']),
+                ], 400);
+            }
+
+            return response()->json([
+                'status' => 'error',
+                'message' => __('error_delete', ['data' => 'survei']),
+            ], 500);
+        }
     }
 }

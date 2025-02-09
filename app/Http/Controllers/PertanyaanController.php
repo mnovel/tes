@@ -234,10 +234,24 @@ class PertanyaanController extends Controller
      */
     public function destroy(Pertanyaan $pertanyaan)
     {
-        $pertanyaan->delete();
-        return response()->json([
-            'status' => 'success',
-            'message' => __('delete_data', ['data' => 'Pertanyaan']),
-        ]);
+        try {
+            $pertanyaan->delete();
+            return response()->json([
+                'status' => 'success',
+                'message' => __('delete_data', ['data' => 'pertanyaan']),
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() == 23000) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => __('error_delete_relation', ['data' => 'pertanyaan']),
+                ], 400);
+            }
+
+            return response()->json([
+                'status' => 'error',
+                'message' => __('error_delete', ['data' => 'pertanyaan']),
+            ], 500);
+        }
     }
 }

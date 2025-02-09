@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sesi_bakat', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('sesi_id')->constrained()->onDelete('cascade');
-            $table->foreignUuid('bakat_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('bakat_id')->constrained()->onDelete('restrict');
             $table->integer('total');
             $table->timestamps();
         });
