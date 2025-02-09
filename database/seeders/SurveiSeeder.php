@@ -12,6 +12,27 @@ class SurveiSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $survei = [
+            [
+                'question' => 'Apakah web ini membantumu dalam menemukan potensi dirimu?',
+                'type' => 'Scale',
+                'status' => 'active'
+            ],
+            [
+                'question' => 'Apakah hasil tes telah memberimu inspirasi dalam penentuan jurusan yang akan kamu pilih?',
+                'type' => 'Scale',
+                'status' => 'active'
+            ],
+            [
+                'question' => 'Apakah kamu tertarik untuk mempromosikan website ini pada orang di sekitarmu?',
+                'type' => 'Scale',
+                'status' => 'active'
+            ],
+            [
+                'question' => 'Berikan kritik dan saran anda untuk pengembangan website ini!',
+                'type' => 'Text',
+                'status' => 'active'
+            ]
+        ];
     }
 }

@@ -117,34 +117,35 @@ class JawabanController extends Controller
      */
     public function save(Sesi $sesi)
     {
-
         $totalPertanyaan = Pertanyaan::where('versi_id', $sesi->versi_id)->count();
         $totalJawaban = $sesi->jawaban->groupBy('pertanyaan_id')->count();
-        $this->sendReport($sesi);
-        // if ($totalJawaban == $totalPertanyaan && $sesi->status === 'Active') {
-        //     $calculateBakat = $this->calculateBakat($sesi);
-        //     $sesi->status = 'Survei';
-        //     foreach ($calculateBakat as $bakat) {
-        //         $sesi->bakat()->attach($bakat['bakat_id'], ['total' => $bakat['total']]);
-        //     }
-        //     $sesi->save();
-        //     $this->sendReport($sesi);
-        // } else if ($totalJawaban != $totalPertanyaan) {
+
+        // if ($totalJawaban != $totalPertanyaan) {
         //     return response()->json([
         //         'status' => 'error',
         //         'message' => __('error_save_answer')
         //     ]);
-        // } else {
+        // }
+
+        // if ($sesi->status !== 'Active') {
         //     return response()->json([
         //         'status' => 'error',
         //         'message' => __('completed_sesi')
         //     ]);
         // }
 
-        // return response()->json([
-        //     'status' => 'success',
-        //     'message' => __('save_answer'),
-        // ]);
+        // Validasi peserta sebelum lanjut
+        $user = $sesi->peserta;
+        // $calculateBakat = $this->calculateBakat($sesi);
+        // $sesi->status = 'Survei';
+
+        // foreach ($calculateBakat as $bakat) {
+        //     $sesi->bakat()->attach($bakat['bakat_id'], ['total' => $bakat['total']]);
+        // }
+
+        // $sesi->save();
+
+        return $this->sendReport($sesi);
     }
 
     public function calculateBakat(Sesi $sesi)
@@ -166,13 +167,6 @@ class JawabanController extends Controller
     {
         $user = $sesi->peserta;
 
-        if (!$user || empty($user->email)) {
-            return response()->json([
-                'status' => 'error',
-                'message' => __('email_not_found'),
-            ], 404);
-        }
-
         $data = [
             'name' => $user->name,
             'survey_link' => url('/survey/' . $sesi->id),
@@ -181,16 +175,14 @@ class JawabanController extends Controller
 
         try {
             Mail::to($user->email)->send(new SendEmail($data));
-
             return response()->json([
                 'status' => 'success',
-                'message' => __('survey_link_sent'),
+                'message' => __('save_answer'),
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' =>
-                $e->getMessage(),
+                'message' => $e->getMessage(),
             ], 500);
         }
     }

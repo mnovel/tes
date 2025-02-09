@@ -17,291 +17,247 @@ class ProfesiSeeder extends Seeder
         $profesi = [
             [
                 'name' => 'Guru/Dosen',
-                'bakat' => ['Linguistik']
+                'bakat' => ['Interpersonal', 'Linguistik', 'Logis Matematis']
             ],
             [
                 'name' => 'Jurnalis/Wartawan',
-                'bakat' => ['Linguistik']
-            ],
-            [
-                'name' => 'Sekretaris',
-                'bakat' => ['Linguistik']
-            ],
-            [
-                'name' => 'Influencer',
-                'bakat' => ['Linguistik']
+                'bakat' => ['Linguistik', 'Interpersonal', 'Logis Matematis']
             ],
             [
                 'name' => 'Copy Writer',
-                'bakat' => ['Linguistik']
+                'bakat' => ['Linguistik', 'Interpersonal', 'Visual Spasial']
             ],
             [
                 'name' => 'Podcaster',
-                'bakat' => ['Linguistik']
+                'bakat' => ['Linguistik', 'Interpersonal', 'Musikal']
             ],
             [
-                'name' => 'Penerjemah',
-                'bakat' => ['Linguistik']
+                'name' => 'Sekretaris',
+                'bakat' => ['Linguistik', 'Interpersonal', 'Logis Matematis']
             ],
             [
-                'name' => 'Penulis',
-                'bakat' => ['Linguistik', 'Intrapersonal']
+                'name' => 'Translator',
+                'bakat' => ['Linguistik', 'Intrapersonal', 'Logis Matematis']
             ],
             [
                 'name' => 'Sutradara',
-                'bakat' => ['Linguistik']
+                'bakat' => ['Visual Spasial', 'Interpersonal', 'Linguistik']
+            ],
+            [
+                'name' => 'Influencer',
+                'bakat' => ['Interpersonal', 'Linguistik', 'Intrapersonal']
             ],
             [
                 'name' => 'Diplomat',
-                'bakat' => ['Linguistik']
+                'bakat' => ['Interpersonal', 'Linguistik', 'Logis Matematis']
             ],
             [
                 'name' => 'Dokter',
-                'bakat' => ['Logis Matematis', 'Naturalis']
-            ],
-            [
-                'name' => 'Programmer',
-                'bakat' => ['Logis Matematis']
-            ],
-            [
-                'name' => 'Data Analyst',
-                'bakat' => ['Logis Matematis']
-            ],
-            [
-                'name' => 'Game Developer',
-                'bakat' => ['Logis Matematis']
-            ],
-            [
-                'name' => 'Manajer',
-                'bakat' => ['Logis Matematis', 'Interpersonal', 'Intrapersonal']
-            ],
-            [
-                'name' => 'Pengusaha',
-                'bakat' => ['Logis Matematis']
-            ],
-            [
-                'name' => 'Konsultan',
-                'bakat' => ['Logis Matematis', 'Interpersonal', 'Intrapersonal']
-            ],
-            [
-                'name' => 'Ahli Teknologi Pangan',
-                'bakat' => ['Logis Matematis']
-            ],
-            [
-                'name' => 'Apoteker',
-                'bakat' => ['Logis Matematis']
+                'bakat' => ['Logis Matematis', 'Kinestetik', 'Interpersonal']
             ],
             [
                 'name' => 'Aktuaris',
-                'bakat' => ['Logis Matematis']
+                'bakat' => ['Logis Matematis', 'Intrapersonal', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Analis Keuangan',
+                'bakat' => ['Logis Matematis', 'Linguistik', 'Visual Spasial']
             ],
             [
                 'name' => 'Robotik dan AI Specialist',
-                'bakat' => ['Logis Matematis']
+                'bakat' => ['Logis Matematis', 'Visual Spasial', 'Kinestetik']
+            ],
+            [
+                'name' => 'Game Developer',
+                'bakat' => ['Logis Matematis', 'Visual Spasial', 'Kinestetik']
+            ],
+            [
+                'name' => 'Manajer',
+                'bakat' => ['Logis Matematis', 'Interpersonal', 'Linguistik']
+            ],
+            [
+                'name' => 'Programmer',
+                'bakat' => ['Logis Matematis', 'Visual Spasial', 'Kinestetik']
+            ],
+            [
+                'name' => 'Data Analyst',
+                'bakat' => ['Logis Matematis', 'Visual Spasial', 'Linguistik']
+            ],
+            [
+                'name' => 'Pengusaha',
+                'bakat' => ['Logis Matematis', 'Interpersonal', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Apoteker',
+                'bakat' => ['Logis Matematis', 'Kinestetik', 'Intrapersonal']
             ],
             [
                 'name' => 'Desainer',
-                'bakat' => ['Visual Spasial', 'Kinestetik']
-            ],
-            [
-                'name' => 'Ilustrator',
-                'bakat' => ['Visual Spasial']
-            ],
-            [
-                'name' => 'Arsitek',
-                'bakat' => ['Visual Spasial', 'Kinestetik']
-            ],
-            [
-                'name' => 'Pilot',
-                'bakat' => ['Visual Spasial']
-            ],
-            [
-                'name' => 'Perencana Wilayah Kota',
-                'bakat' => ['Visual Spasial']
-            ],
-            [
-                'name' => 'Seniman',
-                'bakat' => ['Visual Spasial', 'Intrapersonal', 'Kinestetik']
-            ],
-            [
-                'name' => 'Insinyur',
-                'bakat' => ['Visual Spasial']
-            ],
-            [
-                'name' => 'Kartografer',
-                'bakat' => ['Visual Spasial']
-            ],
-            [
-                'name' => 'Ahli VR/AR',
-                'bakat' => ['Visual Spasial']
-            ],
-            [
-                'name' => 'Fotografer',
-                'bakat' => ['Visual Spasial']
+                'bakat' => ['Visual Spasial', 'Kinestetik', 'Interpersonal']
             ],
             [
                 'name' => 'Arkeolog',
-                'bakat' => ['Visual Spasial']
+                'bakat' => ['Visual Spasial', 'Linguistik', 'Logis Matematis']
+            ],
+            [
+                'name' => 'Fotografer',
+                'bakat' => ['Visual Spasial', 'Kinestetik', 'Logis Matematis']
+            ],
+            [
+                'name' => 'Insinyur',
+                'bakat' => ['Logis Matematis', 'Visual Spasial', 'Kinestetik']
+            ],
+            [
+                'name' => 'Perencana Wilayah Kota',
+                'bakat' => ['Visual Spasial', 'Logis Matematis', 'Kinestetik']
+            ],
+            [
+                'name' => 'Ilustrator',
+                'bakat' => ['Visual Spasial', 'Kinestetik', 'Interpersonal']
+            ],
+            [
+                'name' => 'Arsitek',
+                'bakat' => ['Visual Spasial', 'Logis Matematis', 'Kinestetik']
+            ],
+            [
+                'name' => 'Seniman',
+                'bakat' => ['Visual Spasial', 'Kinestetik', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Kartografer',
+                'bakat' => ['Visual Spasial', 'Logis Matematis', 'Kinestetik']
             ],
             [
                 'name' => 'Psikolog',
-                'bakat' => ['Interpersonal', 'Intrapersonal']
-            ],
-            [
-                'name' => 'Guru',
-                'bakat' => ['Interpersonal']
+                'bakat' => ['Interpersonal', 'Intrapersonal', 'Logis Matematis']
             ],
             [
                 'name' => 'Perawat',
-                'bakat' => ['Interpersonal']
+                'bakat' => ['Interpersonal', 'Logis Matematis', 'Kinestetik']
             ],
             [
-                'name' => 'HRD',
-                'bakat' => ['Interpersonal']
+                'name' => 'Public relation',
+                'bakat' => ['Interpersonal', 'Linguistik', 'Intrapersonal']
             ],
             [
-                'name' => 'Politisi',
-                'bakat' => ['Interpersonal']
-            ],
-            [
-                'name' => 'Sales Marketing',
-                'bakat' => ['Interpersonal']
+                'name' => 'Konsultan',
+                'bakat' => ['Interpersonal', 'Logis Matematis', 'Linguistik']
             ],
             [
                 'name' => 'Mentor',
-                'bakat' => ['Interpersonal']
+                'bakat' => ['Interpersonal', 'Intrapersonal', 'Linguistik']
             ],
             [
-                'name' => 'Pekerja Sosial',
-                'bakat' => ['Interpersonal']
+                'name' => 'Politisi',
+                'bakat' => ['Linguistik', 'Interpersonal', 'Logis Matematis']
             ],
             [
-                'name' => 'Public Relation',
-                'bakat' => ['Interpersonal']
+                'name' => 'Pekerja Layanan Pelanggan',
+                'bakat' => ['Interpersonal', 'Linguistik', 'Kinestetik']
+            ],
+            [
+                'name' => 'HRD',
+                'bakat' => ['Interpersonal', 'Intrapersonal', 'Logis Matematis']
+            ],
+            [
+                'name' => 'Penulis',
+                'bakat' => ['Linguistik', 'Intrapersonal', 'Interpersonal']
+            ],
+            [
+                'name' => 'Sosiolog',
+                'bakat' => ['Interpersonal', 'Linguistik', 'Logis Matematis']
             ],
             [
                 'name' => 'Konselor',
-                'bakat' => ['Intrapersonal']
-            ],
-            [
-                'name' => 'Konsultan Karier',
-                'bakat' => ['Intrapersonal']
+                'bakat' => ['Interpersonal', 'Intrapersonal', 'Linguistik']
             ],
             [
                 'name' => 'Guru Agama',
-                'bakat' => ['Intrapersonal']
+                'bakat' => ['Intrapersonal', 'Linguistik', 'Interpersonal']
             ],
             [
-                'name' => 'Entrepreneur',
-                'bakat' => ['Intrapersonal']
-            ],
-            [
-                'name' => 'Sosiolog/Antropolog',
-                'bakat' => ['Intrapersonal']
-            ],
-            [
-                'name' => 'Musisi',
-                'bakat' => ['Intrapersonal', 'Musikal']
-            ],
-            [
-                'name' => 'Manajer SDM',
-                'bakat' => ['Intrapersonal']
+                'name' => 'Antropolog',
+                'bakat' => ['Linguistik', 'Interpersonal', 'Intrapersonal']
             ],
             [
                 'name' => 'Atlet',
-                'bakat' => ['Kinestetik']
-            ],
-            [
-                'name' => 'Artis/Seniman',
-                'bakat' => ['Kinestetik']
+                'bakat' => ['Kinestetik', 'Intrapersonal', 'Visual Spasial']
             ],
             [
                 'name' => 'Koreografer',
-                'bakat' => ['Kinestetik']
+                'bakat' => ['Kinestetik', 'Visual Spasial', 'Musikal']
             ],
             [
-                'name' => 'Tour Guide',
-                'bakat' => ['Kinestetik']
+                'name' => 'Guru Olahraga',
+                'bakat' => ['Kinestetik', 'Interpersonal', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Aktor',
+                'bakat' => ['Kinestetik', 'Interpersonal', 'Intrapersonal']
             ],
             [
                 'name' => 'Koki',
-                'bakat' => ['Kinestetik']
+                'bakat' => ['Kinestetik', 'Visual Spasial', 'Logis Matematis']
+            ],
+            [
+                'name' => 'Tour Guide',
+                'bakat' => ['Interpersonal', 'Linguistik', 'Visual Spasial']
             ],
             [
                 'name' => 'MUA',
-                'bakat' => ['Kinestetik']
+                'bakat' => ['Visual Spasial', 'Kinestetik', 'Interpersonal']
             ],
             [
                 'name' => 'Fisioterapis',
-                'bakat' => ['Kinestetik']
-            ],
-            [
-                'name' => 'Instruktur',
-                'bakat' => ['Kinestetik']
-            ],
-            [
-                'name' => 'Traveller',
-                'bakat' => ['Kinestetik']
+                'bakat' => ['Kinestetik', 'Interpersonal', 'Intrapersonal']
             ],
             [
                 'name' => 'Dokter Hewan',
-                'bakat' => ['Naturalis']
-            ],
-            [
-                'name' => 'Ahli Teknologi Lingkungan',
-                'bakat' => ['Naturalis']
-            ],
-            [
-                'name' => 'Ahli Pengelolaan SDA',
-                'bakat' => ['Naturalis']
-            ],
-            [
-                'name' => 'Aktivis Lingkungan',
-                'bakat' => ['Naturalis']
+                'bakat' => ['Logis Matematis', 'Naturalis', 'Interpersonal']
             ],
             [
                 'name' => 'Agronomis (Ahli Pertanian)',
-                'bakat' => ['Naturalis']
+                'bakat' => ['Naturalis', 'Logis Matematis', 'Visual Spasial']
             ],
             [
-                'name' => 'Agropreneur',
-                'bakat' => ['Naturalis']
+                'name' => 'Ahli Teknologi Lingkungan',
+                'bakat' => ['Logis Matematis', 'Naturalis', 'Kinestetik']
+            ],
+            [
+                'name' => 'Pengelola Peternakan',
+                'bakat' => ['Naturalis', 'Logis Matematis', 'Kinestetik']
+            ],
+            [
+                'name' => 'Ahli Pengelolaan SDA',
+                'bakat' => ['Logis Matematis', 'Naturalis', 'Visual Spasial']
             ],
             [
                 'name' => 'Pengelola Ekowisata',
-                'bakat' => ['Naturalis']
+                'bakat' => ['Naturalis', 'Interpersonal', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Musisi',
+                'bakat' => ['Musikal', 'Kinestetik', 'Intrapersonal']
             ],
             [
                 'name' => 'Komposer Lagu',
-                'bakat' => ['Musikal']
+                'bakat' => ['Musikal', 'Logis Matematis', 'Intrapersonal']
             ],
             [
                 'name' => 'Produser Musik',
-                'bakat' => ['Musikal']
-            ],
-            [
-                'name' => 'Peneliti Musik',
-                'bakat' => ['Musikal']
+                'bakat' => ['Musikal', 'Interpersonal', 'Logis Matematis']
             ],
             [
                 'name' => 'Guru Musik',
-                'bakat' => ['Musikal']
+                'bakat' => ['Musikal', 'Interpersonal', 'Kinestetik']
             ],
             [
                 'name' => 'Sound Engineer',
-                'bakat' => ['Musikal']
+                'bakat' => ['Musikal', 'Logis Matematis', 'Kinestetik']
             ],
             [
-                'name' => 'Music Director',
-                'bakat' => ['Musikal']
-            ],
-            [
-                'name' => 'Penyiar Radio',
-                'bakat' => ['Musikal']
-            ],
-            [
-                'name' => 'Ahli Terapi Musik',
-                'bakat' => ['Musikal']
+                'name' => 'Penyiar radio',
+                'bakat' => ['Interpersonal', 'Linguistik', 'Musikal']
             ]
         ];
 

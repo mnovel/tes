@@ -16,507 +16,391 @@ class JurusanSeeder extends Seeder
         $jurusans = [
             [
                 'name' => 'Pendidikan Seni Musik',
-                'bakat' => ['Linguistik', 'Musikal']
-            ],
-            [
-                'name' => 'Seni Pertunjukan',
-                'bakat' => ['Musikal', 'Linguistik']
-            ],
-            [
-                'name' => 'Penciptaan Musik',
-                'bakat' => ['Musikal', 'Linguistik']
+                'bakat' => ['Musikal', 'Kinestetik', 'Interpersonal']
             ],
             [
                 'name' => 'Etnomusikologi',
-                'bakat' => ['Musikal', 'Linguistik']
+                'bakat' => ['Musikal', 'Linguistik', 'Interpersonal']
             ],
             [
-                'name' => 'Ilmu Komunikasi',
-                'bakat' => ['Linguistik', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Manajemen Pendidikan',
-                'bakat' => ['Linguistik', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Kesekretariatan',
-                'bakat' => ['Linguistik', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Sejarah',
-                'bakat' => ['Linguistik', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Filsafat',
-                'bakat' => ['Logis Matematis', 'Linguistik']
-            ],
-            [
-                'name' => 'Hukum',
-                'bakat' => ['Logis Matematis', 'Linguistik']
-            ],
-            [
-                'name' => 'Ilmu Politik',
-                'bakat' => ['Logis Matematis', 'Linguistik']
-            ],
-            [
-                'name' => 'Bisnis Digital',
-                'bakat' => ['Logis Matematis', 'Linguistik']
-            ],
-            [
-                'name' => 'Ekonomi Pembangunan',
-                'bakat' => ['Logis Matematis', 'Linguistik']
-            ],
-            [
-                'name' => 'Pendidikan Biologi',
-                'bakat' => ['Linguistik', 'Naturalis']
-            ],
-            [
-                'name' => 'Hukum Lingkungan',
-                'bakat' => ['Linguistik', 'Naturalis']
-            ],
-            [
-                'name' => 'Pariwisata',
-                'bakat' => ['Naturalis', 'Linguistik']
-            ],
-            [
-                'name' => 'Arkeologi',
-                'bakat' => ['Naturalis', 'Linguistik']
-            ],
-            [
-                'name' => 'Ilmu Perpustakaan',
-                'bakat' => ['Linguistik', 'Visual Spasial']
-            ],
-            [
-                'name' => 'Manajemen Informatika',
-                'bakat' => ['Linguistik', 'Visual Spasial']
-            ],
-            [
-                'name' => 'Kearsipan',
-                'bakat' => ['Linguistik', 'Visual Spasial']
-            ],
-            [
-                'name' => 'Desain Grafis',
-                'bakat' => ['Visual Spasial', 'Linguistik']
-            ],
-            [
-                'name' => 'DKV (Desain Komunikasi Visual)',
-                'bakat' => ['Visual Spasial', 'Linguistik']
-            ],
-            [
-                'name' => 'Televisi dan Film',
-                'bakat' => ['Visual Spasial', 'Linguistik']
-            ],
-            [
-                'name' => 'Broadcasting',
-                'bakat' => ['Linguistik', 'Kinestetik']
-            ],
-            [
-                'name' => 'Teater/Drama',
-                'bakat' => ['Kinestetik', 'Linguistik']
-            ],
-            [
-                'name' => 'Pendidikan Sendratasik',
-                'bakat' => ['Kinestetik', 'Linguistik']
-            ],
-            [
-                'name' => 'Hubungan Internasional',
-                'bakat' => ['Linguistik', 'Interpersonal']
-            ],
-            [
-                'name' => 'Administrasi Perkantoran',
-                'bakat' => ['Linguistik', 'Interpersonal']
-            ],
-            [
-                'name' => 'BK (Bimbingan Konseling)',
-                'bakat' => ['Interpersonal', 'Linguistik']
-            ],
-            [
-                'name' => 'Pendidikan Bahasa',
-                'bakat' => ['Interpersonal', 'Linguistik']
-            ],
-            [
-                'name' => 'PGSD (Pendidikan Guru Sekolah Dasar)',
-                'bakat' => ['Interpersonal', 'Linguistik']
-            ],
-            [
-                'name' => 'Sosiologi',
-                'bakat' => ['Interpersonal', 'Linguistik']
-            ],
-            [
-                'name' => 'Sastra',
-                'bakat' => ['Linguistik', 'Intrapersonal']
-            ],
-            [
-                'name' => 'Manajemen SDM',
-                'bakat' => ['Linguistik', 'Intrapersonal']
-            ],
-            [
-                'name' => 'PAI (Pendidikan Agama Islam)',
-                'bakat' => ['Linguistik', 'Intrapersonal']
-            ],
-            [
-                'name' => 'Psikologi',
-                'bakat' => ['Intrapersonal', 'Linguistik']
-            ],
-            [
-                'name' => 'Studi Agama-Agama',
-                'bakat' => ['Intrapersonal', 'Linguistik']
-            ],
-            [
-                'name' => 'Antropologi',
-                'bakat' => ['Intrapersonal', 'Linguistik']
-            ],
-            [
-                'name' => 'Produksi Media',
-                'bakat' => ['Musikal', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Audio Engineering',
-                'bakat' => ['Musikal', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Akustika',
-                'bakat' => ['Logis Matematis', 'Musikal']
-            ],
-            [
-                'name' => 'Film dan Animasi',
-                'bakat' => ['Musikal', 'Visual Spasial']
-            ],
-            [
-                'name' => 'Desain Multimedia',
-                'bakat' => ['Visual Spasial', 'Musikal']
-            ],
-            [
-                'name' => 'Teknologi Game',
-                'bakat' => ['Visual Spasial', 'Musikal']
-            ],
-            [
-                'name' => 'Komposisi Musik',
-                'bakat' => ['Musikal', 'Kinestetik']
-            ],
-            [
-                'name' => 'Seni Musik',
-                'bakat' => ['Musikal', 'Kinestetik']
-            ],
-            [
-                'name' => 'Seni Karawitan',
-                'bakat' => ['Musikal', 'Interpersonal']
-            ],
-            [
-                'name' => 'Sains Data',
-                'bakat' => ['Logis Matematis', 'Naturalis']
-            ],
-            [
-                'name' => 'Teknik Lingkungan',
-                'bakat' => ['Logis Matematis', 'Naturalis']
-            ],
-            [
-                'name' => 'Biologi',
-                'bakat' => ['Logis Matematis', 'Naturalis']
-            ],
-            [
-                'name' => 'Farmasi',
-                'bakat' => ['Logis Matematis', 'Naturalis']
-            ],
-            [
-                'name' => 'Teknologi Pertanian',
-                'bakat' => ['Logis Matematis', 'Naturalis']
-            ],
-            [
-                'name' => 'Agroteknologi',
-                'bakat' => ['Logis Matematis', 'Naturalis']
-            ],
-            [
-                'name' => 'Gizi',
-                'bakat' => ['Naturalis', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Kehutanan',
-                'bakat' => ['Naturalis', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Peternakan',
-                'bakat' => ['Naturalis', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Pertanian',
-                'bakat' => ['Naturalis', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Ilmu Lingkungan',
-                'bakat' => ['Naturalis', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Ilmu Kelautan',
-                'bakat' => ['Naturalis', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Teknik',
-                'bakat' => ['Logis Matematis', 'Visual Spasial']
-            ],
-            [
-                'name' => 'Sistem Informasi',
-                'bakat' => ['Logis Matematis', 'Visual Spasial']
-            ],
-            [
-                'name' => 'Ilmu Komputer',
-                'bakat' => ['Logis Matematis', 'Visual Spasial']
-            ],
-            [
-                'name' => 'Aktuaria',
-                'bakat' => ['Logis Matematis', 'Visual Spasial']
-            ],
-            [
-                'name' => 'Statistika',
-                'bakat' => ['Logis Matematis', 'Visual Spasial']
-            ],
-            [
-                'name' => 'Geografi',
-                'bakat' => ['Logis Matematis', 'Visual Spasial']
-            ],
-            [
-                'name' => 'Arsitektur',
-                'bakat' => ['Visual Spasial', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Teknik Penerbangan',
-                'bakat' => ['Visual Spasial', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Perencanaan Wilayah Kota',
-                'bakat' => ['Visual Spasial', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Teknik Geomatika',
-                'bakat' => ['Visual Spasial', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Desain Teknologi',
-                'bakat' => ['Visual Spasial', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Teknik Sipil',
-                'bakat' => ['Logis Matematis', 'Kinestetik']
-            ],
-            [
-                'name' => 'Kedokteran',
-                'bakat' => ['Logis Matematis', 'Kinestetik']
-            ],
-            [
-                'name' => 'Rekayasa Biomedis',
-                'bakat' => ['Logis Matematis', 'Kinestetik']
-            ],
-            [
-                'name' => 'Teknik Mesin',
-                'bakat' => ['Logis Matematis', 'Kinestetik']
-            ],
-            [
-                'name' => 'Teknologi Medis Olahraga',
-                'bakat' => ['Logis Matematis', 'Kinestetik']
-            ],
-            [
-                'name' => 'Ilmu Olahraga',
-                'bakat' => ['Kinestetik', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Teknik Industri',
-                'bakat' => ['Kinestetik', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Administrasi Perkantoran',
-                'bakat' => ['Logis Matematis', 'Interpersonal']
-            ],
-            [
-                'name' => 'Manajemen',
-                'bakat' => ['Logis Matematis', 'Interpersonal']
-            ],
-            [
-                'name' => 'Kesehatan Masyarakat',
-                'bakat' => ['Logis Matematis', 'Interpersonal']
-            ],
-            [
-                'name' => 'Pendidikan Luar Sekolah',
-                'bakat' => ['Interpersonal', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Administrasi Publik',
-                'bakat' => ['Interpersonal', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Pendidikan Ekonomi',
-                'bakat' => ['Interpersonal', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Kewirausahaan',
-                'bakat' => ['Interpersonal', 'Logis Matematis']
-            ],
-            [
-                'name' => 'Akuntansi',
-                'bakat' => ['Logis Matematis', 'Intrapersonal']
-            ],
-            [
-                'name' => 'Ekonomi Syariah',
-                'bakat' => ['Logis Matematis', 'Intrapersonal']
-            ],
-            [
-                'name' => 'Perencanaan Keuangan',
-                'bakat' => ['Logis Matematis', 'Intrapersonal']
+                'name' => 'Seni Pertunjukan',
+                'bakat' => ['Kinestetik', 'Musikal', 'Visual Spasial']
             ],
             [
                 'name' => 'Kesehatan dan Keselamatan Kerja',
-                'bakat' => ['Logis Matematis', 'Intrapersonal']
+                'bakat' => ['Logis Matematis', 'Naturalis', 'Kinestetik']
             ],
             [
-                'name' => 'Psikologi',
-                'bakat' => ['Intrapersonal', 'Logis Matematis']
+                'name' => 'Produksi Media',
+                'bakat' => ['Visual Spasial', 'Linguistik', 'Kinestetik']
             ],
             [
-                'name' => 'Statistika',
-                'bakat' => ['Intrapersonal', 'Logis Matematis']
+                'name' => 'Ilmu Komunikasi',
+                'bakat' => ['Linguistik', 'Interpersonal', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Kesekretariatan',
+                'bakat' => ['Linguistik', 'Interpersonal', 'Logis Matematis']
+            ],
+            [
+                'name' => 'Sastra',
+                'bakat' => ['Linguistik', 'Intrapersonal', 'Interpersonal']
+            ],
+            [
+                'name' => 'Sosiologi',
+                'bakat' => ['Interpersonal', 'Linguistik', 'Logis Matematis']
+            ],
+            [
+                'name' => 'Manajemen Pendidikan',
+                'bakat' => ['Logis Matematis', 'Interpersonal', 'Linguistik']
             ],
             [
                 'name' => 'Filsafat',
-                'bakat' => ['Intrapersonal', 'Logis Matematis']
+                'bakat' => ['Logis Matematis', 'Intrapersonal', 'Linguistik']
             ],
             [
-                'name' => 'Geologi',
-                'bakat' => ['Naturalis', 'Visual Spasial']
+                'name' => 'Hukum',
+                'bakat' => ['Linguistik', 'Logis Matematis', 'Interpersonal']
             ],
             [
-                'name' => 'Teknik Lingkungan',
-                'bakat' => ['Naturalis', 'Visual Spasial']
+                'name' => 'Ilmu Politik',
+                'bakat' => ['Linguistik', 'Interpersonal', 'Logis Matematis']
             ],
             [
-                'name' => 'Ilmu Kelautan',
-                'bakat' => ['Naturalis', 'Visual Spasial']
+                'name' => 'Bisnis Digital',
+                'bakat' => ['Logis Matematis', 'Linguistik', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Ekonomi Pembangunan',
+                'bakat' => ['Logis Matematis', 'Linguistik', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Antropologi',
+                'bakat' => ['Linguistik', 'Interpersonal', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Kewirausahaan',
+                'bakat' => ['Logis Matematis', 'Linguistik', 'Interpersonal']
             ],
             [
                 'name' => 'Arkeologi',
-                'bakat' => ['Visual Spasial', 'Naturalis']
+                'bakat' => ['Naturalis', 'Logis Matematis', 'Visual Spasial']
             ],
             [
-                'name' => 'Teknologi Pertanian',
-                'bakat' => ['Visual Spasial', 'Naturalis']
+                'name' => 'Pariwisata',
+                'bakat' => ['Interpersonal', 'Linguistik', 'Visual Spasial']
             ],
             [
-                'name' => 'Geografi',
-                'bakat' => ['Visual Spasial', 'Naturalis']
+                'name' => 'Sejarah',
+                'bakat' => ['Linguistik', 'Logis Matematis', 'Intrapersonal']
             ],
             [
-                'name' => 'Seni Kriya',
-                'bakat' => ['Visual Spasial', 'Naturalis']
+                'name' => 'Ilmu Perpustakaan',
+                'bakat' => ['Linguistik', 'Logis Matematis', 'Visual Spasial']
             ],
             [
-                'name' => 'Ekowisata',
-                'bakat' => ['Naturalis', 'Kinestetik']
+                'name' => 'Desain Grafis',
+                'bakat' => ['Visual Spasial', 'Kinestetik', 'Linguistik']
             ],
             [
-                'name' => 'Tata Boga',
-                'bakat' => ['Kinestetik', 'Naturalis']
-            ],
-            [
-                'name' => 'Manajemen Industri Katering',
-                'bakat' => ['Kinestetik', 'Naturalis']
-            ],
-            [
-                'name' => 'Agribisnis',
-                'bakat' => ['Naturalis', 'Interpersonal']
-            ],
-            [
-                'name' => 'Manajemen SDA (Sumber Daya Alam)',
-                'bakat' => ['Naturalis', 'Interpersonal']
-            ],
-            [
-                'name' => 'Ekologi Manusia',
-                'bakat' => ['Naturalis', 'Intrapersonal']
-            ],
-            [
-                'name' => 'Pendidikan Kependudukan dan Lingkungan Hidup',
-                'bakat' => ['Naturalis', 'Intrapersonal']
-            ],
-            [
-                'name' => 'Pengobatan Tradisional',
-                'bakat' => ['Intrapersonal', 'Naturalis']
-            ],
-            [
-                'name' => 'Desain Interior',
-                'bakat' => ['Visual Spasial', 'Kinestetik']
-            ],
-            [
-                'name' => 'Desain Produk',
-                'bakat' => ['Visual Spasial', 'Kinestetik']
-            ],
-            [
-                'name' => 'Seni Rupa Murni',
-                'bakat' => ['Visual Spasial', 'Kinestetik']
-            ],
-            [
-                'name' => 'Tata Busana',
-                'bakat' => ['Kinestetik', 'Visual Spasial']
-            ],
-            [
-                'name' => 'Tari',
-                'bakat' => ['Kinestetik', 'Visual Spasial']
-            ],
-            [
-                'name' => 'Tata Rias',
-                'bakat' => ['Kinestetik', 'Visual Spasial']
-            ],
-            [
-                'name' => 'Fotografi',
-                'bakat' => ['Visual Spasial', 'Interpersonal']
-            ],
-            [
-                'name' => 'Branding',
-                'bakat' => ['Interpersonal', 'Visual Spasial']
-            ],
-            [
-                'name' => 'Manajemen Seni',
-                'bakat' => ['Interpersonal', 'Visual Spasial']
-            ],
-            [
-                'name' => 'Fotografi',
-                'bakat' => ['Visual Spasial', 'Intrapersonal']
-            ],
-            [
-                'name' => 'Desain Produk',
-                'bakat' => ['Visual Spasial', 'Intrapersonal']
-            ],
-            [
-                'name' => 'Seni Kriya',
-                'bakat' => ['Visual Spasial', 'Intrapersonal']
+                'name' => 'DKV (Desain Komunikasi Visual)',
+                'bakat' => ['Visual Spasial', 'Kinestetik', 'Interpersonal']
             ],
             [
                 'name' => 'Pendidikan Jasmani & Olahraga',
-                'bakat' => ['Kinestetik', 'Interpersonal']
-            ],
-            [
-                'name' => 'Fisioterapi',
-                'bakat' => ['Kinestetik', 'Interpersonal']
+                'bakat' => ['Kinestetik', 'Interpersonal', 'Intrapersonal']
             ],
             [
                 'name' => 'Kepelatihan Olahraga',
-                'bakat' => ['Kinestetik', 'Interpersonal']
+                'bakat' => ['Kinestetik', 'Interpersonal', 'Logis Matematis']
+            ],
+            [
+                'name' => 'Teater/Drama',
+                'bakat' => ['Interpersonal', 'Kinestetik', 'Linguistik']
             ],
             [
                 'name' => 'Pendidikan Sendratasik',
-                'bakat' => ['Interpersonal', 'Kinestetik']
+                'bakat' => ['Kinestetik', 'Linguistik', 'Interpersonal']
             ],
             [
-                'name' => 'Seni Rupa Murni',
-                'bakat' => ['Kinestetik', 'Intrapersonal']
+                'name' => 'Ilmu Olahraga',
+                'bakat' => ['Kinestetik', 'Logis Matematis', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Hubungan Internasional',
+                'bakat' => ['Linguistik', 'Interpersonal', 'Logis Matematis']
+            ],
+            [
+                'name' => 'Administrasi Perkantoran',
+                'bakat' => ['Linguistik', 'Logis Matematis', 'Interpersonal']
+            ],
+            [
+                'name' => 'BK (Bimbingan Konseling)',
+                'bakat' => ['Interpersonal', 'Intrapersonal', 'Linguistik']
+            ],
+            [
+                'name' => 'PGSD (Pendidikan Guru Sekolah Dasar)',
+                'bakat' => ['Interpersonal', 'Linguistik', 'Logis Matematis']
+            ],
+            [
+                'name' => 'PAI (Pendidikan Agama Islam)',
+                'bakat' => ['Linguistik', 'Interpersonal', 'Intrapersonal']
             ],
             [
                 'name' => 'Psikologi',
-                'bakat' => ['Interpersonal', 'Intrapersonal']
+                'bakat' => ['Interpersonal', 'Intrapersonal', 'Logis Matematis']
             ],
             [
-                'name' => 'Manajemen SDM',
-                'bakat' => ['Interpersonal', 'Intrapersonal']
+                'name' => 'Studi Agama-Agama',
+                'bakat' => ['Linguistik', 'Intrapersonal', 'Logis Matematis']
+            ],
+            [
+                'name' => 'Penciptaan Musik',
+                'bakat' => ['Musikal', 'Kinestetik', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Sains Data',
+                'bakat' => ['Logis Matematis', 'Visual Spasial', 'Linguistik']
+            ],
+            [
+                'name' => 'Teknik Lingkungan',
+                'bakat' => ['Logis Matematis', 'Naturalis', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Biologi',
+                'bakat' => ['Logis Matematis', 'Naturalis', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Farmasi',
+                'bakat' => ['Logis Matematis', 'Kinestetik', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Teknologi Pertanian',
+                'bakat' => ['Logis Matematis', 'Naturalis', 'Kinestetik']
+            ],
+            [
+                'name' => 'Gizi',
+                'bakat' => ['Logis Matematis', 'Naturalis', 'Interpersonal']
+            ],
+            [
+                'name' => 'Kehutanan',
+                'bakat' => ['Naturalis', 'Logis Matematis', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Peternakan',
+                'bakat' => ['Naturalis', 'Logis Matematis', 'Kinestetik']
+            ],
+            [
+                'name' => 'Pertanian',
+                'bakat' => ['Naturalis', 'Logis Matematis', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Ilmu Lingkungan',
+                'bakat' => ['Logis Matematis', 'Naturalis', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Sistem Informasi',
+                'bakat' => ['Logis Matematis', 'Visual Spasial', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Ilmu Komputer',
+                'bakat' => ['Logis Matematis', 'Visual Spasial', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Aktuaria',
+                'bakat' => ['Logis Matematis', 'Intrapersonal', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Statistika',
+                'bakat' => ['Logis Matematis', 'Visual Spasial', 'Linguistik']
+            ],
+            [
+                'name' => 'Arsitektur',
+                'bakat' => ['Visual Spasial', 'Kinestetik', 'Logis Matematis']
+            ],
+            [
+                'name' => 'Perencanaan Wilayah Kota',
+                'bakat' => ['Visual Spasial', 'Logis Matematis', 'Linguistik']
+            ],
+            [
+                'name' => 'Teknik Geomatika',
+                'bakat' => ['Logis Matematis', 'Visual Spasial', 'Naturalis']
+            ],
+            [
+                'name' => 'Teknik Sipil',
+                'bakat' => ['Logis Matematis', 'Visual Spasial', 'Kinestetik']
+            ],
+            [
+                'name' => 'Kedokteran',
+                'bakat' => ['Logis Matematis', 'Kinestetik', 'Interpersonal']
+            ],
+            [
+                'name' => 'Teknik Mesin',
+                'bakat' => ['Logis Matematis', 'Kinestetik', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Fisioterapi',
+                'bakat' => ['Kinestetik', 'Interpersonal', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Teknik Industri',
+                'bakat' => ['Logis Matematis', 'Kinestetik', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Administrasi Publik',
+                'bakat' => ['Interpersonal', 'Linguistik', 'Logis Matematis']
+            ],
+            [
+                'name' => 'Pendidikan Luar Sekolah',
+                'bakat' => ['Interpersonal', 'Linguistik', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Pendidikan Ekonomi',
+                'bakat' => ['Logis Matematis', 'Linguistik', 'Interpersonal']
+            ],
+            [
+                'name' => 'Akuntansi',
+                'bakat' => ['Logis Matematis', 'Linguistik', 'Interpersonal']
+            ],
+            [
+                'name' => 'Ekonomi Syariah',
+                'bakat' => ['Logis Matematis', 'Linguistik', 'Interpersonal']
+            ],
+            [
+                'name' => 'Perencanaan Keuangan',
+                'bakat' => ['Logis Matematis', 'Interpersonal', 'Linguistik']
+            ],
+            [
+                'name' => 'Geografi',
+                'bakat' => ['Visual Spasial', 'Logis Matematis', 'Naturalis']
+            ],
+            [
+                'name' => 'Geologi',
+                'bakat' => ['Naturalis', 'Logis Matematis', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Ilmu Kelautan',
+                'bakat' => ['Naturalis', 'Logis Matematis', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Agribisnis',
+                'bakat' => ['Logis Matematis', 'Naturalis', 'Interpersonal']
+            ],
+            [
+                'name' => 'Agroteknologi',
+                'bakat' => ['Naturalis', 'Logis Matematis', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Ekowisata',
+                'bakat' => ['Naturalis', 'Interpersonal', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Tata Boga',
+                'bakat' => ['Kinestetik', 'Visual Spasial', 'Logis Matematis']
+            ],
+            [
+                'name' => 'Manajemen SDA (Sumber Daya Alam)',
+                'bakat' => ['Logis Matematis', 'Naturalis', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Desain Interior',
+                'bakat' => ['Visual Spasial', 'Logis Matematis', 'Kinestetik']
+            ],
+            [
+                'name' => 'Desain Produk',
+                'bakat' => ['Visual Spasial', 'Logis Matematis', 'Kinestetik']
+            ],
+            [
+                'name' => 'Seni Rupa Murni',
+                'bakat' => ['Visual Spasial', 'Intrapersonal', 'Kinestetik']
+            ],
+            [
+                'name' => 'Tata Busana',
+                'bakat' => ['Visual Spasial', 'Kinestetik', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Tari',
+                'bakat' => ['Kinestetik', 'Visual Spasial', 'Musikal']
+            ],
+            [
+                'name' => 'Tata Rias',
+                'bakat' => ['Visual Spasial', 'Kinestetik', 'Interpersonal']
+            ],
+            [
+                'name' => 'Fotografi',
+                'bakat' => ['Visual Spasial', 'Kinestetik', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Televisi dan Film',
+                'bakat' => ['Visual Spasial', 'Kinestetik', 'Linguistik']
+            ],
+            [
+                'name' => 'Film dan Animasi',
+                'bakat' => ['Visual Spasial', 'Kinestetik', 'Linguistik']
+            ],
+            [
+                'name' => 'Teknologi Game',
+                'bakat' => ['Logis Matematis', 'Visual Spasial', 'Kinestetik']
+            ],
+            [
+                'name' => 'Manajemen Seni',
+                'bakat' => ['Linguistik', 'Visual Spasial', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Manajemen',
+                'bakat' => ['Logis Matematis', 'Linguistik', 'Interpersonal']
+            ],
+            [
+                'name' => 'Kesehatan Masyarakat',
+                'bakat' => ['Interpersonal', 'Logis Matematis', 'Naturalis']
+            ],
+            [
+                'name' => 'Pendidikan Bahasa',
+                'bakat' => ['Linguistik', 'Interpersonal', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Pendidikan Biologi',
+                'bakat' => ['Logis Matematis', 'Naturalis', 'Interpersonal']
+            ],
+            [
+                'name' => 'Manajemen Informatika',
+                'bakat' => ['Logis Matematis', 'Linguistik', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Broadcasting',
+                'bakat' => ['Interpersonal', 'Linguistik', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Seni Musik',
+                'bakat' => ['Musikal', 'Linguistik', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Seni Kriya',
+                'bakat' => ['Visual Spasial', 'Kinestetik', 'Intrapersonal']
+            ],
+            [
+                'name' => 'Branding',
+                'bakat' => ['Interpersonal', 'Visual Spasial', 'Linguistik']
+            ],
+            [
+                'name' => 'Kearsipan',
+                'bakat' => ['Linguistik', 'Logis Matematis', 'Visual Spasial']
+            ],
+            [
+                'name' => 'Manajemen Industri Katering',
+                'bakat' => ['Interpersonal', 'Logis Matematis', 'Kinestetik']
+            ],
+            [
+                'name' => 'Pendidikan Kependudukan dan Lingkungan Hidup',
+                'bakat' => ['Naturalis', 'Logis Matematis', 'Interpersonal']
             ],
             [
                 'name' => 'Tasawuf Psikoterapi',
-                'bakat' => ['Intrapersonal', 'Interpersonal']
+                'bakat' => ['Intrapersonal', 'Interpersonal', 'Logis Matematis']
+            ],
+            [
+                'name' => 'Pengobatan Tradisional',
+                'bakat' => ['Naturalis', 'Kinestetik', 'Logis Matematis']
             ],
         ];
 

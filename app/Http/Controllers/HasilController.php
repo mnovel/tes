@@ -29,6 +29,10 @@ class HasilController extends Controller
                     'level' => $sesi->peserta->sekolah->level,
                     'school' => $sesi->peserta->sekolah->name,
                 ],
+                //Bakat 3
+                // profesi dari 3 bakat
+                // Jurusan dari 3 bakat
+                // Perguruan tinggi dari 3 jurusan
                 'talent' => $sesi->bakat->map(function ($bakat) {
                     return [
                         'id' => $bakat->id,
