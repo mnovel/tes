@@ -166,7 +166,7 @@ Route::group(['prefix' => 'jawaban'], function () {
     Route::post('', [JawabanController::class, 'store'])->withoutMiddleware('throttle');
     Route::get('{sesi}', [JawabanController::class, 'show']);
     Route::put('', [JawabanController::class, 'update'])->withoutMiddleware('throttle');
-    Route::get('save/{sesi}', [JawabanController::class, 'save']);
+    Route::get('save/{sesi}', [JawabanController::class, 'sendReport']);
 });
 
 
