@@ -120,30 +120,30 @@ class JawabanController extends Controller
         $totalPertanyaan = Pertanyaan::where('versi_id', $sesi->versi_id)->count();
         $totalJawaban = $sesi->jawaban->groupBy('pertanyaan_id')->count();
 
-        // if ($totalJawaban != $totalPertanyaan) {
-        //     return response()->json([
-        //         'status' => 'error',
-        //         'message' => __('error_save_answer')
-        //     ]);
-        // }
+        if ($totalJawaban != $totalPertanyaan) {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('error_save_answer')
+            ]);
+        }
 
-        // if ($sesi->status !== 'Active') {
-        //     return response()->json([
-        //         'status' => 'error',
-        //         'message' => __('completed_sesi')
-        //     ]);
-        // }
+        if ($sesi->status !== 'Active') {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('completed_sesi')
+            ]);
+        }
 
         // Validasi peserta sebelum lanjut
         $user = $sesi->peserta;
-        // $calculateBakat = $this->calculateBakat($sesi);
-        // $sesi->status = 'Survei';
+        $calculateBakat = $this->calculateBakat($sesi);
+        $sesi->status = 'Survei';
 
-        // foreach ($calculateBakat as $bakat) {
-        //     $sesi->bakat()->attach($bakat['bakat_id'], ['total' => $bakat['total']]);
-        // }
+        foreach ($calculateBakat as $bakat) {
+            $sesi->bakat()->attach($bakat['bakat_id'], ['total' => $bakat['total']]);
+        }
 
-        // $sesi->save();
+        $sesi->save();
 
         return $this->sendReport($sesi);
     }
