@@ -12,7 +12,7 @@ class BakatSeeder extends Seeder
      */
     public function run(): void
     {
-        $csvPath = database_path('seeders/data/bakat.csv');
+        $csvPath = database_path('seeders/data/Bakat.csv');
 
         if (!file_exists($csvPath) || !is_readable($csvPath)) {
             throw new \Exception("File CSV tidak ditemukan atau tidak bisa dibaca: $csvPath");
