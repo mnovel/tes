@@ -23,6 +23,9 @@ class SettingController extends Controller
     public function index()
     {
         $setting = Setting::select(['title', 'description', 'author', 'keywords', 'icon'])->first();
+        if ($setting && $setting->icon) {
+            $setting->icon = asset($setting->icon);
+        }
         return response()->json([
             'status' => 'success',
             'message' => __('display_data', ['data' => 'setting']),
