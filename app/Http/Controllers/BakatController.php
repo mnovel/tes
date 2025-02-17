@@ -14,7 +14,12 @@ class BakatController extends Controller
      */
     public function index()
     {
-        $bakat = Bakat::all();
+        $bakat = Bakat::all()->map(function ($item) {
+            if ($item->icon) {
+                $item->icon = asset($item->icon);
+            }
+            return $item;
+        });
 
         return response()->json([
             'status' => 'success',
@@ -50,11 +55,18 @@ class BakatController extends Controller
      */
     public function show(Bakat $bakat)
     {
-        return response()->json([
-            'status' => 'success',
-            'message' => __('detail_data', ['data' => 'bakat']),
-            'data' => $bakat,
-        ], 200);
+        if ($bakat->icon) {
+            $bakat->icon = asset($bakat->icon);
+        }
+
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => __('detail_data', ['data' => 'bakat']),
+                'data' => $bakat,
+            ],
+            200
+        );
     }
 
     /**
