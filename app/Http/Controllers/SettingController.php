@@ -22,7 +22,7 @@ class SettingController extends Controller
      */
     public function index()
     {
-        $setting = Setting::select(['title', 'description', 'author', 'keywords', 'icon'])->first();
+        $setting = Setting::first();
         if ($setting && $setting->icon) {
             $setting->icon = asset($setting->icon);
         }

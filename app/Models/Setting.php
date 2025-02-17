@@ -15,5 +15,15 @@ class Setting extends Model
         'keywords',
         'author',
         'icon',
+        'contact'
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
+    protected $casts = [
+        'contact' => 'array',
     ];
 }
