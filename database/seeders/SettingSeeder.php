@@ -18,7 +18,12 @@ class SettingSeeder extends Seeder
             'description' => 'Voluptate qui ipsum velit occaecat qui fugiat aliqua id nulla eiusmod nisi incididunt reprehenderit.',
             'author' => 'Muhammad Novel',
             'keywords' => 'tes,minat bakat,kuliah',
-            'icon' => ''
+            'icon' => '',
+            'contact' => [
+                'email' => 'agus@gmail.com',
+                'phone' => '+6281234567890',
+                'address' => 'Jl. Lorem Ipsum Dolor Sit Amet',
+            ]
         ]);
     }
 }
