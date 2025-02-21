@@ -15,6 +15,7 @@ class Setting extends Model
         'keywords',
         'author',
         'icon',
+        'favicon',
         'contact',
         'seo',
     ];

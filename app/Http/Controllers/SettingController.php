@@ -25,6 +25,7 @@ class SettingController extends Controller
         $setting = Setting::first();
         if ($setting && $setting->icon) {
             $setting->icon = asset($setting->icon);
+            $setting->favicon = asset($setting->favicon);
         }
         return response()->json([
             'status' => 'success',
@@ -47,6 +48,13 @@ class SettingController extends Controller
             $iconFileName = 'icon.' . $fileExtension;
             $iconPath = $request->file('icon')->storeAs('images', $iconFileName, 'public');
             $validated['icon'] = $iconPath;
+        }
+
+        if ($request->hasFile('favicon')) {
+            $fileExtension = $request->file('favicon')->getClientOriginalExtension();
+            $iconFileName = 'favicon.' . $fileExtension;
+            $iconPath = $request->file('icon')->storeAs('images', $iconFileName, 'public');
+            $validated['favicon'] = $iconPath;
         }
 
         $setting->update($validated);

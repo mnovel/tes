@@ -27,6 +27,7 @@ class UpdateSettingRequest extends FormRequest
             'keywords' => 'required|string|max:255',
             'author' => 'required|string|max:20',
             'icon' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
+            'favicon' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
             'contact.email' => 'required|email|max:255',
             'contact.phone' => 'required|regex:/^(\+628)[1-9][0-9]{6,9}$/',
             'contact.address' => 'required|string|max:255',

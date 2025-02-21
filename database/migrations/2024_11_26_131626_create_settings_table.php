@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('keywords');
             $table->string('author');
             $table->string('icon')->nullable();
+            $table->string('favicon')->nullable();
             $table->json('contact')->nullable();
             $table->json('seo')->nullable();
             $table->timestamps();

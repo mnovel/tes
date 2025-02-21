@@ -19,6 +19,7 @@ class SettingSeeder extends Seeder
             'author' => 'CTE Team',
             'keywords' => 'tes,minat bakat,kuliah',
             'icon' => 'images/icon.png',
+            'favicon' => 'images/favicon.png',
             'contact' => [
                 'email' => 'helpdesk@careertheexplorer.com',
                 'phone' => '+6287865790888',
