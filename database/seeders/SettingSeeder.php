@@ -18,7 +18,7 @@ class SettingSeeder extends Seeder
             'description' => 'Voluptate qui ipsum velit occaecat qui fugiat aliqua id nulla eiusmod nisi incididunt reprehenderit.',
             'author' => 'CTE Team',
             'keywords' => 'tes,minat bakat,kuliah',
-            'icon' => 'icon.png',
+            'icon' => 'images/icon.png',
             'contact' => [
                 'email' => 'helpdesk@careertheexplorer.com',
                 'phone' => '+6287865790888',
