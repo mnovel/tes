@@ -114,6 +114,7 @@
         <div class="header">
             <img src="{{ $icon }}" alt="{{ $title }}" class="logo">
             <div class="app-name">{{ $title }}</div>
+            {{ dd($title) }}
         </div>
 
         <h2>Hai, {{ $data['name'] }}! 🌟</h2>
