@@ -21,10 +21,12 @@ class SendEmail extends Mailable
      */
     public function __construct(array $data)
     {
+        $settings = optional(Setting::first());
+
         $this->data = $data;
-        $this->icon = Setting::first()->pluck('icon');
-        $this->title = Setting::first()->pluck('title');
-        $this->contact = Setting::first()->pluck('contact');
+        $this->icon = $settings->icon;
+        $this->title = $settings->title;
+        $this->contact = $settings->contact;
     }
 
     /**
@@ -33,7 +35,7 @@ class SendEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Hasil Tes Bakat - ' . $this->title
+            subject: 'Hasil Tes Bakat - ' . ($this->title ?? 'Tanpa Judul')
         );
     }
 
@@ -44,7 +46,12 @@ class SendEmail extends Mailable
     {
         return new Content(
             view: 'emails.report',
-            with: ['data' => $this->data, 'icon' => $this->icon, 'title' => $this->title, 'contact' => $this->contact]
+            with: [
+                'data' => $this->data,
+                'icon' => $this->icon,
+                'title' => $this->title,
+                'contact' => $this->contact
+            ]
         );
     }
 
