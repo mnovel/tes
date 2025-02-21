@@ -15,7 +15,8 @@ class Setting extends Model
         'keywords',
         'author',
         'icon',
-        'contact'
+        'contact',
+        'seo',
     ];
 
     protected $hidden = [
@@ -25,5 +26,6 @@ class Setting extends Model
 
     protected $casts = [
         'contact' => 'array',
+        'seo' => 'array',
     ];
 }

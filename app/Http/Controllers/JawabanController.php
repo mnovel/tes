@@ -169,8 +169,8 @@ class JawabanController extends Controller
 
         $data = [
             'name' => $user->name,
-            'survey_link' => url('/survey/' . $sesi->id),
-            'report_link' => url('/report/' . $sesi->id),
+            'survey_link' => env('LANDING_URL') . '/survey/' . $sesi->id,
+            'report_link' => env('LANDING_URL') . '/report/' . $sesi->id,
         ];
 
         try {

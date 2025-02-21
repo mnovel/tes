@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('author');
             $table->string('icon')->nullable();
             $table->json('contact')->nullable();
+            $table->json('seo')->nullable();
             $table->timestamps();
         });
     }
