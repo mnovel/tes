@@ -14,15 +14,15 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         Setting::create([
-            'title' => 'Tes Minat Bakat',
+            'title' => 'Career The Explorer',
             'description' => 'Voluptate qui ipsum velit occaecat qui fugiat aliqua id nulla eiusmod nisi incididunt reprehenderit.',
-            'author' => 'Muhammad Novel',
+            'author' => 'CTE Team',
             'keywords' => 'tes,minat bakat,kuliah',
-            'icon' => '',
+            'icon' => 'icon.png',
             'contact' => [
-                'email' => 'agus@gmail.com',
-                'phone' => '+6281234567890',
-                'address' => 'Jl. Lorem Ipsum Dolor Sit Amet',
+                'email' => 'helpdesk@careertheexplorer.com',
+                'phone' => '+6287865790888',
+                'address' => 'Jl. Ketintang Madya II no. 42, Surabaya',
             ]
         ]);
     }
