@@ -42,7 +42,7 @@ class HasilController extends Controller
                     ];
                 }),
                 'profession' => $sesi->bakat->sortByDesc('pivot.total')->take(3)->pluck('profesi')->flatten()->groupBy('id')->filter(function ($profesi) {
-                    return $profesi->count() === 3;
+                    return $profesi->count() >= 2;
                 })->values()->map(function ($profesi) {
                     return [
                         'id' => $profesi->first()->id,
@@ -50,7 +50,7 @@ class HasilController extends Controller
                     ];
                 }),
                 'major' => $sesi->bakat->sortByDesc('pivot.total')->take(3)->pluck('jurusan')->flatten()->groupBy('id')->filter(function ($jurusan) {
-                    return $jurusan->count() === 3;
+                    return $jurusan->count() >= 2;
                 })->values()->map(function ($jurusan) {
                     return [
                         'id' => $jurusan->first()->id,
