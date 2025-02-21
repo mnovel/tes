@@ -140,13 +140,13 @@
 
             <div class="contact-container">
                 <img src="https://img.icons8.com/ios-glyphs/30/000000/phone.png" class="icon" alt="Phone Icon">
-                <span>{{ $phone }}</span>
+                <span>{{ $contact['phone'] }}</span>
                 <div class="divider"></div>
                 <img src="https://img.icons8.com/ios-glyphs/30/000000/new-post.png" class="icon" alt="Email Icon">
-                <a href="mailto:tes@gmail.com">{{ $email }}</a>
+                <a href="mailto:tes@gmail.com">{{ $contact['email'] }}</a>
             </div>
 
-            <p style="margin-top: 10px; font-size: 12px;">{{ $address }}</p>
+            <p style="margin-top: 10px; font-size: 12px;">{{ $contact['address'] }}</p>
         </div>
     </div>
 </body>
