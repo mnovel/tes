@@ -24,8 +24,8 @@ class StoreBakatRequest extends FormRequest
         return [
             'name' => 'required|string|max:30|unique:bakats,name',
             'short_description' => 'nullable|string|max:255',
-            'full_description' => 'required|string|max:500',
-            'recommendation' => 'required|string|max:500',
+            'full_description' => 'required|string|max:2000',
+            'recommendation' => 'required|string|max:2000',
             'icon' => 'nullable|file|mimes:jpeg,png,jpg|max:2048'
         ];
     }
