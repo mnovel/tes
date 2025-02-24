@@ -23,7 +23,6 @@ class StorePerguruanTinggiRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:120|unique:perguruan_tinggis,name',
-            'rank' => 'required|integer|min:1',
             'jurusan' => 'required',
             'jurusan.*' => 'required|exists:jurusans,id|distinct',
             'status' => 'required|in:Active,Inactive'

@@ -9,7 +9,7 @@ class PerguruanTinggi extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'rank', 'status'];
+    protected $fillable = ['name', 'status'];
 
     protected $hidden = ['created_at', 'updated_at'];
 

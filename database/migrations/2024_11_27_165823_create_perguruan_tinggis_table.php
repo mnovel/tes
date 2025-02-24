@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('perguruan_tinggis', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('rank');
             $table->enum('status', ['Active', 'Inactive']);
             $table->timestamps();
         });

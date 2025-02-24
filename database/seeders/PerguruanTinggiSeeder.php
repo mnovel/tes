@@ -27,7 +27,6 @@ class PerguruanTinggiSeeder extends Seeder
 
             $perguruanTinggi = PerguruanTinggi::create([
                 'name' => trim($data['name']),
-                'rank' => trim($data['rank'] ?? 0),
                 'status' => trim($data['status'] ?? 'Active'),
             ]);
 

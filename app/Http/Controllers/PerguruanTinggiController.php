@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PerguruanTinggi;
 use App\Http\Requests\StorePerguruanTinggiRequest;
 use App\Http\Requests\UpdatePerguruanTinggiRequest;
-use App\Models\Jurusan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PerguruanTinggiController extends Controller
 {
@@ -41,7 +39,6 @@ class PerguruanTinggiController extends Controller
             return [
                 'id' => $perguruanTinggi->id,
                 'name' => $perguruanTinggi->name,
-                'rank' => $perguruanTinggi->rank,
                 'status' => $perguruanTinggi->status,
                 'jurusan' =>  $perguruanTinggi->jurusan->map(function ($jurusan) {
                     return [
@@ -67,7 +64,6 @@ class PerguruanTinggiController extends Controller
         $validated = $request->validated();
         $perguruanTinggi = PerguruanTinggi::create([
             'name' =>  $validated['name'],
-            'rank' =>  $validated['rank'],
             'status' => $validated['status']
         ]);
         $perguruanTinggi->jurusan()->attach($validated['jurusan']);
@@ -77,7 +73,6 @@ class PerguruanTinggiController extends Controller
             'data' => [
                 'id' => $perguruanTinggi->id,
                 'name' => $perguruanTinggi->name,
-                'rank' => $perguruanTinggi->rank,
                 'jurusan' => $perguruanTinggi->jurusan->map(function ($jurusan) {
                     return [
                         'id' => $jurusan->id,
@@ -97,7 +92,6 @@ class PerguruanTinggiController extends Controller
         $data = [
             'id' => $perguruanTinggi->id,
             'name' => $perguruanTinggi->name,
-            'rank' => $perguruanTinggi->rank,
             'status' => $perguruanTinggi->status,
             'jurusan' => $perguruanTinggi->jurusan->map(function ($jurusan) {
                 return [
@@ -122,7 +116,6 @@ class PerguruanTinggiController extends Controller
         $validated = $request->validated();
         $perguruanTinggi->update([
             'name' =>  $validated['name'],
-            'rank' =>  $validated['rank'],
             'status' => $validated['status']
         ]);
         $perguruanTinggi->jurusan()->sync($validated['jurusan']);
@@ -132,7 +125,6 @@ class PerguruanTinggiController extends Controller
             'data' =>  [
                 'id' => $perguruanTinggi->id,
                 'name' => $perguruanTinggi->name,
-                'rank' => $perguruanTinggi->rank,
                 'jurusan' => $perguruanTinggi->jurusan->map(function ($jurusan) {
                     return [
                         'id' => $jurusan->id,
