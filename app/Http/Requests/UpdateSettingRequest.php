@@ -22,7 +22,7 @@ class UpdateSettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:16',
+            'title' => 'required|string|max:25',
             'description' => 'required|string|max:255',
             'keywords' => 'required|string|max:255',
             'author' => 'required|string|max:20',
