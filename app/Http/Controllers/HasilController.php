@@ -42,16 +42,16 @@ class HasilController extends Controller
                     ];
                 }),
                 'profession' => $sesi->bakat->sortByDesc('pivot.total')->take(3)->pluck('profesi')->flatten()->groupBy('id')->filter(function ($profesi) {
-                    return $profesi->count() >= 2;
-                })->values()->map(function ($profesi) {
+                    return $profesi->count() >= 1;
+                })->values()->take(5)->map(function ($profesi) {
                     return [
                         'id' => $profesi->first()->id,
                         'name' => $profesi->first()->name,
                     ];
                 }),
                 'major' => $sesi->bakat->sortByDesc('pivot.total')->take(3)->pluck('jurusan')->flatten()->groupBy('id')->filter(function ($jurusan) {
-                    return $jurusan->count() >= 2;
-                })->values()->map(function ($jurusan) {
+                    return $jurusan->count() >= 1;
+                })->values()->take(5)->map(function ($jurusan) {
                     return [
                         'id' => $jurusan->first()->id,
                         'name' => $jurusan->first()->name,
