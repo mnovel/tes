@@ -19,10 +19,8 @@ class HasilController extends Controller
             ], 400);
         }
 
-        // Ambang batas untuk pencarian profesi dan jurusan secara bertahap
         $thresholds = [3, 2, 1];
 
-        // Fungsi untuk mengambil profesi atau jurusan dengan threshold bertahap
         $getMatchedItems = function ($relation) use ($sesi, $thresholds) {
             foreach ($thresholds as $threshold) {
                 $items = $sesi->bakat
@@ -47,15 +45,17 @@ class HasilController extends Controller
             return $items->sortByDesc('match_count')->values();
         };
 
-        // Dapatkan profesi berdasarkan bakat yang cocok
-        $professions = $getMatchedItems('profesi')->take(5);
+        $professions = $getMatchedItems('profesi')->take(5)->map(function ($profession) {
+            return [
+                'name' => $profession['name'],
+                'match_count' => $profession['match_count'],
+            ];
+        });
 
-        // Dapatkan jurusan berdasarkan bakat yang cocok
         $majors = $getMatchedItems('jurusan')->take(5)->map(function ($major) {
             return [
-                'id' => $major['id'],
                 'name' => $major['name'],
-                'universities' => \App\Models\Jurusan::find($major['id'])->perguruanTinggi->pluck('name'), // Ambil universitas terkait
+                'universities' => \App\Models\Jurusan::find($major['id'])->perguruanTinggi->pluck('name')
             ];
         });
 

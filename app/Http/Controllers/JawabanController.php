@@ -30,7 +30,7 @@ class JawabanController extends Controller
                     return [
                         'option' => $option->answer,
                     ];
-                }),
+                })->values(),
             ];
         });
         return response()->json([
