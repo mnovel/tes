@@ -219,12 +219,17 @@ class PertanyaanController extends Controller
                 'message' => __('update_data', ['data' => 'pertanyaan']),
                 'data' => $pertanyaan->load('option')
             ]);
-        } catch (\Exception $e) {
-            DB::rollBack();
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() == 23000) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => __('error_update', ['data' => 'pertanyaan']),
+                ], 400);
+            }
+
             return response()->json([
                 'status' => 'error',
                 'message' => __('error_update', ['data' => 'pertanyaan']),
-                'error' => $e->getMessage()
             ], 500);
         }
     }
