@@ -216,14 +216,13 @@ class PertanyaanController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => __('update_data', ['data' => 'pertanyaan']),
-                'data' => $pertanyaan->load('option')
+                'message' => __('update_data_relation', ['data' => 'pertanyaan']),
             ]);
         } catch (\Illuminate\Database\QueryException $e) {
             if ($e->getCode() == 23000) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => __('error_update', ['data' => 'pertanyaan']),
+                    'message' => __('error_update_relation', ['data' => 'pertanyaan']),
                 ], 400);
             }
 

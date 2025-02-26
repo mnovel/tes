@@ -11,9 +11,10 @@
     "completed_sesi": "Sesi anda telah berakhir.",
 
     "error_create": "Terjadi kesalahan saat menambahkan data :data baru.",
-    "error_udate": "Terjadi kesalahan saat memperbarui data :data.",
+    "error_update": "Terjadi kesalahan saat memperbarui data :data.",
     "error_delete": "Terjadi kesalahan saat menghapus data :data.",
     "error_delete_relation": ":Data tidak dapat dihapus karena masih terhubung dengan data lain.",
+    "error_update_relation": ":Data tidak dapat diperbarui karena masih terhubung dengan data lain.",
 
     "no_data": "Maaf, kami tidak dapat menemukan data :data yang Anda cari.",
     "no_data2": "Maaf, kami tidak dapat menemukan data yang Anda cari.",
