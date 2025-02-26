@@ -29,9 +29,9 @@ class StoreJawabanRequest extends FormRequest
                 'required',
                 'exists:sesis,id',
                 function ($attribute, $value, $fail) {
-                    $status = Sesi::find($value)->status;
-                    if ($status != 'Active') {
-                        $fail('Sesi anda telah berakhir');
+                    $status = Sesi::find($value);
+                    if ($status && $status->status !== 'Active') {
+                        $fail('Sesi anda telah berakhir.');
                     }
                 }
             ],
