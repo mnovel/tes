@@ -178,3 +178,4 @@ Route::group(['middleware' => 'api', 'prefix' => 'jawaban-survei'], function () 
 
 
 Route::get('report/{sesi}', [HasilController::class, 'reportQuiz']);
+Route::get('reset-quiz', [PesertaController::class, 'reset'])->middleware('api');
