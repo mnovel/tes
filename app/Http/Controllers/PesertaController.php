@@ -165,4 +165,14 @@ class PesertaController extends Controller
             'message' => __('delete_data', ['data' => 'Peserta']),
         ]);
     }
+
+    public function reset()
+    {
+        Peserta::query()->delete();
+    
+        return response()->json([
+            'status' => 'success',
+            'message' => __('reset_data', ['data' => 'Peserta']),
+        ]);
+    }
 }
