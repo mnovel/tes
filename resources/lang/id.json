@@ -4,7 +4,7 @@
     "detail_data": "Berikut adalah detail :data yang tersedia.",
     "update_data": "Detail :data telah berhasil diperbarui.",
     "delete_data": ":Data telah berhasil dihapus.",
-    "reset_data": "Semua data :data telah berhasil direset"
+    "reset_data": "Semua data :data telah berhasil direset",
 
     "save_answer": "Jawaban berhasil disimpan, sesi telah berakhir.",
     "error_save_answer": "Terdapat pertanyaan yang belum dijawab, silakan periksa kembali jawaban Anda.",
