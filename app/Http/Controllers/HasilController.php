@@ -78,6 +78,7 @@ class HasilController extends Controller
                     'short_description' => $bakat->short_description,
                     'full_description' => $bakat->full_description,
                     'recommendation' => $bakat->recommendation,
+                    'icon' => asset($bakat->icon)
                 ]),
                 'profession' => $professions,
                 'major' => $majors,
