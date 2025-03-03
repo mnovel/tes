@@ -216,7 +216,7 @@ class PertanyaanController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => __('update_data_relation', ['data' => 'pertanyaan']),
+                'message' => __('update_data', ['data' => 'pertanyaan']),
             ]);
         } catch (\Illuminate\Database\QueryException $e) {
             if ($e->getCode() == 23000) {
