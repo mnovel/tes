@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\Storage;
 
 class BakatController extends Controller
 {
+
+    /**
+     * Create a new ProfesiController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
