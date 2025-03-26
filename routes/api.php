@@ -62,7 +62,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'kelas'], function () {
     Route::put('/{kelas}', [KelasController::class, 'update']);
 });
 
-Route::group(['middleware' => 'auth:api', 'prefix' => 'bakat'], function () {
+Route::group(['middleware' => 'api', 'prefix' => 'bakat'], function () {
     Route::get('', [BakatController::class, 'index']);
     Route::post('', [BakatController::class, 'store']);
     Route::get('{bakat}', [BakatController::class, 'show']);
